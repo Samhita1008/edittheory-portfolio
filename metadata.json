@@ -1,5 +1,5 @@
 {
-  "name": "Edit Theory",
+  "name": "EditTheory",
   "description": "AI Systems for D2C Brands. Portfolio of Samhita Tavutu.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
