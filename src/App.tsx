@@ -23,7 +23,7 @@ import { ParticleBackground, DrawIcon, ProcessConnectLine } from './components/E
 import ClientPortal from './components/ClientPortal';
 
 // Edit Theory Custom High-Fidelity SVG Brand Logo Resource
-const EDIT_THEORY_LOGO_URL = "/src/assets/images/Edit Theory.png";
+const EDIT_THEORY_LOGO_URL = "/images/Edit Theory.png";
 
 export default function App() {
   const [theme, setTheme] = useState<Theme>('dark');
@@ -249,7 +249,7 @@ export default function App() {
                   {/* Digital profile widget */}
                   <div className="w-20 h-20 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-600 relative overflow-hidden">
                     <img 
-                      src="/src/assets/images/sam.jpeg" 
+                      src="/images/sam.jpeg" 
                       alt="Samhita Tavutu Profile" 
                       className="w-full h-full object-cover" 
                       referrerPolicy="no-referrer"

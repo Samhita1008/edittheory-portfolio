@@ -49,9 +49,9 @@ export const PROJECTS: Project[] = [
     notionUrl: 'https://www.notion.so/How-I-would-turn-a-D2C-founder-podcast-into-10-assets-for-skincare-brand-growth-362fd196edb0800cbdb6eaf166c36b0e?source=copy_link',
     loomUrl: 'https://www.loom.com/share/24a0f13f63ad440787e40cb3967c8e24',
     images: [
-      '/src/assets/images/agent1-notion.jpg',
-      '/src/assets/images/agent1-notion1.jpg',
-      '/src/assets/images/agent1-notion2.jpg'
+      '/images/agent1-notion.jpg',
+      '/images/agent1-notion1.jpg',
+      '/images/agent1-notion2.jpg'
     ],
     mockupSlides: [
       {
@@ -81,11 +81,11 @@ export const PROJECTS: Project[] = [
     notionUrl: 'https://www.notion.so/How-I-would-build-an-AI-cold-email-LinkedIn-DM-system-for-a-D2C-brand-363fd196edb080f28d6cd3ae7d48c1d7?source=copy_link',
     loomUrl: 'https://www.loom.com/share/1c2acb8161024c3db8c19366a59c162b',
     images: [
-      '/src/assets/images/agent2-aioutreach.jpg',
-      '/src/assets/images/agent2-followupsequence.jpg',
-      '/src/assets/images/agent2-replytracker.jpg',
-      '/src/assets/images/agent2-excel.jpg',
-      '/src/assets/images/agent2-email.jpg'
+      '/images/agent2-aioutreach.jpg',
+      '/images/agent2-followupsequence.jpg',
+      '/images/agent2-replytracker.jpg',
+      '/images/agent2-excel.jpg',
+      '/images/agent2-email.jpg'
     ],
     mockupSlides: [
       {
@@ -124,9 +124,9 @@ export const PROJECTS: Project[] = [
     description: 'Designed an automated scraping workflow that filters qualified prospects for targeted retail outreach, saving hours of manual competitor and influencer research.',
     notionUrl: 'https://www.notion.so/How-I-would-market-a-D2C-skincare-product-using-content-outreach-and-repurposing-363fd196edb0809890b1da9223fa9c5c?source=copy_link',
     images: [
-      '/src/assets/images/agent3-commandprompt.jpg',
-      '/src/assets/images/agent3-workflow.jpg',
-      '/src/assets/images/agent3-excel.jpg'
+      '/images/agent3-commandprompt.jpg',
+      '/images/agent3-workflow.jpg',
+      '/images/agent3-excel.jpg'
     ],
     mockupSlides: [
       {
