@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%" style="background:#000;">
+  <defs>
+    <!-- Modern bold font styling -->
+    <style>
+      .edit-text {
+        font-family: 'Inter', 'Montserrat', 'Helvetica', 'Arial', sans-serif;
+        font-weight: 900;
+        font-size: 135px;
+        fill: #F5F5F0;
+        letter-spacing: -2px;
+      }
+      .theory-text {
+        font-family: 'Inter', 'Montserrat', 'Helvetica', 'Arial', sans-serif;
+        font-weight: 500;
+        font-size: 30px;
+        fill: #F5F5F0;
+        letter-spacing: 16px;
+      }
+    </style>
+  </defs>
+
+  <!-- Centered logo group -->
+  <g transform="translate(0, 30)">
+    <!-- Lightbulb icon floating above "IT" -->
+    <!-- Placing it around x=310, y=100 (above 'I' and 'T') -->
+    <g transform="translate(305, 110) scale(0.65)" stroke="#F5F5F0" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Lightbulb glass outline -->
+      <path d="M30 90 A 40 40 0 1 1 70 90 C 70 105 60 115 60 125 L 60 135 L 40 135 L 40 125 C 40 115 30 105 30 90 Z" />
+      <!-- Base stripes -->
+      <line x1="45" y1="145" x2="55" y2="145" stroke-width="10" />
+      <line x1="42" y1="155" x2="58" y2="155" stroke-width="10" />
+      <!-- Top rays -->
+      <line x1="50" y1="30" x2="50" y2="15" />
+      <line x1="22" y1="42" x2="12" y2="32" />
+      <line x1="78" y1="42" x2="88" y2="32" />
+      <line x1="10" y1="75" x2="-2" y2="75" />
+      <line x1="90" y1="75" x2="102" y2="75" />
+    </g>
+
+    <!-- "EDIT" text -->
+    <text x="250" y="270" text-anchor="middle" class="edit-text">EDIT</text>
+
+    <!-- "THEORY" text -->
+    <!-- Centering with letter spacing. Shift right slightly to balance the trailing letter-spacing of 16px -->
+    <text x="258" y="325" text-anchor="middle" class="theory-text">THEORY</text>
+  </g>
+</svg>

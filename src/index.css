@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Syne:wght@500;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Syne", sans-serif;
+  --color-bg-theme: #060810;
+  --color-card-theme: #0c101d;
+  --color-accent-theme: #4fffb0;
+}
+
+@layer utilities {
+  .clip-path-circle {
+    clip-path: circle(50% at 50% 50%);
+  }
+}
+
+/* Base style resets and customizations */
+body {
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  scrollbar-width: thin;
+}
+
+/* Sophisticated Dark Heading Text Gradient */
+.text-sophisticated-glow {
+  background: linear-gradient(to bottom, #ffffff 20%, #888888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Sleek Sophisticated Dark Cards */
+.card-vibe {
+  background-color: #0c101d !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Case Study / Pill Badges */
+.contact-pill {
+  background-color: rgba(79, 255, 176, 0.1) !important;
+  border: 1px solid #4fffb0 !important;
+  color: #4fffb0 !important;
+  padding: 4px 12px !important;
+  border-radius: 100px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  display: inline-block !important;
+}
+
+/* Custom glow animations */
+@keyframes orbital-float-1 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+@keyframes orbital-float-2 {
+  0%, 100% { transform: translate(0px, 0px) scale(1.1); }
+  50% { transform: translate(-40px, 40px) scale(0.9); }
+}
+
+.animate-float-orb-1 {
+  animation: orbital-float-1 20s infinite ease-in-out;
+}
+
+.animate-float-orb-2 {
+  animation: orbital-float-2 25s infinite ease-in-out;
+}
+
+/* Pulse breathing effect */
+@keyframes breathing-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px rgba(79, 255, 176, 0.4));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(79, 255, 176, 0.9));
+    transform: scale(1.15);
+  }
+}
+
+.animate-breathing-glow {
+  animation: breathing-glow 3s infinite ease-in-out;
+}
+
+/* Flow line animation */
+@keyframes dash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+.animate-flow-dash {
+  stroke-dasharray: 8 4;
+  animation: dash 5s linear infinite;
+}
+
+/* Interactive custom grid background */
+.bg-grid-overlay {
+  background-size: 40px 40px;
+  background-image: linear-gradient(rgba(79, 255, 176, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(79, 255, 176, 0.03) 1px, transparent 1px);
+}
+
+.bg-grid-overlay-light {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(6, 8, 16, 0.04) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(6, 8, 16, 0.04) 1px, transparent 1px);
+}
+
+/* Draw-in stroke hover for icons */
+.draw-icon-path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.draw-icon-wrapper:hover .draw-icon-path {
+  stroke-dashoffset: 0;
+}
+
+/* Hide scrollbar with styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+.theme-dark ::-webkit-scrollbar-thumb {
+  background: rgba(79, 255, 176, 0.15);
+  border-radius: 4px;
+}
+.theme-dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(79, 255, 176, 0.3);
+}
+.theme-light ::-webkit-scrollbar-thumb {
+  background: rgba(6, 8, 16, 0.1);
+  border-radius: 4px;
+}
+.theme-light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(6, 8, 16, 0.25);
+}
