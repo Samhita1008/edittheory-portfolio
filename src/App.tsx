@@ -17,10 +17,18 @@ import {
   Smartphone, 
   User,
   Instagram,
-  Network
+  Network,
+  Cpu,
+  Users,
+  Wrench,
+  ChevronDown,
+  ChevronUp,
+  MessageSquare,
+  HelpCircle
 } from 'lucide-react';
 import { ParticleBackground, DrawIcon, ProcessConnectLine } from './components/Effects';
 import ClientPortal from './components/ClientPortal';
+import RoiCalculator from './components/RoiCalculator';
 
 // Edit Theory Custom High-Fidelity SVG Brand Logo Resource
 const EDIT_THEORY_LOGO_URL = "/images/Edit Theory.png";
@@ -29,6 +37,7 @@ export default function App() {
   const [theme, setTheme] = useState<Theme>('dark');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   // Sub-slide states for the 3 distinct project carousels
   const [projectSlideIndex, setProjectSlideIndex] = useState<{ [projectId: string]: number }>({
@@ -211,11 +220,11 @@ export default function App() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-extrabold tracking-tight leading-tight max-w-3xl mx-auto text-sophisticated-glow">
-            I build AI-powered <span className="text-[#4fffb0] relative">content</span> & <span className="text-[#4fffb0]">outreach</span> systems for D2C brands.
+            I build custom <span className="text-[#4fffb0] [-webkit-text-fill-color:#4fffb0]">AI systems</span> for D2C brands to solve growth and workflow bottlenecks.
           </h1>
 
-          <p id="hero-subtitle" className="text-base sm:text-lg md:text-xl text-zinc-400 dark:text-zinc-300 max-w-2xl mx-auto font-sans leading-relaxed">
-            One system. Multiple outputs. Organic attention and cold messages engineered to gain qualified pipeline growth without constant manual work.
+          <p id="hero-subtitle" className="text-sm sm:text-base md:text-lg text-zinc-400 dark:text-zinc-300 max-w-2xl mx-auto font-sans leading-relaxed">
+            Eliminate manual bottlenecks. I design and launch tailored AI workflows that scrape qualified leads daily, automate personalized outbound outreach, and scale organic content distribution on autopilot.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
@@ -398,6 +407,118 @@ export default function App() {
               </ul>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* WHAT I BUILD, WHO I HELP & CUSTOM SOLUTIONS SECTION */}
+      <section id="custom-solutions-section" className={`py-20 border-t transition-colors duration-300 ${theme === 'dark' ? 'bg-[#080c18] border-zinc-900/60' : 'bg-[#f4f6fa] border-zinc-200'}`}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="space-y-3 text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-mono tracking-widest text-[#4fffb0] uppercase">Strategic Architecture</span>
+            <h2 className={`text-3xl font-display font-extrabold ${theme === 'dark' ? 'text-sophisticated-glow' : 'text-zinc-800'}`}>Focused on real client conversions.</h2>
+            <p className="text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto leading-relaxed">
+              I don't build generic AI chatbots. I design highly specialized systems that replace hours of manual work with reliable autonomous pipelines.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 items-stretch">
+            
+            {/* Box 1: What I Build */}
+            <div className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'card-vibe hover:border-[#4fffb0]/30' : 'bg-white border-zinc-200 hover:border-zinc-300'}`}>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 rounded-lg bg-[#4fffb0]/10 text-[#4fffb0] border border-[#4fffb0]/20">
+                    <Cpu className="w-5 h-5" />
+                  </div>
+                  <h3 className={`text-base font-display font-bold ${theme === 'dark' ? 'text-zinc-100' : 'text-zinc-800'}`}>What I Build</h3>
+                </div>
+                <p className="text-xs text-zinc-400 leading-relaxed font-sans">
+                  Specialized, single-purpose automation sequences connected directly to your existing workspace.
+                </p>
+                <ul className="space-y-3 pt-2">
+                  <li className="flex items-start gap-2.5 text-xs">
+                    <span className="font-mono text-[#4fffb0] shrink-0 font-bold">✓</span>
+                    <span className="text-zinc-500 dark:text-zinc-400"><strong>Custom AI Agents:</strong> Self-running n8n, Make, or custom Node script logic chains.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5 text-xs">
+                    <span className="font-mono text-[#4fffb0] shrink-0 font-bold">✓</span>
+                    <span className="text-zinc-500 dark:text-zinc-400"><strong>Lead Scraping & Sifting:</strong> Active scrapers returning pre-qualified, clean leads on autopilot.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5 text-xs">
+                    <span className="font-mono text-[#4fffb0] shrink-0 font-bold">✓</span>
+                    <span className="text-zinc-500 dark:text-zinc-400"><strong>Tone Master Engines:</strong> Brand-specific prompt libraries modeled directly on your writing style.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Box 2: Who I Help */}
+            <div className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'card-vibe hover:border-[#4fffb0]/30' : 'bg-white border-zinc-200 hover:border-zinc-300'}`}>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 rounded-lg bg-[#4fffb0]/10 text-[#4fffb0] border border-[#4fffb0]/20">
+                    <Users className="w-5 h-5" />
+                  </div>
+                  <h3 className={`text-base font-display font-bold ${theme === 'dark' ? 'text-zinc-100' : 'text-zinc-800'}`}>Who I Help</h3>
+                </div>
+                <p className="text-xs text-zinc-400 leading-relaxed font-sans">
+                  Simplifying operations for founders, marketers, and operations leaders.
+                </p>
+                <ul className="space-y-3 pt-2">
+                  <li className="flex items-start gap-2.5 text-xs">
+                    <span className="font-mono text-[#4fffb0] shrink-0 font-bold">→</span>
+                    <span className="text-zinc-500 dark:text-zinc-400"><strong>D2C Founders & Operators:</strong> Looking to generate high-intent pipeline growth with extremely lean teams.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5 text-xs">
+                    <span className="font-mono text-[#4fffb0] shrink-0 font-bold">→</span>
+                    <span className="text-zinc-500 dark:text-zinc-400"><strong>Outreach & Growth Leads:</strong> Burdened by endless lead verification and custom outbound templates.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5 text-xs">
+                    <span className="font-mono text-[#4fffb0] shrink-0 font-bold">→</span>
+                    <span className="text-zinc-500 dark:text-zinc-400"><strong>Video Podcasters & Creators:</strong> Needing to distribute organic clips instantly across multi-channels.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Box 3: Custom Work / Bottleneck Buster */}
+            <div className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden flex flex-col justify-between md:col-span-1 border-[#4fffb0]/20 bg-[#4fffb0]/[0.01] ${theme === 'dark' ? 'card-vibe hover:border-[#4fffb0]/40' : 'bg-teal-50/20 hover:border-zinc-300'}`}>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 rounded-lg bg-[#4fffb0]/15 text-[#4fffb0] border border-[#4fffb0]/30 shadow-[0_0_12px_rgba(79,255,176,0.1)]">
+                    <Wrench className="w-5 h-5" />
+                  </div>
+                  <h3 className={`text-base font-display font-bold ${theme === 'dark' ? 'text-zinc-100' : 'text-zinc-800'}`}>Custom Solutions</h3>
+                </div>
+                <div className="p-3 bg-[#4fffb0]/5 rounded-lg border border-[#4fffb0]/20 text-xs text-[#4fffb0] font-sans font-medium">
+                  💡 “If you have a workflow bottleneck, I can design a tailored AI solution for it.”
+                </div>
+                <p className="text-xs text-zinc-400 leading-relaxed font-sans">
+                  The three agents on this site are pre-built blueprints. But if your team spends hours on copy-pasting, multi-platform scrapers, custom DB loaders, or manual routing, I will engineer a custom script optimized for your exact system requirements on request.
+                </p>
+              </div>
+
+              <div className="pt-6 flex flex-col sm:flex-row gap-2.5">
+                <a 
+                  href="https://topmate.io/samhita_tavutu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-2 text-center rounded bg-[#4fffb0] hover:bg-[#4fffb0]/90 text-[#060810] font-bold text-xs transition cursor-pointer"
+                >
+                  Book Audit Call
+                </a>
+                <a 
+                  href="#contact-section"
+                  className="flex-1 py-2 text-center rounded border border-zinc-700 hover:border-[#4fffb0]/40 text-zinc-300 hover:text-white font-semibold text-xs transition cursor-pointer"
+                >
+                  Message Custom Scope
+                </a>
+              </div>
+            </div>
+
+          </div>
+
         </div>
       </section>
 
@@ -698,10 +819,113 @@ export default function App() {
           </div>
 
           {/* Prompt Client Note */}
-          <div className="mt-12 p-4 rounded-xl bg-[#4fffb0]/5 border border-[#4fffb0]/20 max-w-2xl mx-auto text-center">
+          <div className="mt-12 p-4 rounded-xl bg-[#4fffb0]/5 border border-[#4fffb0]/20 max-w-2xl mx-auto text-center font-sans">
             <p className="text-xs text-teal-400 font-sans font-medium line-clamp-3">
               💡 <strong>System Hand-off Memo:</strong> Every system I build ships with solid setup checklists and video walkthroughs so you gain complete, unmanaged autonomy.
             </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ROI CALCULATOR SECTION */}
+      <section id="roi-calculator-section" className={`py-20 border-t transition-colors duration-300 ${theme === 'dark' ? 'bg-[#060810]/95 border-zinc-900/60' : 'bg-zinc-50/50 border-zinc-200'}`}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
+          <div className="space-y-3 text-center max-w-3xl mx-auto">
+            <span className="text-xs font-mono tracking-widest text-[#4fffb0] uppercase font-bold">Capital & Time Leverage</span>
+            <h2 className={`text-3xl font-display font-extrabold ${theme === 'dark' ? 'text-sophisticated-glow' : 'text-zinc-800'}`}>Interactive ROI Calculator.</h2>
+            <p className="text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto leading-relaxed">
+              Estimate the hours reclaimed and direct financial uplift of moving from manual operations to self-running, automated pipelines.
+            </p>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
+            <RoiCalculator theme={theme} />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ SECTION */}
+      <section id="faq-section" className={`py-20 border-t transition-colors duration-300 ${theme === 'dark' ? 'bg-[#060810] border-zinc-900/60' : 'bg-white border-zinc-200'}`}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="space-y-3 text-center max-w-2xl mx-auto mb-16">
+            <span className="text-xs font-mono tracking-widest text-[#4fffb0] uppercase font-bold flex items-center justify-center gap-1.5">
+              <HelpCircle className="w-3.5 h-3.5" /> Frequently Asked Questions
+            </span>
+            <h2 className={`text-3xl font-display font-extrabold ${theme === 'dark' ? 'text-sophisticated-glow' : 'text-zinc-800'}`}>Clear Answers on Automation.</h2>
+            <p className="text-xs sm:text-sm text-zinc-400">
+              Everything you need to know about partnering for custom AI automation setups and custom workflow development.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              {
+                question: 'What kind of problems do you solve?',
+                answer: 'I eliminate routine, manual business bottlenecks. This includes scraping and qualifying leads from niche databases, auto-writing personalized outreach campaigns, and recycling a single audio/video piece into complete newsletter campaigns, short video scripts, and high-engagement social carousels matching your exact team or founder persona.'
+              },
+              {
+                question: 'Do you only build the 3 listed agents?',
+                answer: 'No. The 3 systems (Content Repurposing, AI Cold Outreach, and Lead Discovery) are ready-to-run blueprints that address the major pain points most D2C founders face. However, I specialize in custom AI automation and routinely design custom systems modeled after your unique operations.'
+              },
+              {
+                question: 'Can you build custom workflows?',
+                answer: 'Yes, absolutely. If you have a specific manual process or bottleneck (e.g. copying data between tools, tracking customer reviews, automating inventory logging, or syncing messaging tools), I can design a tailored AI solution for it.'
+              },
+              {
+                question: 'How do clients work with you?',
+                answer: 'We usually start with a quick, high-impact diagnostic review. This lets us map out your custom pipeline and evaluate potential time and cost savings. From there, we either kick off with a small Pilot Project or design a full custom system. Every deployment is complete with continuous coaching and walkthrough clips so you maintain full workspace independence.'
+              }
+            ].map((faq, idx) => {
+              const isOpen = activeFaq === idx;
+              return (
+                <div 
+                  key={idx}
+                  className={`rounded-xl border transition-all duration-300 overflow-hidden ${
+                    isOpen 
+                      ? theme === 'dark' ? 'border-[#4fffb0]/45 bg-[#4fffb0]/[0.02]' : 'border-zinc-300 bg-zinc-50'
+                      : theme === 'dark' ? 'border-zinc-900 bg-zinc-950/20' : 'border-zinc-200 bg-[#f9fafb]'
+                  }`}
+                >
+                  <button
+                    onClick={() => setActiveFaq(isOpen ? null : idx)}
+                    className="w-full py-4 px-5 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
+                  >
+                    <span className={`text-sm font-bold font-display ${isOpen ? 'text-[#4fffb0]' : theme === 'dark' ? 'text-zinc-200' : 'text-zinc-800'}`}>
+                      {faq.question}
+                    </span>
+                    <span className="shrink-0 text-zinc-500 hover:text-white">
+                      {isOpen ? <ChevronUp className="w-4 h-4 text-[#4fffb0]" /> : <ChevronDown className="w-4 h-4" />}
+                    </span>
+                  </button>
+
+                  {/* FAQ Answer with smooth accordion transition */}
+                  <div 
+                    className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                      isOpen ? 'max-h-60 border-t border-zinc-200/50 dark:border-zinc-900/60 py-4 px-5 opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-10 p-5 rounded-2xl bg-[#4fffb0]/5 border border-[#4fffb0]/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-left space-y-1">
+              <h4 className="text-xs font-bold text-white">Got a specific workflow bottleneck?</h4>
+              <p className="text-[11px] text-zinc-400">Let's design a custom-tailored automation system optimized for your exact conversion rate requirements.</p>
+            </div>
+            <a 
+              href="#contact-section"
+              className="px-5 py-2.5 rounded-lg bg-[#4fffb0] text-[#060810] hover:bg-[#4fffb0]/90 font-bold text-xs transition duration-200 shrink-0 cursor-pointer text-center w-full sm:w-auto"
+            >
+              Get Custom Scope
+            </a>
           </div>
 
         </div>
