@@ -172,7 +172,7 @@ export default function App() {
           <div className="hidden md:flex items-center gap-8 text-sm font-medium">
             <a href="#about-section" className="hover:text-[#4fffb0] transition-colors">About</a>
             <a href="#services-section" className="hover:text-[#4fffb0] transition-colors">Services</a>
-            <a href="#projects-section" className="hover:text-[#4fffb0] transition-colors">See My Work</a>
+            <a href="/projects.html" className="hover:text-[#4fffb0] transition-colors font-semibold text-[#4fffb0]">Systems Built</a>
             <a href="#process-section" className="hover:text-[#4fffb0] transition-colors">Work Process</a>
             <a href="#client-portal-section" className="hover:text-[#4fffb0] transition-colors text-xs font-mono px-3 py-1 rounded bg-[#4fffb0]/10 text-[#4fffb0] border border-[#4fffb0]/25">Portal Space</a>
           </div>
@@ -229,7 +229,7 @@ export default function App() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <a 
-              href="#projects-section" 
+              href="/projects.html" 
               className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#4fffb0] text-[#060810] hover:bg-[#4fffb0]/90 font-bold transition duration-300 text-sm flex items-center justify-center gap-2 shadow-[0_0_24px_rgba(79,255,176,0.2)] hover:shadow-[0_0_28px_rgba(79,255,176,0.4)] cursor-pointer"
             >
               See My Work <ArrowRight className="w-4 h-4" />
@@ -722,6 +722,27 @@ export default function App() {
             })}
           </div>
 
+          {/* Dedicated Systems built banner - keeping the option somewhere on the page, not just top nav */}
+          <div className="mt-12 p-6 md:p-8 rounded-2xl bg-gradient-to-r from-[#4fffb0]/10 via-[#4fffb0]/5 to-transparent border border-[#4fffb0]/25 text-left flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="space-y-2">
+              <span className="text-[10px] font-mono tracking-widest text-[#4fffb0] uppercase font-bold px-2 py-0.5 rounded bg-[#4fffb0]/10 border border-[#4fffb0]/20">
+                LIVE TELEMETRY HUB
+              </span>
+              <h3 className="text-xl font-display font-extrabold text-white">
+                Want to explore the live logs, scrapers, and cron schedulers?
+              </h3>
+              <p className="text-xs text-zinc-400 max-w-xl font-sans leading-relaxed">
+                I maintain a dedicated, fully-interactive system archive complete with real audit engine error detectors, templates AI outputs, and CRM rotators.
+              </p>
+            </div>
+            <a 
+              href="/projects.html" 
+              className="w-full md:w-auto px-6 py-3 rounded-xl bg-[#4fffb0] text-[#060810] hover:bg-[#4fffb0]/90 font-bold transition duration-300 text-xs flex items-center justify-center gap-2 cursor-pointer shrink-0 text-center shadow-[0_0_20px_rgba(79,255,176,0.15)] hover:shadow-[0_0_25px_rgba(79,255,176,0.3)]"
+            >
+              Explore Interactive Systems <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
         </div>
       </section>
 
@@ -1075,6 +1096,15 @@ export default function App() {
               <strong className="text-white block">Edit Theory</strong>
               <span>© 2025 - 2026. AI Systems for D2C Brands.</span>
             </div>
+          </div>
+
+          {/* Quick Footer Navigation Links */}
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-zinc-500 font-mono my-4 sm:my-0">
+            <a href="#about-section" className="hover:text-[#4fffb0] transition">About</a>
+            <a href="#services-section" className="hover:text-[#4fffb0] transition">Services</a>
+            <a href="/projects.html" className="hover:text-[#4fffb0] transition font-bold text-[#4fffb0]">Systems Built</a>
+            <a href="#roi-calculator-section" className="hover:text-[#4fffb0] transition">ROI Calc</a>
+            <a href="#contact-section" className="hover:text-[#4fffb0] transition">Contact</a>
           </div>
 
           {/* Social Links opening in brand-new tabs */}

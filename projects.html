@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Theory — AI Automation Systems</title>
+  
+  <!-- Primary Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind Configuration to map Syne, DM Sans and Custom Colors -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            darkBg: '#0a0a0a',
+            mint: '#00ffaa',
+            mintMuted: 'rgba(0, 255, 170, 0.15)',
+          },
+          fontFamily: {
+            syne: ['Syne', 'sans-serif'],
+            sans: ['DM Sans', 'sans-serif'],
+            mono: ['Fira Code', 'monospace'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0a0a0a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1c1c1c;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00ffaa;
+    }
+
+    body {
+      background-color: #0a0a0a;
+      color: #e5e5e5;
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Preloader for 300ms complete black-out */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0a0a0a;
+      z-index: 10000;
+      opacity: 1;
+      pointer-events: none;
+      transition: opacity 0.5s ease-out;
+    }
+
+    /* Heading Letter-by-Letter Transition */
+    .letter {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(24px) scale(0.95);
+      filter: blur(8px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .letter.revealed {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    /* Subtext fade delayed */
+    .delayed-fade {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s, transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
+    }
+    .delayed-fade.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Project Cards Animation on Scroll */
+    .project-card {
+      opacity: 0;
+      transform: translateY(40px);
+      filter: blur(8px);
+      transition: opacity 1s cubic-bezier(0.2, 1, 0.2, 1), transform 1s cubic-bezier(0.2, 1, 0.2, 1), filter 1s cubic-bezier(0.2, 1, 0.2, 1);
+    }
+    .project-card.card-visible {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    /* Laser-drawing Left Border */
+    .laser-border {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2px;
+      height: 0%;
+      background: linear-gradient(to bottom, #00ffaa, transparent);
+      transition: height 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .project-card.card-visible .laser-border {
+      height: 100%;
+    }
+
+    /* Image Gallery Shimmer Animation */
+    @keyframes shimmer-sweep {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
+    }
+    .shimmer-placeholder {
+      background: linear-gradient(90deg, #111111 25%, #1a1a1a 50%, #111111 75%);
+      background-size: 200% 100%;
+      animation: shimmer-sweep 4s infinite linear;
+    }
+
+    /* Stack Tag Entry Stagger */
+    .stack-tag {
+      opacity: 0;
+      transform: scale(0.9) translateY(4px);
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .project-card.card-visible .stack-tag {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    /* Glass Cards Styles with Interactive Spotlight Glow */
+    .glass-box {
+      position: relative;
+      background: rgba(14, 14, 14, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      transition: border-color 0.4s, box-shadow 0.4s, opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(
+        450px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+        rgba(0, 255, 170, 0.045),
+        transparent 80%
+      );
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 0;
+      border-radius: inherit;
+    }
+    .glass-box:hover::before {
+      opacity: 1;
+    }
+    .glass-box:hover {
+      border-color: rgba(0, 255, 170, 0.15);
+      box-shadow: 0 12px 40px -10px rgba(0, 255, 170, 0.03);
+    }
+
+    /* CTA Breathing Glow */
+    @keyframes cta-breath-pulse {
+      0%, 100% {
+        box-shadow: 0 0 12px rgba(0, 255, 170, 0.2);
+        border-color: rgba(0, 255, 170, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 28px rgba(0, 255, 170, 0.5);
+        border-color: #00ffaa;
+      }
+    }
+    .cta-breath {
+      animation: cta-breath-pulse 3.5s infinite ease-in-out;
+    }
+
+    /* Smooth Scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Lightbox Modal */
+    #lightbox {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease-in-out;
+    }
+    #lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body class="bg-[#0a0a0a] min-h-screen text-zinc-350 antialiased selection:bg-[#00ffaa]/20 selection:text-[#00ffaa]">
+
+  <!-- Preloader for 300ms complete blackout -->
+  <div id="preloader"></div>
+
+  <!-- Navigation / Back bar -->
+  <header class="w-full fixed top-0 z-50 backdrop-blur-md bg-[#0a0a0a]/70 border-b border-white/[0.03] py-4">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <a href="index.html" class="interactive-elem group inline-flex items-center gap-2.5 text-xs font-mono tracking-wide text-zinc-400 hover:text-[#00ffaa] transition duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transform group-hover:-translate-x-1 transition-transform"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Back to Home</span>
+      </a>
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#00ffaa] animate-pulse"></span>
+        <span class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">SYSTEM ARCHIVE V1.0</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Intro Section -->
+  <main class="pt-32 pb-16 px-6 max-w-7xl mx-auto">
+    
+    <section class="max-w-4xl mt-12 mb-16 text-left">
+      <h1 id="title-heading" class="text-5xl sm:text-6xl md:text-7xl font-syne font-extrabold tracking-tight leading-[1.05] text-white">
+        <!-- Will be populated letter-by-letter using javascript -->
+        Systems I've Built.
+      </h1>
+      <p id="subtext-para" class="delayed-fade text-sm sm:text-base md:text-lg text-zinc-400 font-sans mt-6 max-w-2xl leading-relaxed">
+        Every system here solves a real business problem. Built from scratch. Tested end-to-end.
+      </p>
+    </section>
+
+    <!-- Interactive System Category Filters -->
+    <div class="delayed-fade flex flex-wrap items-center gap-2 md:gap-3 mb-16 border-b border-white/[0.04] pb-8" id="filter-container">
+      <button class="filter-btn active interactive-elem px-4 py-2 text-xs font-mono rounded-lg border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa] transition duration-300 cursor-pointer" data-filter="all">ALL SYSTEMS</button>
+      <button class="filter-btn interactive-elem px-4 py-2 text-xs font-mono rounded-lg border border-white/[0.04] bg-white/[0.01] text-zinc-400 hover:text-[#00ffaa] hover:border-[#00ffaa]/20 transition duration-300 cursor-pointer" data-filter="content">CONTENT AUTOMATION</button>
+      <button class="filter-btn interactive-elem px-4 py-2 text-xs font-mono rounded-lg border border-white/[0.04] bg-white/[0.01] text-zinc-400 hover:text-[#00ffaa] hover:border-[#00ffaa]/20 transition duration-300 cursor-pointer" data-filter="outreach">OUTREACH ENGINES</button>
+      <button class="filter-btn interactive-elem px-4 py-2 text-xs font-mono rounded-lg border border-white/[0.04] bg-white/[0.01] text-zinc-400 hover:text-[#00ffaa] hover:border-[#00ffaa]/20 transition duration-300 cursor-pointer" data-filter="discovery">DATA SCRAPING</button>
+      <button class="filter-btn interactive-elem px-4 py-2 text-xs font-mono rounded-lg border border-white/[0.04] bg-white/[0.01] text-zinc-400 hover:text-[#00ffaa] hover:border-[#00ffaa]/20 transition duration-300 cursor-pointer" data-filter="intelligence">MEETING INTELLIGENCE</button>
+    </div>
+
+    <!-- Stacked Project Cards Section -->
+    <section class="space-y-16">
+      
+      <!-- Project 01: Content Repurposing System -->
+      <article class="project-card glass-box relative rounded-2xl p-6 sm:p-10 text-left flex flex-col gap-8 overflow-hidden" data-id="1" data-category="content">
+        <!-- Animated border line -->
+        <div class="laser-border"></div>
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.04] pb-6">
+          <div class="space-y-2">
+            <span class="project-number font-mono text-2xl font-bold text-[#00ffaa] block" data-target="1">00</span>
+            <h2 class="text-3xl sm:text-4xl font-syne font-extrabold text-white">Content Repurposing System</h2>
+          </div>
+          <p class="text-sm font-sans font-medium text-zinc-450 md:max-w-md md:text-right">
+            Turned one interview into 10 high-impact content assets for D2C brands.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-start">
+          <!-- Flow mechanics explanation column -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="space-y-4">
+              <h3 class="text-xs font-mono font-bold tracking-widest text-[#00ffaa] uppercase">SYSTEM FLOW</h3>
+              <ul class="space-y-3.5 text-xs text-zinc-400 font-sans">
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Fetches YouTube transcripts automatically upon live publish trigger signals.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Groq AI structures key topics and designs ready-to-use visual carousels, video script hooks, and newsletters.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Generates structured LinkedIn posts, custom X threads, and ad concept variations natively.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Pushes generated content directly into categorized Notion board boards instantly for scheduled release.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Operates continuously 24/7 on lightweight Railway host.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Tech stack pills -->
+            <div class="space-y-3 pt-4 border-t border-white/[0.04]">
+              <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">ENGINE INTEGRATION</h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.1s">n8n</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.2s">Groq AI</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.3s">Supadata API</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.4s">Notion</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.5s">Railway</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Image gallery column: 3 slots requested -->
+          <div class="lg:col-span-7 space-y-3">
+            <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">TELEMETRY & UI LOGS (3 SLOTS)</h4>
+            <div class="grid grid-cols-3 gap-3">
+              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                <img src="images/agent1-notion.jpg" alt="Notion Output Node" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                <div class="absolute bottom-1.5 left-2 bg-black/80 px-1.5 py-0.5 rounded text-[8px] font-mono text-zinc-400">01 / NOTION CRM</div>
+              </div>
+              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                <img src="images/agent1-notion1.jpg" alt="Repurposing Output Drafts" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                <div class="absolute bottom-1.5 left-2 bg-black/80 px-1.5 py-0.5 rounded text-[8px] font-mono text-zinc-400">02 / WORKFLOW STAGE</div>
+              </div>
+              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                <img src="images/agent1-notion2.jpg" alt="Groq Extraction Model" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                <div class="absolute bottom-1.5 left-2 bg-black/80 px-1.5 py-0.5 rounded text-[8px] font-mono text-zinc-400">03 / AI LOG PARSER</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 02: D2C Outreach System -->
+      <article class="project-card glass-box relative rounded-2xl p-6 sm:p-10 text-left flex flex-col gap-8 overflow-hidden" data-id="2" data-category="outreach">
+        <div class="laser-border"></div>
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.04] pb-6">
+          <div class="space-y-2">
+            <span class="project-number font-mono text-2xl font-bold text-[#00ffaa] block" data-target="2">00</span>
+            <h2 class="text-3xl sm:text-4xl font-syne font-extrabold text-white">D2C Outreach System</h2>
+          </div>
+          <p class="text-sm font-sans font-medium text-zinc-450 md:max-w-md md:text-right">
+            Full automated cold email machine for D2C skincare outreach.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-start">
+          <div class="lg:col-span-5 space-y-6">
+            <div class="space-y-4">
+              <h3 class="text-xs font-mono font-bold tracking-widest text-[#00ffaa] uppercase">SYSTEM FLOW</h3>
+              <ul class="space-y-3.5 text-xs text-zinc-400 font-sans">
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Extracts verified leads and segments them based on specific cosmetic or catalog types automatically.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Generates highly personalized custom email copy tailored per brand based on catalog audits.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Dispatches sequences natively via Gmail API using rotating parameters to protect domain health.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Follows up automatically on Day 3, 7, and 14 unless reply state flags trigger.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Listens for incoming inbox replies, immediately freezes sequence threads, and alerts the team CRM.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="space-y-3 pt-4 border-t border-white/[0.04]">
+              <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">ENGINE INTEGRATION</h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.1s">n8n</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.2s">Groq AI</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.3s">Gmail</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.4s">Google Sheets</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.5s">Railway</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5 image slots requested -->
+          <div class="lg:col-span-7 space-y-3">
+            <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">TELEMETRY & UI LOGS (5 SLOTS)</h4>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                <img src="images/agent2-aioutreach.jpg" alt="Outreach Builder Node" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                <div class="absolute bottom-1 left-1.5 bg-black/80 px-1 py-0.5 rounded text-[7px] font-mono text-zinc-400">01/AI COMPILER</div>
+              </div>
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                <img src="images/agent2-email.jpg" alt="Email Thread Node" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                <div class="absolute bottom-1 left-1.5 bg-black/80 px-1 py-0.5 rounded text-[7px] font-mono text-zinc-400">02/API rotating</div>
+              </div>
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                <img src="images/agent2-excel.jpg" alt="Google Sheets Prospect Database" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                <div class="absolute bottom-1 left-1.5 bg-black/80 px-1 py-0.5 rounded text-[7px] font-mono text-zinc-400">03/SHEET CRM</div>
+              </div>
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                <img src="images/agent2-followupsequence.jpg" alt="Automatic Sequence Followup Node" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                <div class="absolute bottom-1 left-1.5 bg-black/80 px-1 py-0.5 rounded text-[7px] font-mono text-zinc-400">04/SCHEDULER</div>
+              </div>
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                <img src="images/agent2-replytracker.jpg" alt="Incoming Inbox Listener" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                <div class="absolute bottom-1 left-1.5 bg-black/80 px-1 py-0.5 rounded text-[7px] font-mono text-zinc-400">05/REPLY FLOW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 03: Lead Discovery System -->
+      <article class="project-card glass-box relative rounded-2xl p-6 sm:p-10 text-left flex flex-col gap-8 overflow-hidden" data-id="3" data-category="discovery">
+        <div class="laser-border"></div>
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.04] pb-6">
+          <div class="space-y-2">
+            <span class="project-number font-mono text-2xl font-bold text-[#00ffaa] block" data-target="3">00</span>
+            <h2 class="text-3xl sm:text-4xl font-syne font-extrabold text-white">Lead Discovery System</h2>
+          </div>
+          <p class="text-sm font-sans font-medium text-zinc-450 md:max-w-md md:text-right">
+            Automated scraping workflow that finds qualified prospects in minutes.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-start">
+          <div class="lg:col-span-5 space-y-6">
+            <div class="space-y-4">
+              <h3 class="text-xs font-mono font-bold tracking-widest text-[#00ffaa] uppercase">SYSTEM FLOW</h3>
+              <ul class="space-y-3.5 text-xs text-zinc-400 font-sans">
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Accepts targeting criteria (e.g. niche categories and follower count ranges) on-demand.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Dispatches cloud actors (Apify) to crawl and scrape matching brand/creator Instagram profiles.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Cross-checks list with history tables to strip duplicates and verify profile validity automatically.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Extracts key caption contexts from recent posts to feed context to personalization agents.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Logs structured row records to the Google Sheet CRM, immediately handshaking the outreach queue.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="space-y-3 pt-4 border-t border-white/[0.04]">
+              <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">ENGINE INTEGRATION</h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.1s">n8n</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.2s">Apify</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.3s">Groq AI</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.4s">Google Sheets</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.5s">Railway</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 image slots requested -->
+          <div class="lg:col-span-7 space-y-3">
+            <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">TELEMETRY & UI LOGS (3 SLOTS)</h4>
+            <div class="grid grid-cols-3 gap-3">
+              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                <img src="images/agent3-commandprompt.jpg" alt="Scraping Console Node" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                <div class="absolute bottom-1.5 left-2 bg-black/80 px-1.5 py-0.5 rounded text-[8px] font-mono text-zinc-400">01 / SCRAPER LOGS</div>
+              </div>
+              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                <img src="images/agent3-workflow.jpg" alt="API Scrape Workflow" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                <div class="absolute bottom-1.5 left-2 bg-black/80 px-1.5 py-0.5 rounded text-[8px] font-mono text-zinc-400">02 / TARGETING FLOW</div>
+              </div>
+              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                <img src="images/agent3-excel.jpg" alt="Sourced Prospect Rows" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                <div class="absolute bottom-1.5 left-2 bg-black/80 px-1.5 py-0.5 rounded text-[8px] font-mono text-zinc-400">03 / SCRAPED DATABASE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 04: Restaurant Outreach AI System -->
+      <article class="project-card glass-box relative rounded-2xl p-6 sm:p-10 text-left flex flex-col gap-8 overflow-hidden" data-id="4" data-category="outreach">
+        <div class="laser-border"></div>
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.04] pb-6">
+          <div class="space-y-2">
+            <span class="project-number font-mono text-2xl font-bold text-[#00ffaa] block" data-target="4">00</span>
+            <h2 class="text-3xl sm:text-4xl font-syne font-extrabold text-white">Restaurant Outreach AI System</h2>
+          </div>
+          <p class="text-sm font-sans font-medium text-zinc-450 md:max-w-md md:text-right">
+            3 workflows, one canvas, end-to-end restaurant outreach.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-start">
+          <div class="lg:col-span-5 space-y-6">
+            <div class="space-y-4">
+              <h3 class="text-xs font-mono font-bold tracking-widest text-[#00ffaa] uppercase">SYSTEM FLOW</h3>
+              <ul class="space-y-3.5 text-xs text-zinc-400 font-sans">
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Detects newly populated restaurant leads on Google Sheets instantly.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Fetches website content automatically, auditing performance markers to classify as Broken, Mediocre, or Good. Skip Good sites entirely.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Writes context-specific pitch draft highlighting precise website errors found during audit.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Generates unique alternative solutions for those with no existing website to construct immediate value.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Holds in manual approval block → dispatches via Gmail upon single-click confirmation.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Scans incoming responses: flags positive triggers and fires instant Telegram notify messages to team channels.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="space-y-3 pt-4 border-t border-white/[0.04]">
+              <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">ENGINE INTEGRATION</h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.1s">n8n</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.2s">Groq AI</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.3s">Gmail</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.4s">Google Sheets</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.5s">Telegram</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5 image slots requested -->
+          <div class="lg:col-span-7 space-y-3">
+            <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">TELEMETRY & UI LOGS (5 SLOTS)</h4>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
+              <!-- Slot 1: Audit Engine Console -->
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
+                  <div class="flex gap-1">
+                    <span class="w-1 h-1 rounded-full bg-red-500"></span>
+                    <span class="w-1 h-1 rounded-full bg-yellow-500"></span>
+                    <span class="w-1 h-1 rounded-full bg-[#00ffaa]"></span>
+                  </div>
+                  <span class="text-[6px] font-mono text-zinc-500">AUDIT_CORE_v1.2</span>
+                </div>
+                <div class="font-mono text-[7px] text-zinc-400 space-y-1 my-1 flex-1 leading-tight select-none z-10">
+                  <div class="text-[#00ffaa] flex justify-between"><span>GET /menu-page</span><span class="text-[5px] text-zinc-500">12ms</span></div>
+                  <div class="text-red-400 font-bold">● ERROR_404: BROKEN LINK</div>
+                  <div class="text-zinc-500">MOBILE_OPTIMIZE: FALSE</div>
+                  <div class="text-[#00ffaa] animate-pulse">■ SECURING_DATA_PITCH...</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
+                  <span class="text-[6px] font-mono text-zinc-450 uppercase">AUDIT ENGINE</span>
+                  <span class="text-[8px] font-bold text-white truncate">Broken Detector</span>
+                </div>
+              </div>
+
+              <!-- Slot 2: Template AI -->
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
+                  <span class="text-[6px] font-mono text-[#00ffaa]">GROQ_RUNNING</span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#00ffaa] animate-pulse"></span>
+                </div>
+                <div class="font-mono text-[7px] text-zinc-400 space-y-0.5 my-1 flex-1 leading-normal select-none overflow-hidden z-10">
+                  <div class="text-zinc-500">Prompt: Pitch Joe's Diner</div>
+                  <div class="text-white text-[6px] italic border-l border-[#00ffaa] pl-1 py-0.5">"I noticed your menu button 404s..."</div>
+                  <div class="text-zinc-550">Tone: Empathetic/Value</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
+                  <span class="text-[6px] font-mono text-zinc-450 uppercase">TEMPLATE AI</span>
+                  <span class="text-[8px] font-bold text-white truncate">Pitch Generator</span>
+                </div>
+              </div>
+
+              <!-- Slot 3: CRM Pipeline -->
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
+                  <span class="text-[6px] font-mono text-zinc-500">SYS_WAITING_APPROVAL</span>
+                  <span class="text-[6px] font-mono text-yellow-500">PENDING_REVIEW</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center justify-center gap-1 my-1 z-10">
+                  <div class="px-2 py-0.5 rounded text-[6px] font-mono font-bold bg-[#00ffaa]/10 text-[#00ffaa] border border-[#00ffaa]/25 animate-pulse text-center w-full">
+                    APPROVE_DISPATCH
+                  </div>
+                  <span class="text-[5.5px] font-mono text-zinc-500">ID: #9902_RESTAURANT</span>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
+                  <span class="text-[6px] font-mono text-zinc-450 uppercase">CRM PIPELINE</span>
+                  <span class="text-[8px] font-bold text-white truncate">Approval Block</span>
+                </div>
+              </div>
+
+              <!-- Slot 4: Rotator -->
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
+                  <span class="text-[6px] font-mono text-zinc-500">GMAIL_API_ROTATOR</span>
+                  <span class="text-[6px] font-mono text-[#00ffaa]">ACTIVE_IP</span>
+                </div>
+                <div class="font-mono text-[6px] text-zinc-400 space-y-0.5 my-1 flex-1 leading-normal select-none overflow-hidden z-10">
+                  <div class="flex items-center gap-1"><span class="w-1 h-1 rounded-full bg-[#00ffaa]"></span><span>domain_a@edit.com</span></div>
+                  <div class="flex items-center gap-1"><span class="w-1 h-1 rounded-full bg-zinc-600"></span><span>domain_b@edit.com</span></div>
+                  <div class="text-[5.5px] text-zinc-500 mt-1">RATE: 15 / hr protective limit</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
+                  <span class="text-[6px] font-mono text-zinc-450 uppercase">ROTATOR</span>
+                  <span class="text-[8px] font-bold text-white truncate">Inbox Dispatch</span>
+                </div>
+              </div>
+
+              <!-- Slot 5: Notify Signal -->
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
+                  <span class="text-[6px] font-mono text-[#00ffaa]">TELEGRAM_PUSH</span>
+                  <span class="text-[6px] font-mono text-zinc-500">ALERT_LIVE</span>
+                </div>
+                <div class="font-mono text-[6px] text-zinc-400 space-y-0.5 my-1 flex-1 leading-tight select-none overflow-hidden z-10">
+                  <div class="text-[#00ffaa] font-bold">🔔 REPLY RECEIVED!</div>
+                  <div class="text-white text-[5.5px] border-l border-zinc-500 pl-1">"Hey, let's schedule a chat."</div>
+                  <div class="text-[5px] text-zinc-500">Thread: Joe's Diner #9902</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
+                  <span class="text-[6px] font-mono text-zinc-450 uppercase">NOTIFY SIGNAL</span>
+                  <span class="text-[8px] font-bold text-white truncate">Telegram alert</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 05: MeetMind -->
+      <article class="project-card glass-box relative rounded-2xl p-6 sm:p-10 text-left flex flex-col gap-8 overflow-hidden" data-id="5" data-category="intelligence">
+        <div class="laser-border"></div>
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.04] pb-6">
+          <div class="space-y-2">
+            <span class="project-number font-mono text-2xl font-bold text-[#00ffaa] block" data-target="5">00</span>
+            <h2 class="text-3xl sm:text-4xl font-syne font-extrabold text-white">MeetMind</h2>
+          </div>
+          <p class="text-sm font-sans font-medium text-zinc-450 md:max-w-md md:text-right">
+            Turns client meetings into structured intelligence and action.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-start">
+          <div class="lg:col-span-5 space-y-6">
+            <div class="space-y-4">
+              <h3 class="text-xs font-mono font-bold tracking-widest text-[#00ffaa] uppercase">SYSTEM FLOW</h3>
+              <ul class="space-y-3.5 text-xs text-zinc-400 font-sans">
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Detects call termination signals on calendar integrations automatically.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Resolves and references the client account in CRM registers instantly.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Processes full transcription payload through Groq API models to filter key takeaways, decisions, and immediate action tasks.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Publishes records straight to individual client folders and shared Google Sheets space.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Triggers Telegram summary logs detailing assigned items immediately to operational teams.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span>Fires periodic automated follow-up reminders until tasks are checked as resolved on the centralized table.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="space-y-3 pt-4 border-t border-white/[0.04]">
+              <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">ENGINE INTEGRATION</h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.1s">n8n</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.2s">Fireflies.ai</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.3s">Groq AI</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.4s">Google Sheets</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.5s">Telegram</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 image slots requested -->
+          <div class="lg:col-span-7 space-y-3">
+            <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">TELEMETRY & UI LOGS (3 SLOTS)</h4>
+            <div class="grid grid-cols-3 gap-3">
+              <!-- Slot 1: Transcript Trigger -->
+              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.05] bg-[#0c0d12] p-3 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1.5 z-10">
+                  <span class="text-[7px] font-mono text-[#00ffaa]">CALENDAR_LISTENER</span>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping"></span>
+                    <span class="text-[6px] font-mono text-zinc-500">LIVE</span>
+                  </div>
+                </div>
+                <div class="font-mono text-[7px] text-zinc-450 space-y-1 my-1.5 flex-1 leading-tight select-none z-10">
+                  <div class="flex items-center justify-between">
+                    <span class="text-zinc-600">00:15 [Client]:</span>
+                    <span class="text-zinc-350 truncate max-w-[60%]">"Yes, send the draft."</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-zinc-600">00:32 [Sam]:</span>
+                    <span class="text-zinc-350 truncate max-w-[60%]">"I'll have it by Monday."</span>
+                  </div>
+                  <div class="text-[6.5px] text-[#00ffaa] animate-pulse">■ PROCESS_TRANSCRIPTION_API...</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-3 pointer-events-none z-20">
+                  <span class="text-[7px] font-mono text-zinc-450 uppercase">TRANSCRIPT TRIGGER</span>
+                  <span class="text-[8px] font-bold text-white truncate">Call end listener</span>
+                </div>
+              </div>
+
+              <!-- Slot 2: Extraction Model -->
+              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.05] bg-[#0c0d12] p-3 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1.5 z-10">
+                  <span class="text-[7px] font-mono text-[#00ffaa]">GROQ_JSON_PARSER</span>
+                  <span class="text-[6px] font-mono text-zinc-500">ACCURACY: 98%</span>
+                </div>
+                <div class="font-mono text-[6.5px] text-zinc-450 space-y-1 my-1.5 flex-1 leading-tight select-none z-10">
+                  <div class="text-[#00ffaa] font-bold">📋 EXTRACED_DELIVERABLES:</div>
+                  <div class="flex items-center gap-1">
+                    <span class="w-1 h-1 rounded-full bg-[#00ffaa]"></span>
+                    <span>Action: Send contract draft</span>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <span class="w-1 h-1 rounded-full bg-[#00ffaa]"></span>
+                    <span>Assignee: Sam | Due: Monday</span>
+                  </div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-3 pointer-events-none z-20">
+                  <span class="text-[7px] font-mono text-zinc-450 uppercase">EXTRACTION MODEL</span>
+                  <span class="text-[8px] font-bold text-white truncate">Task analyzer API</span>
+                </div>
+              </div>
+
+              <!-- Slot 3: Chron Task -->
+              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.05] bg-[#0c0d12] p-3 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1.5 z-10">
+                  <span class="text-[7px] font-mono text-zinc-500">CHRON_DAEMON</span>
+                  <span class="text-[6px] font-mono text-yellow-500">WAITING: 09:00AM</span>
+                </div>
+                <div class="font-mono text-[6.5px] text-zinc-450 space-y-1 my-1.5 flex-1 leading-tight select-none z-10">
+                  <div class="text-zinc-500">Execution in 8h 12m</div>
+                  <div class="text-[#00ffaa] border-l border-[#00ffaa]/30 pl-1 py-0.5 max-h-[18px] overflow-hidden truncate">
+                    Telegram push queued: "Daily check-in for Sam on contract draft..."
+                  </div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-3 pointer-events-none z-20">
+                  <span class="text-[7px] font-mono text-zinc-450 uppercase">CHRON TASK</span>
+                  <span class="text-[8px] font-bold text-white truncate">Daily reminder loop</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Footer Area -->
+    <footer class="mt-24 mb-16 text-center border-t border-white/[0.04] pt-12">
+      <div class="max-w-2xl mx-auto space-y-6">
+        <h3 class="text-2xl sm:text-3xl font-syne font-extrabold text-white">
+          Want a system built for your business?
+        </h3>
+        <div>
+          <a href="index.html#contact-section" class="interactive-elem cta-breath button-trace inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#00ffaa] text-[#0a0a0a] font-bold text-sm transition duration-300">
+            <span>Let's talk</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+        <p class="text-[10px] font-mono text-zinc-550 uppercase tracking-widest mt-8">
+          EDIT THEORY &copy; 2026. ALL RIGHTS RESERVED.
+        </p>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Lightbox Modal for Full Resolution Screenshot Review -->
+  <div id="lightbox" class="fixed inset-0 bg-black/95 z-[10001] flex items-center justify-center p-4">
+    <button id="lightbox-close" class="absolute top-6 right-6 text-white hover:text-[#00ffaa] p-2 bg-zinc-900/60 rounded-full transition duration-200 cursor-pointer">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div class="max-w-5xl max-h-[85vh] overflow-hidden flex flex-col items-center gap-3">
+      <img id="lightbox-img" src="" alt="Zoomed Telemetry" class="max-w-full max-h-[80vh] object-contain rounded border border-white/10 shadow-2xl">
+      <div id="lightbox-caption" class="text-xs font-mono text-[#00ffaa] bg-[#0a0a0a] px-3 py-1 rounded"></div>
+    </div>
+  </div>
+
+  <!-- Animation and Interaction Core JS Logic -->
+  <script>
+    // 2. Preloader blackout
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 500);
+        
+        // Trigger Heading Letter-by-Letter presentation
+        triggerHeadingReveal();
+      }, 300);
+    });
+
+    // 3. Page load letter-by-letter reveal
+    function triggerHeadingReveal() {
+      const heading = document.getElementById('title-heading');
+      const text = heading.innerText.trim();
+      heading.innerHTML = '';
+      
+      const words = text.split(' ');
+      let globalIdx = 0;
+      
+      words.forEach((word, wordIdx) => {
+        // Create an inline-block container for each word to prevent wrapping inside a word
+        const wordSpan = document.createElement('span');
+        wordSpan.className = 'inline-block whitespace-nowrap';
+        
+        [...word].forEach((char) => {
+          const span = document.createElement('span');
+          span.className = 'letter';
+          span.innerHTML = char;
+          // Staggered letters across all words
+          span.style.transitionDelay = `${globalIdx * 40}ms`;
+          wordSpan.appendChild(span);
+          globalIdx++;
+          
+          // Force reflow
+          span.offsetHeight;
+          
+          // Add revealed class
+          setTimeout(() => {
+            span.classList.add('revealed');
+          }, 50);
+        });
+        
+        heading.appendChild(wordSpan);
+        
+        // Add a space between words
+        if (wordIdx < words.length - 1) {
+          const spaceSpan = document.createElement('span');
+          spaceSpan.innerHTML = '&nbsp;';
+          heading.appendChild(spaceSpan);
+        }
+      });
+
+      // Fade-in subtext afterwards
+      setTimeout(() => {
+        document.getElementById('subtext-para').classList.add('revealed');
+      }, 350);
+    }
+
+    // 4. Scroll Animation Handler using IntersectionObserver
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+
+    const cardObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const card = entry.target;
+          card.classList.add('card-visible');
+          
+          // Trigger the sequential number count-up
+          triggerNumberCountUp(card);
+          
+          // Stop observing once visible
+          observer.unobserve(card);
+        }
+      });
+    }, observerOptions);
+
+    // Watch all cards
+    document.querySelectorAll('.project-card').forEach(card => {
+      cardObserver.observe(card);
+    });
+
+    // 5. Monospace numbers count-up animation
+    function triggerNumberCountUp(card) {
+      const numElem = card.querySelector('.project-number');
+      if (!numElem || numElem.getAttribute('data-active') === 'true') return;
+      
+      numElem.setAttribute('data-active', 'true');
+      const targetVal = parseInt(numElem.getAttribute('data-target'), 10);
+      let currentVal = 0;
+      
+      const interval = setInterval(() => {
+        currentVal++;
+        if (currentVal >= targetVal) {
+          numElem.innerText = String(targetVal).padStart(2, '0');
+          clearInterval(interval);
+        } else {
+          numElem.innerText = String(currentVal).padStart(2, '0');
+        }
+      }, 120); // Steady system-like tick
+    }
+
+    // 6. Lightbox zoom action for beautiful images
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCap = document.getElementById('lightbox-caption');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    document.querySelectorAll('.project-card img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightboxCap.innerText = img.alt || "Edit Theory Automation Node";
+        lightbox.classList.add('active');
+      });
+    });
+
+    lightboxClose.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.remove('active');
+      }
+    });
+
+    // Support keyboard escape key to close lightbox
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        lightbox.classList.remove('active');
+      }
+    });
+
+    // 7. Spotlight mouse-tracking effect for glass-box cards
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
+    // 8. Filter Systems Logic
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Toggle active button style
+        filterBtns.forEach(b => {
+          b.classList.remove('active', 'border-[#00ffaa]/20', 'bg-[#00ffaa]/5', 'text-[#00ffaa]');
+          b.classList.add('border-white/[0.04]', 'bg-white/[0.01]', 'text-zinc-400');
+        });
+        btn.classList.add('active', 'border-[#00ffaa]/20', 'bg-[#00ffaa]/5', 'text-[#00ffaa]');
+        btn.classList.remove('border-white/[0.04]', 'bg-white/[0.01]', 'text-zinc-400');
+
+        const filterVal = btn.getAttribute('data-filter');
+
+        projectCards.forEach(card => {
+          const cardCat = card.getAttribute('data-category');
+          if (filterVal === 'all' || cardCat === filterVal) {
+            card.style.display = 'flex';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0) scale(1)';
+              card.style.filter = 'blur(0)';
+            }, 50);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(12px) scale(0.98)';
+            card.style.filter = 'blur(4px)';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 450);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
