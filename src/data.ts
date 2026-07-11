@@ -43,7 +43,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'project-glossier',
     agentNumber: 1,
-    title: 'Glossier Content Repurposing',
+    title: 'Glossier Content Repurposing (Concept Build)',
     category: 'Content Repurposing',
     description: 'Turned one Emily Weiss founder interview into 10 high-impact content assets including carousels, reels, newsletters, and LinkedIn posts designed for skincare brand awareness and organic growth.',
     notionUrl: 'https://www.notion.so/How-I-would-turn-a-D2C-founder-podcast-into-10-assets-for-skincare-brand-growth-362fd196edb0800cbdb6eaf166c36b0e?source=copy_link',
@@ -75,7 +75,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'project-dew-co',
     agentNumber: 2,
-    title: 'Dew & Co. Outreach System',
+    title: 'Dew & Co. Outreach System (Concept Build)',
     category: 'Outreach System',
     description: 'Built a full, automated cold email and LinkedIn DM machine for dynamic D2C skincare outreach, engineered with intelligent lead extraction, segmentation, tailored template generation, CRM trackers, and custom personalization prompts.',
     notionUrl: 'https://www.notion.so/How-I-would-build-an-AI-cold-email-LinkedIn-DM-system-for-a-D2C-brand-363fd196edb080f28d6cd3ae7d48c1d7?source=copy_link',
@@ -111,7 +111,7 @@ export const PROJECTS: Project[] = [
       {
         title: 'Outbox Delivery Proof',
         description: 'Active client conversation logs demonstrating personalized email delivery with positive engagement and reply patterns.',
-        metrics: '99.8% primary inbox landing rate'
+        metrics: 'Automated deliverability practices: warm-up sequencing, personalized subject lines, no spam-trigger language'
       }
     ],
     tags: ['Cold Email', 'LinkedIn Automation', 'Personalization API', 'HubSpot / CRM Automation']
@@ -137,7 +137,7 @@ export const PROJECTS: Project[] = [
       {
         title: 'n8n Scraper Workflow Railway',
         description: 'The automated scraping canvas running on Railway. It expands search hashtags, crawls Instagram listings, bypasses captcha, formats raw profiles, scoring matching leads automatically.',
-        metrics: 'Scraping speed: 200+ profiles processed / min'
+        metrics: 'Automated qualification pipeline, filters and scores leads without manual review'
       },
       {
         title: 'Google Sheets Lead Pipeline',
