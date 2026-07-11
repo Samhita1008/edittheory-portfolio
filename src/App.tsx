@@ -41,8 +41,8 @@ export default function App() {
 
   // Sub-slide states for the 3 distinct project carousels
   const [projectSlideIndex, setProjectSlideIndex] = useState<{ [projectId: string]: number }>({
-    'project-glossier': 0,
-    'project-dew-co': 0,
+    'project-skincare-repurposing': 0,
+    'project-skincare-outreach': 0,
     'project-lead-discovery': 0,
   });
 

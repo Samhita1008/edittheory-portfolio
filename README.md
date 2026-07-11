@@ -1,20 +1,48 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Edit Theory — AI Automation Systems for D2C Brands
 
-# Run and deploy your AI Studio app
+Portfolio site for **Edit Theory**, an AI automation practice built by [Samhita Tavutu](mailto:samhitatavutu@gmail.com) — a first-year CSE student building working automation agents for D2C brands, using n8n, Groq, and Google Workspace APIs.
 
-This contains everything you need to run your app locally.
+**Live site:** https://edittheory-portfolio.vercel.app/
+**Book a call:** https://topmate.io/samhita_tavutu
 
-View your app in AI Studio: https://ai.studio/apps/97fe0a35-8fc7-4773-bfa9-f3721437754c
+---
 
-## Run Locally
+## What this is
 
-**Prerequisites:**  Node.js
+Most portfolios show finished screenshots. This one shows working systems — every project links to the actual automation canvas, the AI prompts used, and a walkthrough video, not just a polished mockup.
 
+## Projects showcased
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1. **Content Repurposing System** — Turns one long-form video/podcast into 10 platform-ready content assets (reels, carousels, newsletters) using Supadata + Groq.
+2. **AI Outreach System** — Personalized cold email generation with automated follow-up sequences and reply tracking, built on Groq + Gmail + Google Sheets CRM.
+3. **Lead Discovery System** — Automated Instagram/hashtag lead scraping and qualification pipeline feeding directly into the outreach system.
+4. **Restaurant Outreach AI System** — A 3-workflow system covering lead draft generation, human-reviewed sending, and reply tracking with instant Telegram alerts.
+5. **Email Digest Agent** — Daily inbox triage: pulls the last 24 hours of email, filters noise, categorizes by urgency (🔴/🟡/🟢) via Groq, and delivers a morning summary to Telegram.
+
+Full workflow files (n8n JSON exports) for each agent live in a separate repo: [ADD LINK ONCE CREATED]
+
+## Stack
+
+- **Automation:** n8n
+- **AI:** Groq (Llama 3.3 70B)
+- **Frontend:** React, TypeScript, Vite, Tailwind CSS
+- **Integrations:** Gmail API, Google Sheets, Telegram Bot API, Apify
+
+## Note on projects
+
+Some projects shown are spec/concept builds created to demonstrate technical capability, not paid client engagements. This is stated explicitly on each relevant project.
+
+## Run locally
+
+**Prerequisites:** Node.js
+
+```bash
+npm install
+npm run dev
+```
+
+## Contact
+
+- Email: samhitatavutu@gmail.com
+- Topmate: https://topmate.io/samhita_tavutu
+- LinkedIn: https://linkedin.com/in/samhita-tavutu-b17b2a37b/

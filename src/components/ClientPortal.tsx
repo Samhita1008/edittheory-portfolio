@@ -208,7 +208,7 @@ AI Agent for ${brandName}`,
         });
       } else if (activeTab === 'repurpose') {
         setGeneratedResult({
-          podcastSegment: `Repurposed 1 Emily Weiss Podcast → 10 assets for ${brandName}`,
+          podcastSegment: `Repurposed 1 Founder Podcast → 10 assets for ${brandName}`,
           assets: [
             { type: 'Carousel', content: `Slide 1: Why conventional ${productType} fails. Slide 2: The chemical formulation secret. Slide 3: How we purified our active ingredients. Slide 4: Real results after 14 days of ${brandName}. Slide 5: Link in bio to join first batch.` },
             { type: 'Reel Script 1', content: `[Visuals: Extreme close up of ${productType} texture being dispensed] Hook: "If your skincare is 90% water, you are getting scammed." Action: Show comparison of high-density active ingredients. CTA: Sound on, save this for your next routine.` },
