@@ -19,7 +19,7 @@ Most portfolios show finished screenshots. This one shows working systems — ev
 4. **Restaurant Outreach AI System** — A 3-workflow system covering lead draft generation, human-reviewed sending, and reply tracking with instant Telegram alerts.
 5. **Email Digest Agent** — Daily inbox triage: pulls the last 24 hours of email, filters noise, categorizes by urgency (🔴/🟡/🟢) via Groq, and delivers a morning summary to Telegram.
 
-Full workflow files (n8n JSON exports) for each agent live in a separate repo: [ADD LINK ONCE CREATED]
+Full workflow files (n8n JSON exports) for each agent live in a separate repo: [edit-theory-agents](https://github.com/Samhita1008/edit-theory-agents)
 
 ## Stack
 
