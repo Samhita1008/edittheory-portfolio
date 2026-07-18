@@ -2,7 +2,7 @@
 
 Portfolio site for **Edit Theory**, an AI automation practice built by [Samhita Tavutu](mailto:samhitatavutu@gmail.com), a first-year CSE student building working automation agents for D2C brands, using n8n, Groq, and Google Workspace APIs.
 
-**Live site:** https://edittheory-portfolio.vercel.app/
+**Live site:** [Portfolio](https://edittheory-portfolio.vercel.app/)
 
 ---
 
