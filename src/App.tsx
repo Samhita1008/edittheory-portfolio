@@ -17,7 +17,9 @@ import {
   Smartphone, 
   User,
   Instagram,
+  Linkedin,
   Network,
+  Github,
   Cpu,
   Users,
   Wrench,
@@ -41,8 +43,8 @@ export default function App() {
 
   // Sub-slide states for the 3 distinct project carousels
   const [projectSlideIndex, setProjectSlideIndex] = useState<{ [projectId: string]: number }>({
-    'project-skincare-repurposing': 0,
-    'project-skincare-outreach': 0,
+    'project-glossier': 0,
+    'project-dew-co': 0,
     'project-lead-discovery': 0,
   });
 
@@ -979,20 +981,33 @@ export default function App() {
             </a>
 
             <a 
-              href="https://topmate.io/samhita_tavutu"
+              href="https://github.com/Samhita1008/"
               target="_blank"
               rel="noopener noreferrer" 
               className={`p-4 rounded-xl border flex items-center gap-3 transition-all duration-300 group ${theme === 'dark' ? 'card-vibe hover:border-[#4fffb0]/40' : 'bg-white border-zinc-200 hover:border-zinc-300'}`}
             >
-              <Sliders className="w-5 h-5 text-[#4fffb0] shrink-0" />
+              <Github className="w-5 h-5 text-[#4fffb0] shrink-0" />
               <div className="overflow-hidden">
-                <span className="text-[10px] font-mono text-zinc-500 uppercase block leading-none">Schedule Call</span>
-                <span className={`text-xs font-bold transition-colors truncate block mt-1 ${theme === 'dark' ? 'text-zinc-350 group-hover:text-white' : 'text-zinc-700 group-hover:text-zinc-950'}`}>Topmate Hub Page →</span>
+                <span className="text-[10px] font-mono text-zinc-500 uppercase block leading-none">GitHub Profile</span>
+                <span className={`text-xs font-bold transition-colors truncate block mt-1 ${theme === 'dark' ? 'text-zinc-350 group-hover:text-white' : 'text-zinc-700 group-hover:text-zinc-950'}`}>@Samhita1008 →</span>
               </div>
             </a>
 
             <a 
-              href="https://www.instagram.com/edit_theory3124"
+              href="https://www.linkedin.com/in/samhita-tavutu-b17b2a37b/"
+              target="_blank"
+              rel="noopener noreferrer" 
+              className={`p-4 rounded-xl border flex items-center gap-3 transition-all duration-300 group ${theme === 'dark' ? 'card-vibe hover:border-[#4fffb0]/40' : 'bg-white border-zinc-200 hover:border-zinc-300'}`}
+            >
+              <Linkedin className="w-5 h-5 text-[#4fffb0] shrink-0" />
+              <div className="overflow-hidden">
+                <span className="text-[10px] font-mono text-zinc-500 uppercase block leading-none">LinkedIn Profile</span>
+                <span className={`text-xs font-bold transition-colors truncate block mt-1 ${theme === 'dark' ? 'text-zinc-350 group-hover:text-white' : 'text-zinc-700 group-hover:text-zinc-950'}`}>Samhita Tavutu →</span>
+              </div>
+            </a>
+
+            <a 
+              href="https://www.instagram.com/fr_samhitaaa/"
               target="_blank"
               rel="noopener noreferrer" 
               className={`p-4 rounded-xl border flex items-center gap-3 transition-all duration-300 group ${theme === 'dark' ? 'card-vibe hover:border-[#4fffb0]/40' : 'bg-white border-zinc-200 hover:border-zinc-300'}`}
@@ -1000,7 +1015,7 @@ export default function App() {
               <Instagram className="w-5 h-5 text-[#4fffb0] shrink-0" />
               <div className="overflow-hidden">
                 <span className="text-[10px] font-mono text-zinc-500 uppercase block leading-none">Social Updates</span>
-                <span className={`text-xs font-bold transition-colors truncate block mt-1 ${theme === 'dark' ? 'text-zinc-350 group-hover:text-white' : 'text-zinc-700 group-hover:text-zinc-950'}`}>@edit_theory3124</span>
+                <span className={`text-xs font-bold transition-colors truncate block mt-1 ${theme === 'dark' ? 'text-zinc-350 group-hover:text-white' : 'text-zinc-700 group-hover:text-zinc-950'}`}>@fr_samhitaaa</span>
               </div>
             </a>
 
@@ -1110,22 +1125,31 @@ export default function App() {
           {/* Social Links opening in brand-new tabs */}
           <div className="flex items-center gap-6">
             <a 
-              href="https://www.instagram.com/edit_theory3124" 
+              href="https://www.instagram.com/fr_samhitaaa/" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="text-zinc-500 hover:text-[#4fffb0] transition"
-              title="Instagram"
+              title="Instagram Profile"
             >
               <Instagram className="w-5 h-5" />
             </a>
             <a 
-              href="https://topmate.io/samhita_tavutu" 
+              href="https://www.linkedin.com/in/samhita-tavutu-b17b2a37b/" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="text-zinc-500 hover:text-[#4fffb0] transition"
-              title="Topmate Schedule Hub"
+              title="LinkedIn Profile"
             >
-              <Network className="w-5 h-5" />
+              <Linkedin className="w-5 h-5" />
+            </a>
+            <a 
+              href="https://github.com/Samhita1008/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-zinc-500 hover:text-[#4fffb0] transition"
+              title="GitHub Profile"
+            >
+              <Github className="w-5 h-5" />
             </a>
             <a 
               href="mailto:samhitatavutu@gmail.com" 
