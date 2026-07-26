@@ -310,65 +310,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* COMPREHENSIVE SEARCH & CATALOG DISCOVERY SECTION */}
-      <section id="discovery-section" className="py-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div id="search-console-container" className={`rounded-2xl p-6 relative transition-all duration-300 ${theme === 'dark' ? 'card-vibe' : 'bg-white border border-zinc-200'}`}>
-          
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-            <div className="space-y-1 text-left">
-              <span className="text-[11px] font-mono text-[#4fffb0] uppercase tracking-wider block">Real-time Catalog Engine</span>
-              <h3 className={`text-lg font-display font-semibold ${theme === 'dark' ? 'text-sophisticated-glow' : 'text-zinc-800'}`}>Dynamic Asset Search Console</h3>
-            </div>
-            
-            {/* Search Input field */}
-            <div className="relative max-w-sm w-full">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  setSelectedTag(null); // Clear tag selection when searching manually
-                }}
-                placeholder="Search tools, projects, tags..."
-                className="w-full bg-[#060810] border border-zinc-800 rounded-lg pl-10 pr-4 py-2 text-xs text-white focus:outline-none focus:border-[#4fffb0]/60 transition"
-              />
-              {searchTerm && (
-                <button 
-                  onClick={() => setSearchTerm('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white text-xs cursor-pointer"
-                >
-                  ✕
-                </button>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-zinc-900">
-            <span className="text-[11px] font-mono text-zinc-500 mr-2">Filter tags:</span>
-            <button
-              onClick={() => setSelectedTag(null)}
-              className={`px-2.5 py-1 rounded text-[10px] font-mono transition capitalize cursor-pointer ${!selectedTag ? 'bg-[#4fffb0] text-[#060810] font-semibold' : 'bg-zinc-900 text-zinc-400 hover:text-white'}`}
-            >
-              All Assets
-            </button>
-            {allProjectTags.map(tag => (
-              <button
-                key={tag}
-                onClick={() => {
-                  setSelectedTag(selectedTag === tag ? null : tag);
-                  setSearchTerm(''); // Clear text search to focus on tag
-                }}
-                className={`px-2.5 py-1 rounded text-[10px] font-mono transition cursor-pointer ${selectedTag === tag ? 'bg-[#4fffb0] text-[#060810] font-semibold' : 'bg-zinc-900 text-zinc-400 hover:text-white'}`}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
       {/* SERVICES SECTION */}
       <section id="services-section" className="py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-2 text-center max-w-2xl mx-auto mb-16">
