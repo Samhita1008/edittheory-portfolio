@@ -665,6 +665,61 @@ export default function App() {
             })}
           </div>
 
+          {/* GITHUB REPOSITORY SPOTLIGHT CARD FOR edit-theory-agents */}
+          <div className="mt-12 p-6 md:p-8 rounded-2xl bg-[#060810] border border-zinc-800 hover:border-[#4fffb0]/40 transition-all duration-300 text-left relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#4fffb0]/5 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+              <div className="space-y-3 max-w-2xl">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-[10px] font-mono tracking-widest text-[#4fffb0] uppercase font-bold px-2.5 py-0.5 rounded bg-[#4fffb0]/10 border border-[#4fffb0]/20 flex items-center gap-1.5">
+                    <Github className="w-3 h-3" /> FEATURED REPOSITORY
+                  </span>
+                  <span className="text-[10px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-0.5 rounded">
+                    Samhita1008 / edit-theory-agents
+                  </span>
+                </div>
+
+                <h3 className="text-xl md:text-2xl font-display font-extrabold text-white group-hover:text-[#4fffb0] transition-colors">
+                  edit-theory-agents: 5 Deployed Automation Agents
+                </h3>
+
+                <p className="text-xs sm:text-sm text-zinc-400 font-sans leading-relaxed">
+                  Complete production source code and architecture notes for 5 deployed AI automation agents. Includes real engineering post-mortems documenting <span className="text-zinc-200 font-medium">what actually broke in production</span> (API rate limits, webhook drops, non-deterministic formatting, proxy blocks) and <span className="text-[#4fffb0] font-medium">how each issue was diagnosed, refactored, and fixed</span>.
+                </p>
+
+                <div className="grid sm:grid-cols-3 gap-3 pt-2">
+                  <div className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
+                    <p className="text-[10px] font-mono text-[#4fffb0] font-bold">5 Active Agents</p>
+                    <p className="text-[10px] text-zinc-500 font-mono">Full production workflows</p>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
+                    <p className="text-[10px] font-mono text-[#4fffb0] font-bold">Engineering Post-Mortems</p>
+                    <p className="text-[10px] text-zinc-500 font-mono">Failure logs & root causes</p>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
+                    <p className="text-[10px] font-mono text-[#4fffb0] font-bold">Resilience Fixes</p>
+                    <p className="text-[10px] text-zinc-500 font-mono">Backoff retries & fail-safes</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3 shrink-0">
+                <a 
+                  href="https://github.com/Samhita1008/edit-theory-agents" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3.5 rounded-xl bg-[#4fffb0] text-[#060810] hover:bg-[#4fffb0]/90 font-bold transition duration-300 text-xs flex items-center justify-center gap-2 cursor-pointer text-center shadow-[0_0_20px_rgba(79,255,176,0.15)] hover:shadow-[0_0_25px_rgba(79,255,176,0.3)]"
+                >
+                  <Github className="w-4 h-4" /> Inspect Repo & Post-Mortems <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+                <span className="text-[10px] font-mono text-zinc-500 text-center">
+                  Open Source • MIT / Production Notes
+                </span>
+              </div>
+            </div>
+          </div>
+
           {/* Dedicated Systems built banner - keeping the option somewhere on the page, not just top nav */}
           <div className="mt-12 p-6 md:p-8 rounded-2xl bg-gradient-to-r from-[#4fffb0]/10 via-[#4fffb0]/5 to-transparent border border-[#4fffb0]/25 text-left flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="space-y-2">
@@ -922,12 +977,25 @@ export default function App() {
             </a>
 
             <a 
-              href="https://github.com/Samhita1008/"
+              href="https://github.com/Samhita1008/edit-theory-agents"
               target="_blank"
               rel="noopener noreferrer" 
               className={`p-4 rounded-xl border flex items-center gap-3 transition-all duration-300 group ${theme === 'dark' ? 'card-vibe hover:border-[#4fffb0]/40' : 'bg-white border-zinc-200 hover:border-zinc-300'}`}
             >
               <Github className="w-5 h-5 text-[#4fffb0] shrink-0" />
+              <div className="overflow-hidden">
+                <span className="text-[10px] font-mono text-[#4fffb0] uppercase font-bold block leading-none">Featured Repo</span>
+                <span className={`text-xs font-bold transition-colors truncate block mt-1 ${theme === 'dark' ? 'text-zinc-350 group-hover:text-white' : 'text-zinc-700 group-hover:text-zinc-950'}`}>edit-theory-agents (5 Agents) →</span>
+              </div>
+            </a>
+
+            <a 
+              href="https://github.com/Samhita1008/"
+              target="_blank"
+              rel="noopener noreferrer" 
+              className={`p-4 rounded-xl border flex items-center gap-3 transition-all duration-300 group ${theme === 'dark' ? 'card-vibe hover:border-[#4fffb0]/40' : 'bg-white border-zinc-200 hover:border-zinc-300'}`}
+            >
+              <Github className="w-5 h-5 text-zinc-400 shrink-0 group-hover:text-[#4fffb0]" />
               <div className="overflow-hidden">
                 <span className="text-[10px] font-mono text-zinc-500 uppercase block leading-none">GitHub Profile</span>
                 <span className={`text-xs font-bold transition-colors truncate block mt-1 ${theme === 'dark' ? 'text-zinc-350 group-hover:text-white' : 'text-zinc-700 group-hover:text-zinc-950'}`}>@Samhita1008 →</span>
