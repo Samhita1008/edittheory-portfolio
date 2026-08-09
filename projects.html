@@ -233,7 +233,7 @@
   <!-- Hero Intro Section -->
   <main class="pt-32 pb-16 px-6 max-w-7xl mx-auto">
     
-    <section class="max-w-4xl mt-12 mb-16 text-left">
+    <section class="max-w-4xl mt-12 mb-12 text-left">
       <h1 id="title-heading" class="text-5xl sm:text-6xl md:text-7xl font-syne font-extrabold tracking-tight leading-[1.05] text-white">
         <!-- Will be populated letter-by-letter using javascript -->
         Systems I've Built.
@@ -243,26 +243,33 @@
       </p>
 
       <!-- Featured GitHub Repo Banner for edit-theory-agents -->
-      <div class="delayed-fade mt-8 p-6 rounded-2xl bg-gradient-to-r from-[#00ffaa]/10 via-white/[0.02] to-transparent border border-[#00ffaa]/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-        <div class="space-y-2">
-          <div class="flex items-center gap-2">
-            <span class="text-[10px] font-mono tracking-widest text-[#00ffaa] uppercase font-bold px-2 py-0.5 rounded bg-[#00ffaa]/10 border border-[#00ffaa]/20">
+      <div class="delayed-fade mt-8 p-6 md:p-8 rounded-2xl bg-[#080b12] border border-[#00ffaa]/25 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-left relative overflow-hidden">
+        <div class="space-y-3 max-w-2xl relative z-10">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-[10px] font-mono tracking-widest text-[#00ffaa] uppercase font-bold px-2.5 py-0.5 rounded bg-[#00ffaa]/10 border border-[#00ffaa]/20">
               FEATURED GITHUB REPOSITORY
             </span>
-            <span class="text-[10px] font-mono text-zinc-400">Samhita1008 / edit-theory-agents</span>
+            <span class="text-[10px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-0.5 rounded">
+              Samhita1008 / edit-theory-agents
+            </span>
+            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2.5 py-0.5 rounded">
+              5 Deployed Automation Agents
+            </span>
           </div>
-          <h2 class="text-xl font-syne font-extrabold text-white">edit-theory-agents: 5 Deployed Agents + Engineering Notes</h2>
-          <p class="text-xs text-zinc-400 max-w-xl font-sans leading-relaxed">
-            Source code for 5 production automation agents, paired with post-mortem logs documenting what broke under load and how it was fixed.
+          <h2 class="text-xl md:text-2xl font-syne font-extrabold text-white">
+            edit-theory-agents: Production Source Code & Post-Mortems
+          </h2>
+          <p class="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed">
+            My GitHub repository consists of full source code for 5 deployed AI automation agents, alongside detailed post-mortems on <span class="text-white font-semibold">what actually broke in production</span> (API rate limits, webhook drops, non-deterministic formatting, proxy blocks) and <span class="text-[#00ffaa] font-semibold">how each issue was diagnosed, refactored, and fixed</span>.
           </p>
         </div>
         <a 
           href="https://github.com/Samhita1008/edit-theory-agents" 
           target="_blank" 
           rel="noopener noreferrer" 
-          class="interactive-elem px-5 py-2.5 rounded-xl bg-[#00ffaa] text-[#0a0a0a] hover:bg-[#00ffaa]/90 font-mono font-bold transition duration-300 text-xs flex items-center justify-center gap-2 cursor-pointer shrink-0"
+          class="interactive-elem px-6 py-3.5 rounded-xl bg-[#00ffaa] text-[#0a0a0a] hover:bg-[#00ffaa]/90 font-mono font-bold transition duration-300 text-xs flex items-center justify-center gap-2 cursor-pointer shrink-0 shadow-[0_0_20px_rgba(0,255,170,0.15)] hover:shadow-[0_0_25px_rgba(0,255,170,0.3)]"
         >
-          <span>View Repo & Engineering Notes</span>
+          <span>View Repository on GitHub</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </a>
       </div>
@@ -274,7 +281,7 @@
       <button class="filter-btn interactive-elem px-4 py-2 text-xs font-mono rounded-lg border border-white/[0.04] bg-white/[0.01] text-zinc-400 hover:text-[#00ffaa] hover:border-[#00ffaa]/20 transition duration-300 cursor-pointer" data-filter="content">CONTENT AUTOMATION</button>
       <button class="filter-btn interactive-elem px-4 py-2 text-xs font-mono rounded-lg border border-white/[0.04] bg-white/[0.01] text-zinc-400 hover:text-[#00ffaa] hover:border-[#00ffaa]/20 transition duration-300 cursor-pointer" data-filter="outreach">OUTREACH ENGINES</button>
       <button class="filter-btn interactive-elem px-4 py-2 text-xs font-mono rounded-lg border border-white/[0.04] bg-white/[0.01] text-zinc-400 hover:text-[#00ffaa] hover:border-[#00ffaa]/20 transition duration-300 cursor-pointer" data-filter="discovery">DATA SCRAPING</button>
-      <button class="filter-btn interactive-elem px-4 py-2 text-xs font-mono rounded-lg border border-white/[0.04] bg-white/[0.01] text-zinc-400 hover:text-[#00ffaa] hover:border-[#00ffaa]/20 transition duration-300 cursor-pointer" data-filter="intelligence">MEETING INTELLIGENCE</button>
+      <button class="filter-btn interactive-elem px-4 py-2 text-xs font-mono rounded-lg border border-white/[0.04] bg-white/[0.01] text-zinc-400 hover:text-[#00ffaa] hover:border-[#00ffaa]/20 transition duration-300 cursor-pointer" data-filter="inbox-triage">EMAIL SUMMARY / TRIAGE</button>
     </div>
 
     <!-- Stacked Project Cards Section -->
@@ -673,132 +680,174 @@
         </div>
       </article>
 
-      <!-- Project 05: MeetMind -->
-      <article class="project-card glass-box relative rounded-2xl p-6 sm:p-10 text-left flex flex-col gap-8 overflow-hidden" data-id="5" data-category="intelligence">
+      <!-- Project 05: Email Summary Agent -->
+      <article class="project-card glass-box relative rounded-2xl p-6 sm:p-10 text-left flex flex-col gap-8 overflow-hidden" data-id="5" data-category="inbox-triage">
         <div class="laser-border"></div>
         
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.04] pb-6">
           <div class="space-y-2">
             <span class="project-number font-mono text-2xl font-bold text-[#00ffaa] block" data-target="5">00</span>
-            <h2 class="text-3xl sm:text-4xl font-syne font-extrabold text-white">MeetMind</h2>
+            <h2 class="text-3xl sm:text-4xl font-syne font-extrabold text-white">Email Summary Agent</h2>
           </div>
           <p class="text-sm font-sans font-medium text-zinc-450 md:max-w-md md:text-right">
-            Turns client meetings into structured intelligence and action.
+            Triages your inbox every morning, before you open Gmail.
           </p>
         </div>
 
         <div class="grid lg:grid-cols-12 gap-8 items-start">
           <div class="lg:col-span-5 space-y-6">
             <div class="space-y-4">
+              <div class="p-3.5 rounded-xl bg-[#00ffaa]/5 border border-[#00ffaa]/20 space-y-1.5">
+                <span class="text-[10px] font-mono font-bold tracking-widest text-[#00ffaa] uppercase block">AGENT PURPOSE</span>
+                <p class="text-xs text-zinc-300 font-sans leading-relaxed">
+                  Built my fifth automation agent: an Email Summary Agent that triages your inbox every morning, before you open Gmail. No dashboard. No scrolling. Open Telegram, know what needs you in 10 seconds.
+                </p>
+              </div>
+
               <h3 class="text-xs font-mono font-bold tracking-widest text-[#00ffaa] uppercase">SYSTEM FLOW</h3>
-              <ul class="space-y-3.5 text-xs text-zinc-400 font-sans">
+              <ul class="space-y-3 text-xs text-zinc-400 font-sans">
                 <li class="flex items-start gap-2.5 leading-relaxed">
                   <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
-                  <span>Detects call termination signals on calendar integrations automatically.</span>
+                  <span><strong>24h Inbox Scan:</strong> Pulls every email from the last 24 hours, not just unread.</span>
                 </li>
                 <li class="flex items-start gap-2.5 leading-relaxed">
                   <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
-                  <span>Resolves and references the client account in CRM registers instantly.</span>
+                  <span><strong>Noise Stripper:</strong> Filters out newsletter and promo noise before it hits the AI.</span>
                 </li>
                 <li class="flex items-start gap-2.5 leading-relaxed">
                   <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
-                  <span>Processes full transcription payload through Groq API models to filter key takeaways, decisions, and immediate action tasks.</span>
+                  <span><strong>Groq Triage:</strong> Groq reads each email and categorizes it: 🔴 needs reply today, 🟡 FYI, 🟢 can wait.</span>
                 </li>
                 <li class="flex items-start gap-2.5 leading-relaxed">
                   <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
-                  <span>Publishes records straight to individual client folders and shared Google Sheets space.</span>
+                  <span><strong>One-Line Distillation:</strong> Writes a one-line summary per email, not the whole thread dumped.</span>
                 </li>
                 <li class="flex items-start gap-2.5 leading-relaxed">
                   <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
-                  <span>Triggers Telegram summary logs detailing assigned items immediately to operational teams.</span>
-                </li>
-                <li class="flex items-start gap-2.5 leading-relaxed">
-                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
-                  <span>Fires periodic automated follow-up reminders until tasks are checked as resolved on the centralized table.</span>
+                  <span><strong>Telegram Dispatch:</strong> Sends one clean, sorted digest to Telegram every morning.</span>
                 </li>
               </ul>
+
+              <!-- Engineering Insight Box -->
+              <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] space-y-2">
+                <span class="text-[10px] font-mono font-bold tracking-widest text-yellow-400 uppercase flex items-center gap-1.5">
+                  ⚡ PRODUCTION POST-MORTEM
+                </span>
+                <p class="text-[11px] text-zinc-400 font-sans leading-relaxed">
+                  <strong>What made this hard:</strong> Keeping sender and subject data intact through the AI step without it getting lost or duplicated. Same fix as always: a <span class="text-white font-mono font-semibold">Merge node</span> in the right place.
+                </p>
+                <p class="text-[11px] text-zinc-400 font-sans leading-relaxed">
+                  This is built for founders drowning in inbox with no time to triage. Same system adapts to any niche where inbox fatigue is real, not just solo founders.
+                </p>
+                <p class="text-[10px] font-mono text-zinc-500 italic">
+                  (Blurred sender details in the screenshot below — real inbox, just keeping it private.)
+                </p>
+              </div>
             </div>
 
             <div class="space-y-3 pt-4 border-t border-white/[0.04]">
               <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">ENGINE INTEGRATION</h4>
               <div class="flex flex-wrap gap-2">
                 <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.1s">n8n</span>
-                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.2s">Fireflies.ai</span>
-                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.3s">Groq AI</span>
-                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.4s">Google Sheets</span>
-                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.5s">Telegram</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.2s">Groq AI</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.3s">Gmail</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.4s">Telegram</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.5s">Merge Node Architecture</span>
               </div>
             </div>
           </div>
 
-          <!-- 3 image slots requested -->
+          <!-- 3 image / telemetry slots -->
           <div class="lg:col-span-7 space-y-3">
-            <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">TELEMETRY & UI LOGS (3 SLOTS)</h4>
-            <div class="grid grid-cols-3 gap-3">
-              <!-- Slot 1: Transcript Trigger -->
-              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.05] bg-[#0c0d12] p-3 flex flex-col justify-between overflow-hidden group">
+            <div class="flex items-center justify-between">
+              <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">TELEMETRY & UI LOGS (3 SLOTS)</h4>
+              <span class="text-[9px] font-mono text-zinc-500">REAL INBOX DATA • PRIVACY BLURRED</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <!-- Slot 1: Gmail Pull & Noise Filter -->
+              <div class="interactive-elem relative aspect-video sm:aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-3 flex flex-col justify-between overflow-hidden group">
                 <div class="flex items-center justify-between border-b border-white/[0.05] pb-1.5 z-10">
-                  <span class="text-[7px] font-mono text-[#00ffaa]">CALENDAR_LISTENER</span>
+                  <span class="text-[7px] font-mono text-[#00ffaa]">GMAIL_24H_SCAN</span>
                   <div class="flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping"></span>
-                    <span class="text-[6px] font-mono text-zinc-500">LIVE</span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#00ffaa] animate-ping"></span>
+                    <span class="text-[6px] font-mono text-zinc-500">24H SYNC</span>
                   </div>
                 </div>
-                <div class="font-mono text-[7px] text-zinc-450 space-y-1 my-1.5 flex-1 leading-tight select-none z-10">
-                  <div class="flex items-center justify-between">
-                    <span class="text-zinc-600">00:15 [Client]:</span>
-                    <span class="text-zinc-350 truncate max-w-[60%]">"Yes, send the draft."</span>
+                <div class="font-mono text-[7px] text-zinc-450 space-y-1 my-1 flex-1 leading-tight select-none z-10">
+                  <div class="flex items-center justify-between text-zinc-500">
+                    <span>POLL_WINDOW:</span>
+                    <span class="text-white">Last 24 Hours</span>
                   </div>
                   <div class="flex items-center justify-between">
-                    <span class="text-zinc-600">00:32 [Sam]:</span>
-                    <span class="text-zinc-350 truncate max-w-[60%]">"I'll have it by Monday."</span>
+                    <span class="text-zinc-500">RAW_EMAILS:</span>
+                    <span class="text-zinc-300">42 messages</span>
                   </div>
-                  <div class="text-[6.5px] text-[#00ffaa] animate-pulse">■ PROCESS_TRANSCRIPTION_API...</div>
+                  <div class="flex items-center justify-between text-yellow-400">
+                    <span>PROMO_FILTER:</span>
+                    <span>-28 newsletters</span>
+                  </div>
+                  <div class="text-[6.5px] text-[#00ffaa] pt-0.5 border-t border-white/5">
+                    ✔ 14 Actionable Threads → Merge Node
+                  </div>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-3 pointer-events-none z-20">
-                  <span class="text-[7px] font-mono text-zinc-450 uppercase">TRANSCRIPT TRIGGER</span>
-                  <span class="text-[8px] font-bold text-white truncate">Call end listener</span>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2.5 pointer-events-none z-20">
+                  <span class="text-[7px] font-mono text-zinc-450 uppercase">DATA INGEST</span>
+                  <span class="text-[8px] font-bold text-white truncate">Gmail 24h & Promo Filter</span>
                 </div>
               </div>
 
-              <!-- Slot 2: Extraction Model -->
-              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.05] bg-[#0c0d12] p-3 flex flex-col justify-between overflow-hidden group">
+              <!-- Slot 2: Groq Triage Classifier -->
+              <div class="interactive-elem relative aspect-video sm:aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-3 flex flex-col justify-between overflow-hidden group">
                 <div class="flex items-center justify-between border-b border-white/[0.05] pb-1.5 z-10">
-                  <span class="text-[7px] font-mono text-[#00ffaa]">GROQ_JSON_PARSER</span>
-                  <span class="text-[6px] font-mono text-zinc-500">ACCURACY: 98%</span>
+                  <span class="text-[7px] font-mono text-[#00ffaa]">GROQ_TRIAGE_LLM</span>
+                  <span class="text-[6px] font-mono text-zinc-500">SPEED: ~500 tok/s</span>
                 </div>
-                <div class="font-mono text-[6.5px] text-zinc-450 space-y-1 my-1.5 flex-1 leading-tight select-none z-10">
-                  <div class="text-[#00ffaa] font-bold">📋 EXTRACED_DELIVERABLES:</div>
+                <div class="font-mono text-[6.5px] text-zinc-450 space-y-1 my-1 flex-1 leading-tight select-none z-10">
+                  <div class="text-[#00ffaa] font-bold">🎯 3-TIER CLASSIFIER:</div>
                   <div class="flex items-center gap-1">
-                    <span class="w-1 h-1 rounded-full bg-[#00ffaa]"></span>
-                    <span>Action: Send contract draft</span>
+                    <span class="text-red-400">🔴</span>
+                    <span class="text-zinc-300 truncate">Needs Reply Today (2)</span>
                   </div>
                   <div class="flex items-center gap-1">
-                    <span class="w-1 h-1 rounded-full bg-[#00ffaa]"></span>
-                    <span>Assignee: Sam | Due: Monday</span>
+                    <span class="text-yellow-400">🟡</span>
+                    <span class="text-zinc-300 truncate">FYI Standup / Updates (4)</span>
                   </div>
+                  <div class="flex items-center gap-1">
+                    <span class="text-emerald-400">🟢</span>
+                    <span class="text-zinc-300 truncate">Can Wait / Receipts (8)</span>
+                  </div>
+                  <div class="text-[6px] text-zinc-500 italic">One-line summaries distilled</div>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-3 pointer-events-none z-20">
-                  <span class="text-[7px] font-mono text-zinc-450 uppercase">EXTRACTION MODEL</span>
-                  <span class="text-[8px] font-bold text-white truncate">Task analyzer API</span>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2.5 pointer-events-none z-20">
+                  <span class="text-[7px] font-mono text-zinc-450 uppercase">AI REASONING</span>
+                  <span class="text-[8px] font-bold text-white truncate">Groq 3-Tier Categorizer</span>
                 </div>
               </div>
 
-              <!-- Slot 3: Chron Task -->
-              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.05] bg-[#0c0d12] p-3 flex flex-col justify-between overflow-hidden group">
+              <!-- Slot 3: Telegram Morning Digest -->
+              <div class="interactive-elem relative aspect-video sm:aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-3 flex flex-col justify-between overflow-hidden group">
                 <div class="flex items-center justify-between border-b border-white/[0.05] pb-1.5 z-10">
-                  <span class="text-[7px] font-mono text-zinc-500">CHRON_DAEMON</span>
-                  <span class="text-[6px] font-mono text-yellow-500">WAITING: 09:00AM</span>
+                  <span class="text-[7px] font-mono text-[#00ffaa]">TELEGRAM_DIGEST</span>
+                  <span class="text-[6px] font-mono text-[#00ffaa]">PUSH: 08:00 AM</span>
                 </div>
-                <div class="font-mono text-[6.5px] text-zinc-450 space-y-1 my-1.5 flex-1 leading-tight select-none z-10">
-                  <div class="text-zinc-500">Execution in 8h 12m</div>
-                  <div class="text-[#00ffaa] border-l border-[#00ffaa]/30 pl-1 py-0.5 max-h-[18px] overflow-hidden truncate">
-                    Telegram push queued: "Daily check-in for Sam on contract draft..."
+                <div class="font-mono text-[6.5px] text-zinc-450 space-y-1 my-1 flex-1 leading-tight select-none z-10">
+                  <div class="text-white font-bold text-[7px] flex items-center gap-1">
+                    <span>📬 Morning Inbox Digest</span>
                   </div>
+                  <div class="text-red-400 truncate filter blur-[1.2px] hover:blur-0 transition duration-200 cursor-pointer" title="Real inbox sender blurred for privacy">
+                    🔴 [Brand Client]: "Approve revised contract"
+                  </div>
+                  <div class="text-yellow-400 truncate filter blur-[1.2px] hover:blur-0 transition duration-200 cursor-pointer" title="Real inbox sender blurred for privacy">
+                    🟡 [Stripe Alert]: "Payout sent to account"
+                  </div>
+                  <div class="text-emerald-400 truncate filter blur-[1.2px] hover:blur-0 transition duration-200 cursor-pointer" title="Real inbox sender blurred for privacy">
+                    🟢 [Figma Cloud]: "3 team comments added"
+                  </div>
+                  <div class="text-[6px] text-zinc-500 font-mono">10-second inbox triage complete</div>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-3 pointer-events-none z-20">
-                  <span class="text-[7px] font-mono text-zinc-450 uppercase">CHRON TASK</span>
-                  <span class="text-[8px] font-bold text-white truncate">Daily reminder loop</span>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2.5 pointer-events-none z-20">
+                  <span class="text-[7px] font-mono text-zinc-450 uppercase">DISPATCH LOOP</span>
+                  <span class="text-[8px] font-bold text-white truncate">Morning Telegram Digest</span>
                 </div>
               </div>
             </div>

@@ -30,7 +30,6 @@ import {
 } from 'lucide-react';
 import { ParticleBackground, DrawIcon, ProcessConnectLine } from './components/Effects';
 import ClientPortal from './components/ClientPortal';
-import RoiCalculator from './components/RoiCalculator';
 
 // Edit Theory Custom High-Fidelity SVG Brand Logo Resource
 const EDIT_THEORY_LOGO_URL = "/images/Edit Theory.png";
@@ -572,6 +571,14 @@ export default function App() {
                             if (sIdx === 0) stepLabel = `step 1: curl`;
                             if (sIdx === 1) stepLabel = `step 2: workflow`;
                             if (sIdx === 2) stepLabel = `step 3: sheets`;
+                          } else if (proj.agentNumber === 4) {
+                            if (sIdx === 0) stepLabel = `step 1: audit`;
+                            if (sIdx === 1) stepLabel = `step 2: pitch`;
+                            if (sIdx === 2) stepLabel = `step 3: alerts`;
+                          } else if (proj.agentNumber === 5) {
+                            if (sIdx === 0) stepLabel = `step 1: gmail 24h`;
+                            if (sIdx === 1) stepLabel = `step 2: groq triage`;
+                            if (sIdx === 2) stepLabel = `step 3: telegram`;
                           }
                           return (
                             <button
@@ -665,56 +672,44 @@ export default function App() {
             })}
           </div>
 
-          {/* GITHUB REPOSITORY SPOTLIGHT CARD FOR edit-theory-agents */}
-          <div className="mt-12 p-6 md:p-8 rounded-2xl bg-[#060810] border border-zinc-800 hover:border-[#4fffb0]/40 transition-all duration-300 text-left relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#4fffb0]/5 rounded-full blur-3xl pointer-events-none"></div>
+          {/* GITHUB REPOSITORY SPOTLIGHT CARD */}
+          <div className="mt-12 p-6 md:p-8 rounded-2xl bg-[#060810] border border-zinc-800 hover:border-[#4fffb0]/40 transition-all duration-300 text-left relative overflow-hidden group shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-[#4fffb0]/5 rounded-full blur-3xl pointer-events-none"></div>
             
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
               <div className="space-y-3 max-w-2xl">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-[10px] font-mono tracking-widest text-[#4fffb0] uppercase font-bold px-2.5 py-0.5 rounded bg-[#4fffb0]/10 border border-[#4fffb0]/20 flex items-center gap-1.5">
-                    <Github className="w-3 h-3" /> FEATURED REPOSITORY
+                    <Github className="w-3.5 h-3.5" /> FEATURED REPOSITORY
                   </span>
                   <span className="text-[10px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-0.5 rounded">
                     Samhita1008 / edit-theory-agents
                   </span>
+                  <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2.5 py-0.5 rounded">
+                    5 Production Automation Agents
+                  </span>
                 </div>
 
                 <h3 className="text-xl md:text-2xl font-display font-extrabold text-white group-hover:text-[#4fffb0] transition-colors">
-                  edit-theory-agents: 5 Deployed Automation Agents
+                  edit-theory-agents: Production Source Code & Post-Mortems
                 </h3>
 
-                <p className="text-xs sm:text-sm text-zinc-400 font-sans leading-relaxed">
-                  Complete production source code and architecture notes for 5 deployed AI automation agents. Includes real engineering post-mortems documenting <span className="text-zinc-200 font-medium">what actually broke in production</span> (API rate limits, webhook drops, non-deterministic formatting, proxy blocks) and <span className="text-[#4fffb0] font-medium">how each issue was diagnosed, refactored, and fixed</span>.
+                <p className="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed">
+                  My GitHub repository consists of full source code for 5 deployed AI automation agents, alongside detailed post-mortems on <span className="text-white font-semibold">what actually broke in production</span> (API rate limits, webhook drops, non-deterministic formatting, proxy blocks) and <span className="text-[#4fffb0] font-semibold">how each issue was diagnosed, refactored, and fixed</span>.
                 </p>
-
-                <div className="grid sm:grid-cols-3 gap-3 pt-2">
-                  <div className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
-                    <p className="text-[10px] font-mono text-[#4fffb0] font-bold">5 Active Agents</p>
-                    <p className="text-[10px] text-zinc-500 font-mono">Full production workflows</p>
-                  </div>
-                  <div className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
-                    <p className="text-[10px] font-mono text-[#4fffb0] font-bold">Engineering Post-Mortems</p>
-                    <p className="text-[10px] text-zinc-500 font-mono">Failure logs & root causes</p>
-                  </div>
-                  <div className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
-                    <p className="text-[10px] font-mono text-[#4fffb0] font-bold">Resilience Fixes</p>
-                    <p className="text-[10px] text-zinc-500 font-mono">Backoff retries & fail-safes</p>
-                  </div>
-                </div>
               </div>
 
-              <div className="flex flex-col gap-3 shrink-0">
+              <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
                 <a 
                   href="https://github.com/Samhita1008/edit-theory-agents" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3.5 rounded-xl bg-[#4fffb0] text-[#060810] hover:bg-[#4fffb0]/90 font-bold transition duration-300 text-xs flex items-center justify-center gap-2 cursor-pointer text-center shadow-[0_0_20px_rgba(79,255,176,0.15)] hover:shadow-[0_0_25px_rgba(79,255,176,0.3)]"
                 >
-                  <Github className="w-4 h-4" /> Inspect Repo & Post-Mortems <ExternalLink className="w-3.5 h-3.5" />
+                  <Github className="w-4 h-4" /> View Repository on GitHub <ExternalLink className="w-3.5 h-3.5" />
                 </a>
                 <span className="text-[10px] font-mono text-zinc-500 text-center">
-                  Open Source • MIT / Production Notes
+                  Open Source • MIT License
                 </span>
               </div>
             </div>
@@ -847,23 +842,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* ROI CALCULATOR SECTION */}
-      <section id="roi-calculator-section" className={`py-20 border-t transition-colors duration-300 ${theme === 'dark' ? 'bg-[#060810]/95 border-zinc-900/60' : 'bg-zinc-50/50 border-zinc-200'}`}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
-          <div className="space-y-3 text-center max-w-3xl mx-auto">
-            <span className="text-xs font-mono tracking-widest text-[#4fffb0] uppercase font-bold">Capital & Time Leverage</span>
-            <h2 className={`text-3xl font-display font-extrabold ${theme === 'dark' ? 'text-sophisticated-glow' : 'text-zinc-800'}`}>Interactive ROI Calculator.</h2>
-            <p className="text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto leading-relaxed">
-              Estimate the hours reclaimed and direct financial uplift of moving from manual operations to self-running, automated pipelines.
-            </p>
-          </div>
-
-          <div className="max-w-6xl mx-auto">
-            <RoiCalculator theme={theme} />
-          </div>
-        </div>
-      </section>
-
       {/* FAQ SECTION */}
       <section id="faq-section" className={`py-20 border-t transition-colors duration-300 ${theme === 'dark' ? 'bg-[#060810] border-zinc-900/60' : 'bg-white border-zinc-200'}`}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -977,25 +955,12 @@ export default function App() {
             </a>
 
             <a 
-              href="https://github.com/Samhita1008/edit-theory-agents"
-              target="_blank"
-              rel="noopener noreferrer" 
-              className={`p-4 rounded-xl border flex items-center gap-3 transition-all duration-300 group ${theme === 'dark' ? 'card-vibe hover:border-[#4fffb0]/40' : 'bg-white border-zinc-200 hover:border-zinc-300'}`}
-            >
-              <Github className="w-5 h-5 text-[#4fffb0] shrink-0" />
-              <div className="overflow-hidden">
-                <span className="text-[10px] font-mono text-[#4fffb0] uppercase font-bold block leading-none">Featured Repo</span>
-                <span className={`text-xs font-bold transition-colors truncate block mt-1 ${theme === 'dark' ? 'text-zinc-350 group-hover:text-white' : 'text-zinc-700 group-hover:text-zinc-950'}`}>edit-theory-agents (5 Agents) →</span>
-              </div>
-            </a>
-
-            <a 
               href="https://github.com/Samhita1008/"
               target="_blank"
               rel="noopener noreferrer" 
               className={`p-4 rounded-xl border flex items-center gap-3 transition-all duration-300 group ${theme === 'dark' ? 'card-vibe hover:border-[#4fffb0]/40' : 'bg-white border-zinc-200 hover:border-zinc-300'}`}
             >
-              <Github className="w-5 h-5 text-zinc-400 shrink-0 group-hover:text-[#4fffb0]" />
+              <Github className="w-5 h-5 text-[#4fffb0] shrink-0" />
               <div className="overflow-hidden">
                 <span className="text-[10px] font-mono text-zinc-500 uppercase block leading-none">GitHub Profile</span>
                 <span className={`text-xs font-bold transition-colors truncate block mt-1 ${theme === 'dark' ? 'text-zinc-350 group-hover:text-white' : 'text-zinc-700 group-hover:text-zinc-950'}`}>@Samhita1008 →</span>
@@ -1023,7 +988,7 @@ export default function App() {
             >
               <Instagram className="w-5 h-5 text-[#4fffb0] shrink-0" />
               <div className="overflow-hidden">
-                <span className="text-[10px] font-mono text-zinc-500 uppercase block leading-none">Social Updates</span>
+                <span className="text-[10px] font-mono text-zinc-500 uppercase block leading-none">Instagram Handle</span>
                 <span className={`text-xs font-bold transition-colors truncate block mt-1 ${theme === 'dark' ? 'text-zinc-350 group-hover:text-white' : 'text-zinc-700 group-hover:text-zinc-950'}`}>@fr_samhitaaa</span>
               </div>
             </a>
@@ -1127,7 +1092,6 @@ export default function App() {
             <a href="#about-section" className="hover:text-[#4fffb0] transition">About</a>
             <a href="#services-section" className="hover:text-[#4fffb0] transition">Services</a>
             <a href="/projects.html" className="hover:text-[#4fffb0] transition font-bold text-[#4fffb0]">Systems Built</a>
-            <a href="#roi-calculator-section" className="hover:text-[#4fffb0] transition">ROI Calc</a>
             <a href="#contact-section" className="hover:text-[#4fffb0] transition">Contact</a>
           </div>
 
