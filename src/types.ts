@@ -6,8 +6,26 @@ export interface Project {
   title: string;
   category: string;
   description: string;
+  oneLiner?: string;
+  overview?: string;
+  architectureImage?: string;
+  architectureExplanation?: string;
+  howItWorks?: {
+    step: string;
+    title: string;
+    description: string;
+  }[];
+  technologyLine?: string;
+  outputImages?: {
+    url: string;
+    title?: string;
+    caption?: string;
+  }[];
   notionUrl?: string;
   loomUrl?: string;
+  githubUrl?: string;
+  liveUrl?: string;
+  badge?: string;
   images: string[];
   mockupSlides: {
     title: string;

@@ -199,15 +199,30 @@
       scroll-behavior: smooth;
     }
 
-    /* Lightbox Modal */
+    /* Lightbox Modal & Smooth Transitions */
     #lightbox {
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease-in-out;
+      transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     #lightbox.active {
       opacity: 1;
       pointer-events: auto;
+    }
+    #lightbox-img-wrapper {
+      transform: scale(0.96);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #lightbox.active #lightbox-img-wrapper {
+      transform: scale(1);
+    }
+    #lightbox-img {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: zoom-in;
+    }
+    #lightbox-img.zoomed {
+      transform: scale(1.75);
+      cursor: zoom-out;
     }
   </style>
 </head>
@@ -253,14 +268,14 @@
               Samhita1008 / edit-theory-agents
             </span>
             <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2.5 py-0.5 rounded">
-              5 Deployed Automation Agents
+              6 Production Systems & Flagship Builds
             </span>
           </div>
           <h2 class="text-xl md:text-2xl font-syne font-extrabold text-white">
-            edit-theory-agents: Production Source Code & Post-Mortems
+            edit-theory-agents: Production Systems & Architecture
           </h2>
           <p class="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed">
-            My GitHub repository consists of full source code for 5 deployed AI automation agents, alongside detailed post-mortems on <span class="text-white font-semibold">what actually broke in production</span> (API rate limits, webhook drops, non-deterministic formatting, proxy blocks) and <span class="text-[#00ffaa] font-semibold">how each issue was diagnosed, refactored, and fixed</span>.
+            Detailed architecture blueprints and workflows for 6 deployed AI automation systems and customer-facing products, alongside detailed post-mortems on <span class="text-white font-semibold">what actually broke in production</span> (API rate limits, webhook drops, non-deterministic formatting, proxy blocks) and <span class="text-[#00ffaa] font-semibold">how each issue was diagnosed, refactored, and fixed</span>.
           </p>
         </div>
         <a 
@@ -278,6 +293,7 @@
     <!-- Interactive System Category Filters -->
     <div class="delayed-fade flex flex-wrap items-center gap-2 md:gap-3 mb-16 border-b border-white/[0.04] pb-8" id="filter-container">
       <button class="filter-btn active interactive-elem px-4 py-2 text-xs font-mono rounded-lg border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa] transition duration-300 cursor-pointer" data-filter="all">ALL SYSTEMS</button>
+      <button class="filter-btn interactive-elem px-4 py-2 text-xs font-mono rounded-lg border border-white/[0.04] bg-white/[0.01] text-zinc-400 hover:text-[#00ffaa] hover:border-[#00ffaa]/20 transition duration-300 cursor-pointer" data-filter="product">FLAGSHIP PRODUCT</button>
       <button class="filter-btn interactive-elem px-4 py-2 text-xs font-mono rounded-lg border border-white/[0.04] bg-white/[0.01] text-zinc-400 hover:text-[#00ffaa] hover:border-[#00ffaa]/20 transition duration-300 cursor-pointer" data-filter="content">CONTENT AUTOMATION</button>
       <button class="filter-btn interactive-elem px-4 py-2 text-xs font-mono rounded-lg border border-white/[0.04] bg-white/[0.01] text-zinc-400 hover:text-[#00ffaa] hover:border-[#00ffaa]/20 transition duration-300 cursor-pointer" data-filter="outreach">OUTREACH ENGINES</button>
       <button class="filter-btn interactive-elem px-4 py-2 text-xs font-mono rounded-lg border border-white/[0.04] bg-white/[0.01] text-zinc-400 hover:text-[#00ffaa] hover:border-[#00ffaa]/20 transition duration-300 cursor-pointer" data-filter="discovery">DATA SCRAPING</button>
@@ -286,7 +302,432 @@
 
     <!-- Stacked Project Cards Section -->
     <section class="space-y-16">
-      
+
+      <!-- Flagship Build 06: Edit Theory Concierge -->
+      <article class="project-card glass-box relative rounded-2xl p-6 sm:p-10 text-left flex flex-col gap-8 overflow-hidden border border-[#00ffaa]/25 shadow-[0_0_50px_rgba(0,255,170,0.06)]" data-id="6" data-category="product">
+        <div class="laser-border"></div>
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.04] pb-6">
+          <div class="space-y-2">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="project-number font-mono text-2xl font-bold text-[#00ffaa] block" data-target="6">00</span>
+              <span class="text-[10px] font-mono tracking-widest text-[#00ffaa] uppercase font-bold px-2.5 py-0.5 rounded bg-[#00ffaa]/10 border border-[#00ffaa]/30 flex items-center gap-1.5 shadow-[0_0_15px_rgba(0,255,170,0.15)]">
+                ★ FLAGSHIP BUILD • CUSTOMER-FACING PRODUCT
+              </span>
+              <span class="text-[10px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded">
+                6-edit-theory-concierge
+              </span>
+              <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2 py-0.5 rounded">
+                Full-Stack Architecture
+              </span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold text-white">Edit Theory Concierge</h2>
+          </div>
+          <div class="space-y-1.5 md:text-right">
+            <p class="text-sm sm:text-base font-sans font-semibold text-[#00ffaa] md:max-w-md">
+              A universal booking assistant for local businesses
+            </p>
+            <p class="text-xs font-mono text-zinc-400">
+              Restaurants • Gyms • Salons • Parlours • Travel Agencies
+            </p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-start">
+          <!-- Flow mechanics explanation column -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="space-y-4">
+              <div class="p-4 rounded-xl bg-[#00ffaa]/5 border border-[#00ffaa]/20 space-y-2">
+                <span class="text-[10px] font-mono font-bold tracking-widest text-[#00ffaa] uppercase block">
+                  CUSTOMER-FACING PRODUCT OVERVIEW
+                </span>
+                <p class="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed">
+                  A customer picks a category, searches for a venue, books it, and gets a live-tracked confirmation — all through a React frontend backed by an n8n automation pipeline. Unlike my earlier agents, which automate a business's internal workflow, this is a product a business could hand directly to their customers.
+                </p>
+              </div>
+
+              <h3 class="text-xs font-mono font-bold tracking-widest text-[#00ffaa] uppercase">WHAT IT DOES</h3>
+              <ul class="space-y-3 text-xs text-zinc-400 font-sans">
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span><strong class="text-white">Discover:</strong> AI-assisted location extraction + venue search across multiple local categories.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span><strong class="text-white">Book:</strong> Field validation, automated booking logging, and instant booking ID generation.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span><strong class="text-white">Confirm:</strong> Automated venue contact dispatch and status resolution.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span><strong class="text-white">Notify:</strong> Instant confirmation email with booking reference, calendar details, and itinerary.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span><strong class="text-white">Status:</strong> Zero-refresh live polling for real-time booking status transitions.</span>
+                </li>
+              </ul>
+
+              <!-- Architecture Status Note -->
+              <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-mono font-bold tracking-widest text-emerald-400 uppercase flex items-center gap-1.5">
+                    ⚙ ARCHITECTURE & DEMO DISCLOSURE
+                  </span>
+                  <span class="text-[9px] font-mono text-zinc-500">PLUG-AND-PLAY READY</span>
+                </div>
+                <p class="text-[11px] text-zinc-300 font-sans leading-relaxed">
+                  <strong class="text-white">Intentional Architecture:</strong> Venue discovery and venue-confirmation both run on free/simulated data sources by design, disclosed clearly, with production integrations (Google Places, WhatsApp Business API) fully built and ready to activate once connected to real credentials.
+                </p>
+                <p class="text-[11px] text-zinc-400 font-sans leading-relaxed">
+                  This is an intentional design decision, not a limitation — the product is built to be handed to a client who plugs in their own accounts without vendor lock-in.
+                </p>
+              </div>
+
+              <!-- Links / Actions -->
+              <div class="pt-2 flex flex-wrap items-center gap-3">
+                <a 
+                  href="https://github.com/Samhita1008/edit-theory-agents/tree/main/6-edit-theory-concierge" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="interactive-elem px-5 py-2.5 rounded-xl bg-[#00ffaa] text-[#0a0a0a] hover:bg-[#00ffaa]/90 font-mono font-bold transition duration-300 text-xs flex items-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(0,255,170,0.2)] hover:shadow-[0_0_25px_rgba(0,255,170,0.35)]"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                  <span>View Concierge on GitHub</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="space-y-3 pt-4 border-t border-white/[0.04]">
+              <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">ENGINE INTEGRATION</h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.1s">React</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.2s">Tailwind</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.3s">n8n</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.4s">Groq</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.5s">OpenStreetMap</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.6s">Google Sheets</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.7s">Gmail</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-white/10 bg-white/5 text-zinc-300" style="transition-delay: 0.8s">Google Places Ready</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-white/10 bg-white/5 text-zinc-300" style="transition-delay: 0.9s">WhatsApp API Ready</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5 telemetry / UI logs stages -->
+          <div class="lg:col-span-7 space-y-3">
+            <div class="flex items-center justify-between">
+              <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">TELEMETRY & CUSTOMER UI PIPELINE (5 STAGES)</h4>
+              <span class="text-[9px] font-mono text-emerald-400">REACT ↔ n8n END-TO-END</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
+              
+              <!-- Stage 1: Discover -->
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2.5 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
+                  <span class="text-[6.5px] font-mono text-[#00ffaa]">STAGE_01_DISCOVER</span>
+                  <span class="text-[5.5px] font-mono text-zinc-400">OSM + GROQ</span>
+                </div>
+                <div class="font-mono text-[6.5px] text-zinc-400 space-y-1 my-1 flex-1 leading-tight select-none z-10">
+                  <div class="text-zinc-500">Query: "Boutique gym near Soho"</div>
+                  <div class="text-[#00ffaa]">AI Geo Extract: [40.723, -73.998]</div>
+                  <div class="text-white">Found: 6 nearby locations</div>
+                  <div class="text-[5.5px] text-zinc-500 pt-0.5 border-t border-white/5">Auto-categorized by business type</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
+                  <span class="text-[6px] font-mono text-zinc-450 uppercase">DISCOVER</span>
+                  <span class="text-[8px] font-bold text-white truncate">AI Venue Search</span>
+                </div>
+              </div>
+
+              <!-- Stage 2: Book -->
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2.5 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
+                  <span class="text-[6.5px] font-mono text-[#00ffaa]">STAGE_02_BOOK</span>
+                  <span class="text-[5.5px] font-mono text-emerald-400">VALIDATED</span>
+                </div>
+                <div class="font-mono text-[6.5px] text-zinc-400 space-y-1 my-1 flex-1 leading-tight select-none z-10">
+                  <div class="text-white font-bold text-[#00ffaa]">ID: #BK-7729</div>
+                  <div class="text-zinc-300">Party: 2 • 19:30 UTC</div>
+                  <div class="text-zinc-500">Logged → Google Sheets DB</div>
+                  <div class="text-[5.5px] text-zinc-400 pt-0.5 border-t border-white/5">Instant atomic booking record</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
+                  <span class="text-[6px] font-mono text-zinc-450 uppercase">BOOK</span>
+                  <span class="text-[8px] font-bold text-white truncate">Field Validation & ID</span>
+                </div>
+              </div>
+
+              <!-- Stage 3: Confirm -->
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2.5 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
+                  <span class="text-[6.5px] font-mono text-yellow-400">STAGE_03_CONFIRM</span>
+                  <span class="text-[5.5px] font-mono text-zinc-400">n8n CORE</span>
+                </div>
+                <div class="font-mono text-[6.5px] text-zinc-400 space-y-1 my-1 flex-1 leading-tight select-none z-10">
+                  <div class="text-zinc-500">Automated venue contact</div>
+                  <div class="text-emerald-400">Status: RESOLVED</div>
+                  <div class="text-zinc-500">Plug-in: WhatsApp / Twilio</div>
+                  <div class="text-[5.5px] text-yellow-500/80 pt-0.5 border-t border-white/5">Demo: Simulated resolution</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
+                  <span class="text-[6px] font-mono text-zinc-450 uppercase">CONFIRM</span>
+                  <span class="text-[8px] font-bold text-white truncate">Venue Auto-Resolution</span>
+                </div>
+              </div>
+
+              <!-- Stage 4: Notify -->
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2.5 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
+                  <span class="text-[6.5px] font-mono text-[#00ffaa]">STAGE_04_NOTIFY</span>
+                  <span class="text-[5.5px] font-mono text-[#00ffaa]">GMAIL_API</span>
+                </div>
+                <div class="font-mono text-[6.5px] text-zinc-400 space-y-1 my-1 flex-1 leading-tight select-none z-10">
+                  <div class="text-white">Email dispatch fired</div>
+                  <div class="text-[#00ffaa] truncate">Subj: Confirmed #BK-7729</div>
+                  <div class="text-zinc-500">Sent to customer inbox</div>
+                  <div class="text-[5.5px] text-zinc-400 pt-0.5 border-t border-white/5">Contains itinerary & address</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
+                  <span class="text-[6px] font-mono text-zinc-450 uppercase">NOTIFY</span>
+                  <span class="text-[8px] font-bold text-white truncate">Confirmation Email</span>
+                </div>
+              </div>
+
+              <!-- Stage 5: Status -->
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2.5 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
+                  <span class="text-[6.5px] font-mono text-[#00ffaa]">STAGE_05_STATUS</span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#00ffaa] animate-ping"></span>
+                </div>
+                <div class="font-mono text-[6.5px] text-zinc-400 space-y-1 my-1 flex-1 leading-tight select-none z-10">
+                  <div class="text-zinc-500">Client polling: 2.5s interval</div>
+                  <div class="text-white">Live State: CONFIRMED</div>
+                  <div class="text-[#00ffaa]">Frontend re-render: 0ms</div>
+                  <div class="text-[5.5px] text-zinc-400 pt-0.5 border-t border-white/5">Real-time status tracking</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
+                  <span class="text-[6px] font-mono text-zinc-450 uppercase">STATUS</span>
+                  <span class="text-[8px] font-bold text-white truncate">Live Polling Engine</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 04: Restaurant Outreach AI System (v2.0 Production Hardened & Deployable Product Prep) -->
+      <article class="project-card glass-box relative rounded-2xl p-6 sm:p-10 text-left flex flex-col gap-8 overflow-hidden border border-[#00ffaa]/20" data-id="4" data-category="outreach">
+        <div class="laser-border"></div>
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.04] pb-6">
+          <div class="space-y-2">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="project-number font-mono text-2xl font-bold text-[#00ffaa] block" data-target="4">00</span>
+              <span class="text-[10px] font-mono tracking-widest text-[#00ffaa] uppercase font-bold px-2.5 py-0.5 rounded bg-[#00ffaa]/10 border border-[#00ffaa]/30 flex items-center gap-1.5">
+                AGENT 04 • v2.0 PRODUCTION HARDENED
+              </span>
+              <span class="text-[10px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded">
+                4-restaurant-outreach-agent
+              </span>
+              <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2.5 py-0.5 rounded">
+                Deployable Product Prep • GCP Marketplace Exploring
+              </span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold text-white">Restaurant Outreach AI System</h2>
+          </div>
+          <div class="space-y-1.5 md:text-right">
+            <p class="text-sm sm:text-base font-sans font-semibold text-[#00ffaa] md:max-w-md">
+              Structured 8-point audit engine, bulletproof pipeline reliability, and customer-deployable packaging.
+            </p>
+            <p class="text-xs font-mono text-zinc-400">
+              Audit Engine • Deduplication Shield • Decoupled Architecture
+            </p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-start">
+          <div class="lg:col-span-5 space-y-6">
+            <div class="space-y-4">
+              
+              <!-- Product-Readiness Milestone Callout -->
+              <div class="p-4 rounded-xl bg-[#00ffaa]/5 border border-[#00ffaa]/20 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-mono font-bold tracking-widest text-[#00ffaa] uppercase block">
+                    PRODUCT-READINESS MILESTONE: PROTOTYPE → DEPLOYABLE PRODUCT
+                  </span>
+                  <span class="text-[9px] font-mono text-emerald-400">STANDALONE READY</span>
+                </div>
+                <p class="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed">
+                  Reworked the system from an internal workflow into a fully customer-deployable product. Completely decoupled all environment variables and API credentials from canvas logic, built a standardized Google Sheet template for client onboarding, authored an end-to-end setup guide, and centralized configuration so the engine operates independently of personal accounts. This serves as core technical preparation toward listing the package (actively exploring Google Cloud Marketplace).
+                </p>
+              </div>
+
+              <!-- System Engineering Breakdown -->
+              <h3 class="text-xs font-mono font-bold tracking-widest text-[#00ffaa] uppercase">SYSTEM UPGRADES & AUDIT WORKFLOW</h3>
+              <ul class="space-y-3.5 text-xs text-zinc-400 font-sans">
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span><strong class="text-white">Structured 8-Point Audit Checklist:</strong> Replaced vague AI quality tags with an objective, deterministically evaluated inspection covering: <em>(1) Site exists, (2) Loads correctly, (3) Mobile-friendly viewport, (4) Clear menu/services, (5) Visible contact info, (6) Online booking/ordering, (7) Modern UI layout, and (8) Technical console errors</em>. Every classification is backed by a specific written reason.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span><strong class="text-white">Graceful Website Error Boundaries:</strong> Built comprehensive exception handling for unreachable, timeout-prone, or DNS-failing domains. Instead of leads silently dropping mid-workflow, failures are trapped, categorized, and preserved in the CRM with clear status flags.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span><strong class="text-white">Row-Matching & Deduplication Shield:</strong> Resolved Google Sheets row-matching synchronization race conditions and eliminated duplicate-email-send bugs by enforcing idempotent lead hashing before any Gmail API dispatch.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span><strong class="text-white">Active Production LLM Migration:</strong> Migrated prompt execution off deprecated Groq models to current, supported production endpoints for deterministic pitch generation referencing audited site findings.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
+                  <span><strong class="text-white">Safety-First Dispatch & Alerts:</strong> Preserves manual approval gates before sending, respects mailbox health limits (15/hr), and forwards positive inbound replies to Telegram in real time.</span>
+                </li>
+              </ul>
+
+              <!-- Links / Actions -->
+              <div class="pt-2 flex flex-wrap items-center gap-3">
+                <a 
+                  href="https://github.com/Samhita1008/edit-theory-agents" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="interactive-elem px-5 py-2.5 rounded-xl bg-[#00ffaa] text-[#0a0a0a] hover:bg-[#00ffaa]/90 font-mono font-bold transition duration-300 text-xs flex items-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(0,255,170,0.2)] hover:shadow-[0_0_25px_rgba(0,255,170,0.35)]"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                  <span>Project & architecture</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="space-y-3 pt-4 border-t border-white/[0.04]">
+              <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">ENGINE INTEGRATION</h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.1s">n8n</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.2s">Groq Llama 3.3</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.3s">Gmail API</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.4s">Google Sheets Template</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.5s">Telegram Alerts</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-white/10 bg-white/5 text-zinc-300" style="transition-delay: 0.6s">Credential Decoupling</span>
+                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-white/10 bg-white/5 text-zinc-300" style="transition-delay: 0.7s">GCP Marketplace Prep</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5 telemetry / UI logs stages -->
+          <div class="lg:col-span-7 space-y-3">
+            <div class="flex items-center justify-between">
+              <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">TELEMETRY & HARDENED PIPELINE LOGS</h4>
+              <span class="text-[9px] font-mono text-emerald-400">AUDIT CHECKLIST + DEPLOYABLE v2.0</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
+              
+              <!-- Slot 1: 8-Point Audit Engine -->
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
+                  <span class="text-[6px] font-mono text-[#00ffaa]">AUDIT_8PT_CHECKLIST</span>
+                  <span class="text-[5.5px] font-mono text-emerald-400">STRUCTURED</span>
+                </div>
+                <div class="font-mono text-[6.5px] text-zinc-400 space-y-0.5 my-1 flex-1 leading-tight select-none z-10">
+                  <div class="text-zinc-300">[✓] Loads 200 OK • Mobile OK</div>
+                  <div class="text-red-400 font-bold">[✗] Menu Link: 404 Broken</div>
+                  <div class="text-yellow-400">[✗] Online Booking: Absent</div>
+                  <div class="text-white text-[6px]">Class: Needs Redesign</div>
+                  <div class="text-[#00ffaa] text-[5.5px] border-t border-white/5 pt-0.5">Reason: Menu 404 + no booking</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
+                  <span class="text-[6px] font-mono text-zinc-450 uppercase">AUDIT ENGINE</span>
+                  <span class="text-[8px] font-bold text-white truncate">8-Point Evaluation</span>
+                </div>
+              </div>
+
+              <!-- Slot 2: Error Boundary & Unreachable Handler -->
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
+                  <span class="text-[6px] font-mono text-yellow-400">ERROR_BOUNDARY</span>
+                  <span class="text-[5.5px] font-mono text-zinc-400">TRAP_ACTIVE</span>
+                </div>
+                <div class="font-mono text-[6.5px] text-zinc-400 space-y-0.5 my-1 flex-1 leading-tight select-none z-10">
+                  <div class="text-zinc-500">Target: timeout > 8000ms</div>
+                  <div class="text-red-400">ERR_DNS_UNRESOLVED</div>
+                  <div class="text-emerald-400 font-bold">Catch: Preserved in CRM</div>
+                  <div class="text-zinc-300">Flag: Site_Unreachable</div>
+                  <div class="text-[5.5px] text-zinc-500 border-t border-white/5 pt-0.5">Zero silent lead drops</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
+                  <span class="text-[6px] font-mono text-zinc-450 uppercase">EXCEPTION GUARD</span>
+                  <span class="text-[8px] font-bold text-white truncate">Unreachable Handler</span>
+                </div>
+              </div>
+
+              <!-- Slot 3: Row-Match & Anti-Duplicate Shield -->
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
+                  <span class="text-[6px] font-mono text-[#00ffaa]">ROW_SYNC_DEDUP</span>
+                  <span class="text-[5.5px] font-mono text-emerald-400">IDEMPOTENT</span>
+                </div>
+                <div class="font-mono text-[6.5px] text-zinc-400 space-y-0.5 my-1 flex-1 leading-tight select-none z-10">
+                  <div class="text-zinc-300">Row Key: #REST-4402 (R14)</div>
+                  <div class="text-[#00ffaa]">Atomic Sheet Match: OK</div>
+                  <div class="text-zinc-500">Hash Check: outreach_sent</div>
+                  <div class="text-emerald-400 font-bold">Duplicate Send: BLOCKED</div>
+                  <div class="text-[5.5px] text-zinc-400 border-t border-white/5 pt-0.5">Sync bugs eliminated</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
+                  <span class="text-[6px] font-mono text-zinc-450 uppercase">SYNC SHIELD</span>
+                  <span class="text-[8px] font-bold text-white truncate">Row-Match & Dedup</span>
+                </div>
+              </div>
+
+              <!-- Slot 4: Standalone Deployable Config -->
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
+                  <span class="text-[6px] font-mono text-[#00ffaa]">DEPLOYABLE_PRODUCT</span>
+                  <span class="text-[5.5px] font-mono text-zinc-400">DECOUPLED</span>
+                </div>
+                <div class="font-mono text-[6.5px] text-zinc-400 space-y-0.5 my-1 flex-1 leading-tight select-none z-10">
+                  <div class="text-white font-bold">Reusable Sheet Template</div>
+                  <div class="text-[#00ffaa]">Model: Groq Llama 3.3</div>
+                  <div class="text-zinc-400">Zero hardcoded secrets</div>
+                  <div class="text-emerald-400">GCP Marketplace Prep</div>
+                  <div class="text-[5.5px] text-zinc-500 border-t border-white/5 pt-0.5">Client-ready installation</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
+                  <span class="text-[6px] font-mono text-zinc-450 uppercase">DEPLOY READY</span>
+                  <span class="text-[8px] font-bold text-white truncate">Decoupled Config</span>
+                </div>
+              </div>
+
+              <!-- Slot 5: Approval & Alerts -->
+              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2 flex flex-col justify-between overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
+                  <span class="text-[6px] font-mono text-[#00ffaa]">DISPATCH_ALERTS</span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#00ffaa] animate-pulse"></span>
+                </div>
+                <div class="font-mono text-[6.5px] text-zinc-400 space-y-0.5 my-1 flex-1 leading-tight select-none z-10">
+                  <div class="text-zinc-500">Approval: CONFIRMED</div>
+                  <div class="text-white">Gmail API: Rate Safe (15/h)</div>
+                  <div class="text-[#00ffaa] font-bold">🔔 Telegram: Reply Alert</div>
+                  <div class="text-[5.5px] text-zinc-400 border-t border-white/5 pt-0.5">Instant push to channel</div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
+                  <span class="text-[6px] font-mono text-zinc-450 uppercase">DELIVERY ENGINE</span>
+                  <span class="text-[8px] font-bold text-white truncate">Safe Dispatch & Alert</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </article>
+
       <!-- Project 01: Content Repurposing System -->
       <article class="project-card glass-box relative rounded-2xl p-6 sm:p-10 text-left flex flex-col gap-8 overflow-hidden" data-id="1" data-category="content">
         <!-- Animated border line -->
@@ -344,21 +785,31 @@
             </div>
           </div>
 
-          <!-- Image gallery column: 3 slots requested -->
+          <!-- Image gallery column: Featured Image + 2 supporting slots -->
           <div class="lg:col-span-7 space-y-3">
             <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">TELEMETRY & UI LOGS (3 SLOTS)</h4>
-            <div class="grid grid-cols-3 gap-3">
-              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
-                <img src="images/agent1-notion.jpg" alt="Notion Output Node" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
-                <div class="absolute bottom-1.5 left-2 bg-black/80 px-1.5 py-0.5 rounded text-[8px] font-mono text-zinc-400">01 / NOTION CRM</div>
+            <div class="space-y-2.5">
+              <!-- Featured larger image -->
+              <div class="gallery-item interactive-elem relative aspect-video rounded-xl border border-white/[0.06] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                <img src="images/agent1-notion.jpg" alt="Notion CRM Log · Automated Database Record" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-85 group-hover:scale-[1.015] group-hover:opacity-100 transition duration-300" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                <div class="absolute bottom-2 left-2.5 bg-black/85 backdrop-blur-sm px-2 py-0.5 rounded text-[8px] font-mono text-zinc-300 border border-white/10">01 / FEATURED · NOTION CRM</div>
+                <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                  <span class="text-[10px] font-mono text-[#00ffaa] bg-black/85 px-3 py-1 rounded-full border border-[#00ffaa]/30 flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                    Expand Visual
+                  </span>
+                </div>
               </div>
-              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
-                <img src="images/agent1-notion1.jpg" alt="Repurposing Output Drafts" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
-                <div class="absolute bottom-1.5 left-2 bg-black/80 px-1.5 py-0.5 rounded text-[8px] font-mono text-zinc-400">02 / WORKFLOW STAGE</div>
-              </div>
-              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
-                <img src="images/agent1-notion2.jpg" alt="Groq Extraction Model" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
-                <div class="absolute bottom-1.5 left-2 bg-black/80 px-1.5 py-0.5 rounded text-[8px] font-mono text-zinc-400">03 / AI LOG PARSER</div>
+              <!-- Supporting images underneath -->
+              <div class="grid grid-cols-2 gap-2.5">
+                <div class="gallery-item interactive-elem relative aspect-[16/9] rounded-lg border border-white/[0.05] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                  <img src="images/agent1-notion1.jpg" alt="Workflow Stage · Content Repurposing Pipeline" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-75 group-hover:scale-[1.015] group-hover:opacity-100 transition duration-300" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                  <div class="absolute bottom-1.5 left-2 bg-black/85 px-1.5 py-0.5 rounded text-[7.5px] font-mono text-zinc-400 border border-white/10">02 / WORKFLOW STAGE</div>
+                </div>
+                <div class="gallery-item interactive-elem relative aspect-[16/9] rounded-lg border border-white/[0.05] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                  <img src="images/agent1-notion2.jpg" alt="Groq Extraction Model · Execution Logs" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-75 group-hover:scale-[1.015] group-hover:opacity-100 transition duration-300" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                  <div class="absolute bottom-1.5 left-2 bg-black/85 px-1.5 py-0.5 rounded text-[7.5px] font-mono text-zinc-400 border border-white/10">03 / AI LOG PARSER</div>
+                </div>
               </div>
             </div>
           </div>
@@ -419,29 +870,39 @@
             </div>
           </div>
 
-          <!-- 5 image slots requested -->
+          <!-- 5 image slots: Featured on top + 4 supporting thumbnails underneath -->
           <div class="lg:col-span-7 space-y-3">
             <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">TELEMETRY & UI LOGS (5 SLOTS)</h4>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
-              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
-                <img src="images/agent2-aioutreach.jpg" alt="Outreach Builder Node" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
-                <div class="absolute bottom-1 left-1.5 bg-black/80 px-1 py-0.5 rounded text-[7px] font-mono text-zinc-400">01/AI COMPILER</div>
+            <div class="space-y-2.5">
+              <!-- Featured larger image -->
+              <div class="gallery-item interactive-elem relative aspect-video rounded-xl border border-white/[0.06] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                <img src="images/agent2-aioutreach.jpg" alt="Outreach Builder Node · Automated Campaign Graph" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-85 group-hover:scale-[1.015] group-hover:opacity-100 transition duration-300" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                <div class="absolute bottom-2 left-2.5 bg-black/85 backdrop-blur-sm px-2 py-0.5 rounded text-[8px] font-mono text-zinc-300 border border-white/10">01 / FEATURED · AI COMPILER NODE</div>
+                <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                  <span class="text-[10px] font-mono text-[#00ffaa] bg-black/85 px-3 py-1 rounded-full border border-[#00ffaa]/30 flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                    Expand Visual
+                  </span>
+                </div>
               </div>
-              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
-                <img src="images/agent2-email.jpg" alt="Email Thread Node" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
-                <div class="absolute bottom-1 left-1.5 bg-black/80 px-1 py-0.5 rounded text-[7px] font-mono text-zinc-400">02/API rotating</div>
-              </div>
-              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
-                <img src="images/agent2-excel.jpg" alt="Google Sheets Prospect Database" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
-                <div class="absolute bottom-1 left-1.5 bg-black/80 px-1 py-0.5 rounded text-[7px] font-mono text-zinc-400">03/SHEET CRM</div>
-              </div>
-              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
-                <img src="images/agent2-followupsequence.jpg" alt="Automatic Sequence Followup Node" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
-                <div class="absolute bottom-1 left-1.5 bg-black/80 px-1 py-0.5 rounded text-[7px] font-mono text-zinc-400">04/SCHEDULER</div>
-              </div>
-              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
-                <img src="images/agent2-replytracker.jpg" alt="Incoming Inbox Listener" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
-                <div class="absolute bottom-1 left-1.5 bg-black/80 px-1 py-0.5 rounded text-[7px] font-mono text-zinc-400">05/REPLY FLOW</div>
+              <!-- 4 supporting thumbnails -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <div class="gallery-item interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                  <img src="images/agent2-email.jpg" alt="Email Thread Node · API Rotation" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-75 group-hover:scale-[1.015] group-hover:opacity-100 transition duration-300" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                  <div class="absolute bottom-1 left-1.5 bg-black/85 px-1 py-0.5 rounded text-[7px] font-mono text-zinc-400">02/API ROTATING</div>
+                </div>
+                <div class="gallery-item interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                  <img src="images/agent2-excel.jpg" alt="Google Sheets Prospect Database" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-75 group-hover:scale-[1.015] group-hover:opacity-100 transition duration-300" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                  <div class="absolute bottom-1 left-1.5 bg-black/85 px-1 py-0.5 rounded text-[7px] font-mono text-zinc-400">03/SHEET CRM</div>
+                </div>
+                <div class="gallery-item interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                  <img src="images/agent2-followupsequence.jpg" alt="Automatic Sequence Followup Node" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-75 group-hover:scale-[1.015] group-hover:opacity-100 transition duration-300" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                  <div class="absolute bottom-1 left-1.5 bg-black/85 px-1 py-0.5 rounded text-[7px] font-mono text-zinc-400">04/SCHEDULER</div>
+                </div>
+                <div class="gallery-item interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                  <img src="images/agent2-replytracker.jpg" alt="Incoming Inbox Listener" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-75 group-hover:scale-[1.015] group-hover:opacity-100 transition duration-300" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                  <div class="absolute bottom-1 left-1.5 bg-black/85 px-1 py-0.5 rounded text-[7px] font-mono text-zinc-400">05/REPLY FLOW</div>
+                </div>
               </div>
             </div>
           </div>
@@ -502,183 +963,38 @@
             </div>
           </div>
 
-          <!-- 3 image slots requested -->
+          <!-- 3 image slots requested: Featured on top + 2 supporting slots underneath -->
           <div class="lg:col-span-7 space-y-3">
             <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">TELEMETRY & UI LOGS (3 SLOTS)</h4>
-            <div class="grid grid-cols-3 gap-3">
-              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
-                <img src="images/agent3-commandprompt.jpg" alt="Scraping Console Node" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
-                <div class="absolute bottom-1.5 left-2 bg-black/80 px-1.5 py-0.5 rounded text-[8px] font-mono text-zinc-400">01 / SCRAPER LOGS</div>
-              </div>
-              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
-                <img src="images/agent3-workflow.jpg" alt="API Scrape Workflow" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
-                <div class="absolute bottom-1.5 left-2 bg-black/80 px-1.5 py-0.5 rounded text-[8px] font-mono text-zinc-400">02 / TARGETING FLOW</div>
-              </div>
-              <div class="interactive-elem relative aspect-video rounded-lg border border-white/[0.03] bg-zinc-950 overflow-hidden group cursor-zoom-in">
-                <img src="images/agent3-excel.jpg" alt="Sourced Prospect Rows" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition duration-500" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
-                <div class="absolute bottom-1.5 left-2 bg-black/80 px-1.5 py-0.5 rounded text-[8px] font-mono text-zinc-400">03 / SCRAPED DATABASE</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Project 04: Restaurant Outreach AI System -->
-      <article class="project-card glass-box relative rounded-2xl p-6 sm:p-10 text-left flex flex-col gap-8 overflow-hidden" data-id="4" data-category="outreach">
-        <div class="laser-border"></div>
-        
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.04] pb-6">
-          <div class="space-y-2">
-            <span class="project-number font-mono text-2xl font-bold text-[#00ffaa] block" data-target="4">00</span>
-            <h2 class="text-3xl sm:text-4xl font-syne font-extrabold text-white">Restaurant Outreach AI System</h2>
-          </div>
-          <p class="text-sm font-sans font-medium text-zinc-450 md:max-w-md md:text-right">
-            3 workflows, one canvas, end-to-end restaurant outreach.
-          </p>
-        </div>
-
-        <div class="grid lg:grid-cols-12 gap-8 items-start">
-          <div class="lg:col-span-5 space-y-6">
-            <div class="space-y-4">
-              <h3 class="text-xs font-mono font-bold tracking-widest text-[#00ffaa] uppercase">SYSTEM FLOW</h3>
-              <ul class="space-y-3.5 text-xs text-zinc-400 font-sans">
-                <li class="flex items-start gap-2.5 leading-relaxed">
-                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
-                  <span>Detects newly populated restaurant leads on Google Sheets instantly.</span>
-                </li>
-                <li class="flex items-start gap-2.5 leading-relaxed">
-                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
-                  <span>Fetches website content automatically, auditing performance markers to classify as Broken, Mediocre, or Good. Skip Good sites entirely.</span>
-                </li>
-                <li class="flex items-start gap-2.5 leading-relaxed">
-                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
-                  <span>Writes context-specific pitch draft highlighting precise website errors found during audit.</span>
-                </li>
-                <li class="flex items-start gap-2.5 leading-relaxed">
-                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
-                  <span>Generates unique alternative solutions for those with no existing website to construct immediate value.</span>
-                </li>
-                <li class="flex items-start gap-2.5 leading-relaxed">
-                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
-                  <span>Holds in manual approval block → dispatches via Gmail upon single-click confirmation.</span>
-                </li>
-                <li class="flex items-start gap-2.5 leading-relaxed">
-                  <span class="text-[#00ffaa] font-mono select-none mt-0.5">→</span>
-                  <span>Scans incoming responses: flags positive triggers and fires instant Telegram notify messages to team channels.</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="space-y-3 pt-4 border-t border-white/[0.04]">
-              <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">ENGINE INTEGRATION</h4>
-              <div class="flex flex-wrap gap-2">
-                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.1s">n8n</span>
-                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.2s">Groq AI</span>
-                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.3s">Gmail</span>
-                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.4s">Google Sheets</span>
-                <span class="stack-tag interactive-elem px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-[#00ffaa]/20 bg-[#00ffaa]/5 text-[#00ffaa]" style="transition-delay: 0.5s">Telegram</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 5 image slots requested -->
-          <div class="lg:col-span-7 space-y-3">
-            <h4 class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">TELEMETRY & UI LOGS (5 SLOTS)</h4>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
-              <!-- Slot 1: Audit Engine Console -->
-              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2 flex flex-col justify-between overflow-hidden group">
-                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
-                  <div class="flex gap-1">
-                    <span class="w-1 h-1 rounded-full bg-red-500"></span>
-                    <span class="w-1 h-1 rounded-full bg-yellow-500"></span>
-                    <span class="w-1 h-1 rounded-full bg-[#00ffaa]"></span>
-                  </div>
-                  <span class="text-[6px] font-mono text-zinc-500">AUDIT_CORE_v1.2</span>
-                </div>
-                <div class="font-mono text-[7px] text-zinc-400 space-y-1 my-1 flex-1 leading-tight select-none z-10">
-                  <div class="text-[#00ffaa] flex justify-between"><span>GET /menu-page</span><span class="text-[5px] text-zinc-500">12ms</span></div>
-                  <div class="text-red-400 font-bold">● ERROR_404: BROKEN LINK</div>
-                  <div class="text-zinc-500">MOBILE_OPTIMIZE: FALSE</div>
-                  <div class="text-[#00ffaa] animate-pulse">■ SECURING_DATA_PITCH...</div>
-                </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
-                  <span class="text-[6px] font-mono text-zinc-450 uppercase">AUDIT ENGINE</span>
-                  <span class="text-[8px] font-bold text-white truncate">Broken Detector</span>
+            <div class="space-y-2.5">
+              <!-- Featured larger image -->
+              <div class="gallery-item interactive-elem relative aspect-video rounded-xl border border-white/[0.06] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                <img src="images/agent3-workflow.jpg" alt="API Scrape Workflow · Cloud Actor Pipeline" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-85 group-hover:scale-[1.015] group-hover:opacity-100 transition duration-300" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                <div class="absolute bottom-2 left-2.5 bg-black/85 backdrop-blur-sm px-2 py-0.5 rounded text-[8px] font-mono text-zinc-300 border border-white/10">01 / FEATURED · TARGETING FLOW</div>
+                <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                  <span class="text-[10px] font-mono text-[#00ffaa] bg-black/85 px-3 py-1 rounded-full border border-[#00ffaa]/30 flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                    Expand Visual
+                  </span>
                 </div>
               </div>
-
-              <!-- Slot 2: Template AI -->
-              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2 flex flex-col justify-between overflow-hidden group">
-                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
-                  <span class="text-[6px] font-mono text-[#00ffaa]">GROQ_RUNNING</span>
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#00ffaa] animate-pulse"></span>
+              <!-- Supporting images underneath -->
+              <div class="grid grid-cols-2 gap-2.5">
+                <div class="gallery-item interactive-elem relative aspect-[16/9] rounded-lg border border-white/[0.05] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                  <img src="images/agent3-commandprompt.jpg" alt="Scraping Console Node · Runtime Logs" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-75 group-hover:scale-[1.015] group-hover:opacity-100 transition duration-300" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                  <div class="absolute bottom-1.5 left-2 bg-black/85 px-1.5 py-0.5 rounded text-[7.5px] font-mono text-zinc-400 border border-white/10">02 / SCRAPER LOGS</div>
                 </div>
-                <div class="font-mono text-[7px] text-zinc-400 space-y-0.5 my-1 flex-1 leading-normal select-none overflow-hidden z-10">
-                  <div class="text-zinc-500">Prompt: Pitch Joe's Diner</div>
-                  <div class="text-white text-[6px] italic border-l border-[#00ffaa] pl-1 py-0.5">"I noticed your menu button 404s..."</div>
-                  <div class="text-zinc-550">Tone: Empathetic/Value</div>
-                </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
-                  <span class="text-[6px] font-mono text-zinc-450 uppercase">TEMPLATE AI</span>
-                  <span class="text-[8px] font-bold text-white truncate">Pitch Generator</span>
-                </div>
-              </div>
-
-              <!-- Slot 3: CRM Pipeline -->
-              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2 flex flex-col justify-between overflow-hidden group">
-                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
-                  <span class="text-[6px] font-mono text-zinc-500">SYS_WAITING_APPROVAL</span>
-                  <span class="text-[6px] font-mono text-yellow-500">PENDING_REVIEW</span>
-                </div>
-                <div class="flex-1 flex flex-col items-center justify-center gap-1 my-1 z-10">
-                  <div class="px-2 py-0.5 rounded text-[6px] font-mono font-bold bg-[#00ffaa]/10 text-[#00ffaa] border border-[#00ffaa]/25 animate-pulse text-center w-full">
-                    APPROVE_DISPATCH
-                  </div>
-                  <span class="text-[5.5px] font-mono text-zinc-500">ID: #9902_RESTAURANT</span>
-                </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
-                  <span class="text-[6px] font-mono text-zinc-450 uppercase">CRM PIPELINE</span>
-                  <span class="text-[8px] font-bold text-white truncate">Approval Block</span>
-                </div>
-              </div>
-
-              <!-- Slot 4: Rotator -->
-              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2 flex flex-col justify-between overflow-hidden group">
-                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
-                  <span class="text-[6px] font-mono text-zinc-500">GMAIL_API_ROTATOR</span>
-                  <span class="text-[6px] font-mono text-[#00ffaa]">ACTIVE_IP</span>
-                </div>
-                <div class="font-mono text-[6px] text-zinc-400 space-y-0.5 my-1 flex-1 leading-normal select-none overflow-hidden z-10">
-                  <div class="flex items-center gap-1"><span class="w-1 h-1 rounded-full bg-[#00ffaa]"></span><span>domain_a@edit.com</span></div>
-                  <div class="flex items-center gap-1"><span class="w-1 h-1 rounded-full bg-zinc-600"></span><span>domain_b@edit.com</span></div>
-                  <div class="text-[5.5px] text-zinc-500 mt-1">RATE: 15 / hr protective limit</div>
-                </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
-                  <span class="text-[6px] font-mono text-zinc-450 uppercase">ROTATOR</span>
-                  <span class="text-[8px] font-bold text-white truncate">Inbox Dispatch</span>
-                </div>
-              </div>
-
-              <!-- Slot 5: Notify Signal -->
-              <div class="interactive-elem relative aspect-[4/3] rounded-lg border border-white/[0.05] bg-[#0c0d12] p-2 flex flex-col justify-between overflow-hidden group">
-                <div class="flex items-center justify-between border-b border-white/[0.05] pb-1 z-10">
-                  <span class="text-[6px] font-mono text-[#00ffaa]">TELEGRAM_PUSH</span>
-                  <span class="text-[6px] font-mono text-zinc-500">ALERT_LIVE</span>
-                </div>
-                <div class="font-mono text-[6px] text-zinc-400 space-y-0.5 my-1 flex-1 leading-tight select-none overflow-hidden z-10">
-                  <div class="text-[#00ffaa] font-bold">🔔 REPLY RECEIVED!</div>
-                  <div class="text-white text-[5.5px] border-l border-zinc-500 pl-1">"Hey, let's schedule a chat."</div>
-                  <div class="text-[5px] text-zinc-500">Thread: Joe's Diner #9902</div>
-                </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 flex flex-col justify-end p-2 pointer-events-none z-20">
-                  <span class="text-[6px] font-mono text-zinc-450 uppercase">NOTIFY SIGNAL</span>
-                  <span class="text-[8px] font-bold text-white truncate">Telegram alert</span>
+                <div class="gallery-item interactive-elem relative aspect-[16/9] rounded-lg border border-white/[0.05] bg-zinc-950 overflow-hidden group cursor-zoom-in">
+                  <img src="images/agent3-excel.jpg" alt="Sourced Prospect Rows · Sheet Database" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-75 group-hover:scale-[1.015] group-hover:opacity-100 transition duration-300" onerror="this.parentElement.classList.add('shimmer-placeholder'); this.remove();">
+                  <div class="absolute bottom-1.5 left-2 bg-black/85 px-1.5 py-0.5 rounded text-[7.5px] font-mono text-zinc-400 border border-white/10">03 / SCRAPED DATABASE</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </article>
+
+
 
       <!-- Project 05: Email Summary Agent -->
       <article class="project-card glass-box relative rounded-2xl p-6 sm:p-10 text-left flex flex-col gap-8 overflow-hidden" data-id="5" data-category="inbox-triage">
@@ -878,13 +1194,36 @@
   </main>
 
   <!-- Lightbox Modal for Full Resolution Screenshot Review -->
-  <div id="lightbox" class="fixed inset-0 bg-black/95 z-[10001] flex items-center justify-center p-4">
-    <button id="lightbox-close" class="absolute top-6 right-6 text-white hover:text-[#00ffaa] p-2 bg-zinc-900/60 rounded-full transition duration-200 cursor-pointer">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+  <div id="lightbox" class="fixed inset-0 bg-black/95 z-[10001] flex items-center justify-center p-4 sm:p-8 select-none">
+    <!-- Top Bar: Title, Counter & Action buttons -->
+    <div class="absolute top-4 left-4 right-4 sm:top-6 sm:left-6 sm:right-6 flex items-center justify-between pointer-events-none z-30">
+      <div class="flex items-center gap-2.5 bg-zinc-950/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 pointer-events-auto shadow-lg">
+        <span id="lightbox-counter" class="text-xs font-mono text-[#00ffaa] font-semibold">1 / 1</span>
+        <span class="text-zinc-600">·</span>
+        <span id="lightbox-caption" class="text-xs font-mono text-zinc-300 truncate max-w-[200px] sm:max-w-md"></span>
+      </div>
+      
+      <div class="flex items-center gap-2 pointer-events-auto">
+        <button id="lightbox-zoom-btn" class="text-zinc-400 hover:text-white p-2 sm:p-2.5 bg-zinc-950/85 backdrop-blur-md border border-white/10 rounded-full transition duration-200 cursor-pointer shadow-lg" title="Toggle Zoom">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        </button>
+        <button id="lightbox-close" class="text-zinc-400 hover:text-white p-2 sm:p-2.5 bg-zinc-950/85 backdrop-blur-md border border-white/10 rounded-full transition duration-200 cursor-pointer shadow-lg" title="Close (Esc)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button id="lightbox-prev" class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 p-2.5 sm:p-3 bg-zinc-950/85 backdrop-blur-md border border-white/10 text-zinc-300 hover:text-[#00ffaa] rounded-full transition duration-200 cursor-pointer z-30 shadow-xl" title="Previous (←)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
     </button>
-    <div class="max-w-5xl max-h-[85vh] overflow-hidden flex flex-col items-center gap-3">
-      <img id="lightbox-img" src="" alt="Zoomed Telemetry" class="max-w-full max-h-[80vh] object-contain rounded border border-white/10 shadow-2xl">
-      <div id="lightbox-caption" class="text-xs font-mono text-[#00ffaa] bg-[#0a0a0a] px-3 py-1 rounded"></div>
+    <button id="lightbox-next" class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 p-2.5 sm:p-3 bg-zinc-950/85 backdrop-blur-md border border-white/10 text-zinc-300 hover:text-[#00ffaa] rounded-full transition duration-200 cursor-pointer z-30 shadow-xl" title="Next (→)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+
+    <!-- Center Stage Image Container -->
+    <div id="lightbox-img-wrapper" class="relative max-w-6xl max-h-[82vh] overflow-hidden flex items-center justify-center p-2">
+      <img id="lightbox-img" src="" alt="System Telemetry" class="max-w-full max-h-[80vh] object-contain rounded-lg border border-white/10 shadow-2xl select-none" draggable="false">
     </div>
   </div>
 
@@ -999,36 +1338,118 @@
       }, 120); // Steady system-like tick
     }
 
-    // 6. Lightbox zoom action for beautiful images
+    // 6. Upgraded Lightbox with multi-image navigation, zooming, and keyboard shortcuts
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCap = document.getElementById('lightbox-caption');
+    const lightboxCounter = document.getElementById('lightbox-counter');
     const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const lightboxZoomBtn = document.getElementById('lightbox-zoom-btn');
 
-    document.querySelectorAll('.project-card img').forEach(img => {
-      img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightboxCap.innerText = img.alt || "Edit Theory Automation Node";
-        lightbox.classList.add('active');
+    let currentImages = [];
+    let currentIndex = 0;
+    let isZoomed = false;
+
+    function updateLightboxImage(idx) {
+      if (!currentImages.length) return;
+      currentIndex = (idx + currentImages.length) % currentImages.length;
+      const target = currentImages[currentIndex];
+      lightboxImg.src = target.src;
+      lightboxCap.innerText = target.alt || "Edit Theory Automation Node";
+      lightboxCounter.innerText = `${currentIndex + 1} / ${currentImages.length}`;
+      isZoomed = false;
+      lightboxImg.classList.remove('zoomed');
+
+      if (currentImages.length <= 1) {
+        lightboxPrev.style.display = 'none';
+        lightboxNext.style.display = 'none';
+      } else {
+        lightboxPrev.style.display = 'flex';
+        lightboxNext.style.display = 'flex';
+      }
+    }
+
+    document.querySelectorAll('.project-card').forEach(card => {
+      const cardImgs = Array.from(card.querySelectorAll('img')).filter(img => img.src && !img.src.includes('data:'));
+      cardImgs.forEach((img, idx) => {
+        img.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentImages = cardImgs;
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          updateLightboxImage(idx);
+        });
       });
     });
 
-    lightboxClose.addEventListener('click', () => {
+    function closeLightbox() {
       lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+      isZoomed = false;
+      lightboxImg.classList.remove('zoomed');
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+
+    lightboxPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updateLightboxImage(currentIndex - 1);
+    });
+
+    lightboxNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updateLightboxImage(currentIndex + 1);
+    });
+
+    function toggleZoom() {
+      isZoomed = !isZoomed;
+      lightboxImg.classList.toggle('zoomed', isZoomed);
+    }
+
+    lightboxZoomBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleZoom();
+    });
+
+    lightboxImg.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleZoom();
     });
 
     lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) {
-        lightbox.classList.remove('active');
+      if (e.target === lightbox || e.target.id === 'lightbox-img-wrapper') {
+        closeLightbox();
       }
     });
 
-    // Support keyboard escape key to close lightbox
+    // Keyboard support: Escape, ArrowLeft, ArrowRight
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-        lightbox.classList.remove('active');
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        updateLightboxImage(currentIndex - 1);
+      } else if (e.key === 'ArrowRight') {
+        updateLightboxImage(currentIndex + 1);
       }
     });
+
+    // Swipe gesture support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    lightbox.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) {
+        updateLightboxImage(currentIndex + 1);
+      } else if (touchEndX - touchStartX > 50) {
+        updateLightboxImage(currentIndex - 1);
+      }
+    }, { passive: true });
 
     // 7. Spotlight mouse-tracking effect for glass-box cards
     document.querySelectorAll('.project-card').forEach(card => {
@@ -1041,9 +1462,115 @@
       });
     });
 
-    // 8. Filter Systems Logic
+    // 8. Filter Systems Logic & Single-Project Scope Handling
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
+
+    // Mapping for ID aliases
+    const idAliasMap = {
+      'project-concierge': '6',
+      'concierge': '6',
+      '6': '6',
+      'project-restaurant-outreach': '4',
+      'restaurant-outreach': '4',
+      '4': '4',
+      'project-glossier': '1',
+      'glossier': '1',
+      '1': '1',
+      'project-dew-co': '2',
+      'dew-co': '2',
+      '2': '2',
+      'project-lead-discovery': '3',
+      'lead-discovery': '3',
+      '3': '3',
+      'project-email-summary': '5',
+      'email-summary': '5',
+      '5': '5'
+    };
+
+    function showSingleProject(targetId) {
+      const normalizedId = idAliasMap[targetId] || targetId;
+      let matchedCard = null;
+
+      projectCards.forEach(card => {
+        const cardId = card.getAttribute('data-id');
+        if (cardId === normalizedId) {
+          matchedCard = card;
+          card.style.display = 'flex';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0) scale(1)';
+          card.style.filter = 'blur(0)';
+          card.classList.add('card-visible');
+          triggerNumberCountUp(card);
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (matchedCard) {
+        // Create or update Single Project Notification Banner
+        let singleBanner = document.getElementById('single-project-banner');
+        if (!singleBanner) {
+          singleBanner = document.createElement('div');
+          singleBanner.id = 'single-project-banner';
+          singleBanner.className = 'mb-10 p-4 rounded-xl bg-[#00ffaa]/5 border border-[#00ffaa]/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono';
+          const filterContainer = document.getElementById('filter-container');
+          if (filterContainer && filterContainer.parentNode) {
+            filterContainer.parentNode.insertBefore(singleBanner, filterContainer.nextSibling);
+          }
+        }
+
+        const projectTitle = matchedCard.querySelector('h2') ? matchedCard.querySelector('h2').innerText : `Agent 0${normalizedId}`;
+        singleBanner.innerHTML = `
+          <div class="flex items-center gap-2.5 text-zinc-300">
+            <span class="w-2 h-2 rounded-full bg-[#00ffaa] animate-pulse"></span>
+            <span>SINGLE SYSTEM FOCUS: <strong class="text-[#00ffaa]">${projectTitle}</strong> (Agent 0${normalizedId})</span>
+          </div>
+          <button id="show-all-systems-btn" class="interactive-elem px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-white hover:border-[#00ffaa]/40 transition duration-200 cursor-pointer flex items-center gap-1.5">
+            <span>← View All 6 Systems</span>
+          </button>
+        `;
+
+        document.getElementById('show-all-systems-btn').addEventListener('click', () => {
+          showAllProjects();
+          window.history.replaceState(null, '', window.location.pathname);
+        });
+
+        // Hide filter buttons in single view mode
+        const filterContainer = document.getElementById('filter-container');
+        if (filterContainer) filterContainer.style.display = 'none';
+
+        // Scroll to the card smoothly
+        setTimeout(() => {
+          matchedCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      }
+    }
+
+    function showAllProjects() {
+      projectCards.forEach(card => {
+        card.style.display = 'flex';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0) scale(1)';
+        card.style.filter = 'blur(0)';
+      });
+
+      const singleBanner = document.getElementById('single-project-banner');
+      if (singleBanner) {
+        singleBanner.remove();
+      }
+
+      const filterContainer = document.getElementById('filter-container');
+      if (filterContainer) filterContainer.style.display = 'flex';
+    }
+
+    // Check for query parameters (?id=6 or ?project=6) or URL hash (#6 or #project-concierge)
+    const urlParams = new URLSearchParams(window.location.search);
+    const requestedId = urlParams.get('id') || urlParams.get('project') || (window.location.hash ? window.location.hash.replace('#', '') : null);
+
+    if (requestedId) {
+      showSingleProject(requestedId);
+    }
 
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {

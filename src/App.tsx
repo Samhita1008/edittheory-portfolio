@@ -1,6 +1,6 @@
-import { useState, useMemo, FormEvent } from 'react';
-import { SERVICES, PROJECTS, PROCESS_STEPS, CLIENT_TIERS } from './data';
-import { Project, Service, Theme } from './types';
+import { useState, useEffect, useMemo, FormEvent } from 'react';
+import { PROJECTS, PROCESS_STEPS, CLIENT_TIERS } from './data';
+import { Project, Theme } from './types';
 import { 
   Sun, 
   Moon, 
@@ -26,10 +26,14 @@ import {
   ChevronDown,
   ChevronUp,
   MessageSquare,
-  HelpCircle
+  HelpCircle,
+  Maximize2,
+  FileText
 } from 'lucide-react';
 import { ParticleBackground, DrawIcon, ProcessConnectLine } from './components/Effects';
 import ClientPortal from './components/ClientPortal';
+import { ImageViewer, ViewerImage } from './components/ImageViewer';
+import { ProjectDetailModal } from './components/ProjectDetailModal';
 
 // Edit Theory Custom High-Fidelity SVG Brand Logo Resource
 const EDIT_THEORY_LOGO_URL = "/images/Edit Theory.png";
@@ -40,11 +44,72 @@ export default function App() {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
-  // Sub-slide states for the 3 distinct project carousels
+  // Single-project focused detail view state
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  // Fullscreen / Lightbox image viewer state
+  const [viewerOpen, setViewerOpen] = useState(false);
+  const [viewerImages, setViewerImages] = useState<ViewerImage[]>([]);
+  const [viewerIndex, setViewerIndex] = useState(0);
+
+  // Synchronize URL hash or query param for direct project linking
+  useEffect(() => {
+    const handleUrlRouting = () => {
+      const params = new URLSearchParams(window.location.search);
+      const queryId = params.get('project') || params.get('id') || (window.location.hash ? window.location.hash.replace('#', '') : null);
+      if (queryId) {
+        const idAliasMap: Record<string, string> = {
+          'concierge': '6',
+          'project-concierge': '6',
+          '6': '6',
+          'restaurant': '4',
+          'restaurant-outreach': '4',
+          'project-restaurant-outreach': '4',
+          '4': '4',
+          'glossier': '1',
+          'project-glossier': '1',
+          '1': '1',
+          'dew': '2',
+          'dew-co': '2',
+          'project-dew-co': '2',
+          '2': '2',
+          'lead': '3',
+          'lead-discovery': '3',
+          'project-lead-discovery': '3',
+          '3': '3',
+          'email': '5',
+          'email-summary': '5',
+          'project-email-summary': '5',
+          '5': '5',
+        };
+        const normalized = idAliasMap[queryId] || queryId;
+        const found = PROJECTS.find(p => p.id === queryId || String(p.agentNumber) === normalized || p.id === normalized);
+        if (found) {
+          setSelectedProject(found);
+        }
+      }
+    };
+    handleUrlRouting();
+    window.addEventListener('hashchange', handleUrlRouting);
+    return () => window.removeEventListener('hashchange', handleUrlRouting);
+  }, []);
+
+  const openLightbox = (images: string[], title: string, startIndex: number = 0) => {
+    setViewerImages(
+      images.map((img, i) => ({
+        url: img,
+        title: `${title} · Telemetry Review`,
+        caption: `Visual architecture & system execution logs (${i + 1} of ${images.length})`
+      }))
+    );
+    setViewerIndex(startIndex);
+    setViewerOpen(true);
+  };
+
+  // Sub-slide states for the project carousels
   const [projectSlideIndex, setProjectSlideIndex] = useState<{ [projectId: string]: number }>({
-    'project-glossier': 0,
-    'project-dew-co': 0,
-    'project-lead-discovery': 0,
+    'project-concierge': 0,
+    'project-restaurant-outreach': 0,
   });
 
   // Client Portal contact form dynamic values
@@ -65,63 +130,11 @@ export default function App() {
     return Array.from(tags);
   }, []);
 
-  // Filter Projects and Services in real-time based on Search + Selected tag
-  const filteredData = useMemo(() => {
+  // Filter Projects in real-time based on Search + Selected tag
+  const filteredProjects = useMemo(() => {
     const sanitizedSearch = searchTerm.toLowerCase().trim();
 
-    let matchedServices = SERVICES.filter(s => {
-      const titleLower = s.title.toLowerCase();
-      const descLower = s.description.toLowerCase();
-      const bulletsLower = s.bullets.join(' ').toLowerCase();
-
-      if (selectedTag) {
-        const tagLower = selectedTag.toLowerCase();
-        
-        // Dynamic mapping of project tags to services to keep service channel visible
-        if (
-          tagLower.includes('agent') || 
-          tagLower.includes('repurposing') || 
-          tagLower.includes('media') || 
-          tagLower.includes('tone') || 
-          tagLower.includes('scheduling')
-        ) {
-          return s.id === 'service-repurposing';
-        }
-        if (
-          tagLower.includes('email') || 
-          tagLower.includes('outreach') || 
-          tagLower.includes('linkedin') || 
-          tagLower.includes('personalization') || 
-          tagLower.includes('crm') || 
-          tagLower.includes('hubspot')
-        ) {
-          return s.id === 'service-outreach';
-        }
-        if (
-          tagLower.includes('scraping') || 
-          tagLower.includes('sifting') || 
-          tagLower.includes('enrichment') || 
-          tagLower.includes('qualification')
-        ) {
-          return s.id === 'service-scraping';
-        }
-        
-        return titleLower.includes(tagLower) || 
-               descLower.includes(tagLower) || 
-               bulletsLower.includes(tagLower);
-      }
-
-      return titleLower.includes(sanitizedSearch) || 
-             descLower.includes(sanitizedSearch) ||
-             bulletsLower.includes(sanitizedSearch);
-    });
-
-    // Fallback: display all services if filtered structure becomes empty
-    if (matchedServices.length === 0) {
-      matchedServices = SERVICES;
-    }
-
-    const matchedProjects = PROJECTS.filter(p => {
+    return PROJECTS.filter(p => {
       const matchSearch = p.title.toLowerCase().includes(sanitizedSearch) ||
                           p.category.toLowerCase().includes(sanitizedSearch) ||
                           p.description.toLowerCase().includes(sanitizedSearch) ||
@@ -130,11 +143,6 @@ export default function App() {
       const matchTag = selectedTag ? p.tags.includes(selectedTag) : true;
       return matchSearch && matchTag;
     });
-
-    return {
-      services: matchedServices,
-      projects: matchedProjects
-    };
   }, [searchTerm, selectedTag]);
 
   // Handle message send submission simulations
@@ -172,8 +180,7 @@ export default function App() {
           {/* Nav links for desktop */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium">
             <a href="#about-section" className="hover:text-[#4fffb0] transition-colors">About</a>
-            <a href="#services-section" className="hover:text-[#4fffb0] transition-colors">Services</a>
-            <a href="/projects.html" className="hover:text-[#4fffb0] transition-colors font-semibold text-[#4fffb0]">Systems Built</a>
+            <a href="#projects-section" className="hover:text-[#4fffb0] transition-colors font-semibold text-[#4fffb0]">Systems Built</a>
             <a href="#process-section" className="hover:text-[#4fffb0] transition-colors">Work Process</a>
             <a href="#client-portal-section" className="hover:text-[#4fffb0] transition-colors text-xs font-mono px-3 py-1 rounded bg-[#4fffb0]/10 text-[#4fffb0] border border-[#4fffb0]/25">Portal Space</a>
           </div>
@@ -230,7 +237,7 @@ export default function App() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <a 
-              href="/projects.html" 
+              href="#projects-section" 
               className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#4fffb0] text-[#060810] hover:bg-[#4fffb0]/90 font-bold transition duration-300 text-sm flex items-center justify-center gap-2 shadow-[0_0_24px_rgba(79,255,176,0.2)] hover:shadow-[0_0_28px_rgba(79,255,176,0.4)] cursor-pointer"
             >
               See My Work <ArrowRight className="w-4 h-4" />
@@ -306,49 +313,6 @@ export default function App() {
             </div>
 
           </div>
-        </div>
-      </section>
-
-      {/* SERVICES SECTION */}
-      <section id="services-section" className="py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-2 text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-mono tracking-widest text-[#4fffb0] uppercase">Strategic Offerings</span>
-          <h2 className={`text-3xl font-display font-extrabold ${theme === 'dark' ? 'text-sophisticated-glow' : 'text-zinc-800'}`}>AI systems designed to grow without overhead.</h2>
-        </div>
-
-        {filteredData.services.length === 0 && (
-          <p className="text-center text-zinc-500 text-xs py-8">No matching services in active filter query. Try searching for "Repurposing".</p>
-        )}
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {filteredData.services.map((svc) => (
-            <div 
-              key={svc.id}
-              className={`draw-icon-wrapper p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group hover:scale-[1.01] text-left hover:border-[#4fffb0]/50 ${theme === 'dark' ? 'card-vibe' : 'bg-white border-zinc-200'}`}
-            >
-              {/* Highlight background in dark theme */}
-              {theme === 'dark' && (
-                <div className="absolute top-0 left-0 w-24 h-24 bg-[#4fffb0]/1 blur-2xl group-hover:bg-[#4fffb0]/5 transition duration-300"></div>
-              )}
-
-              {/* DrawIcon receives hovering events, outline triggers stroke drawing animation */}
-              <div className="mb-6 inline-block">
-                <DrawIcon name={svc.iconName} className="w-10 h-10" />
-              </div>
-
-              <h3 className={`text-lg font-display font-bold mb-3 group-hover:text-[#4fffb0] transition-colors ${theme === 'dark' ? 'text-zinc-100' : 'text-zinc-800'}`}>{svc.title}</h3>
-              <p className="text-xs text-zinc-400 leading-relaxed mb-6 font-sans">{svc.description}</p>
-              
-              <ul className="space-y-2.5">
-                {svc.bullets.map((blt, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#4fffb0] mt-1.5 shrink-0"></span>
-                    <span className="text-zinc-500 dark:text-zinc-400">{blt}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -437,7 +401,7 @@ export default function App() {
                   💡 “If you have a workflow bottleneck, I can design a tailored AI solution for it.”
                 </div>
                 <p className="text-xs text-zinc-400 leading-relaxed font-sans">
-                  The three agents on this site are pre-built blueprints. But if your team spends hours on copy-pasting, multi-platform scrapers, custom DB loaders, or manual routing, I will engineer a custom script optimized for your exact system requirements on request.
+                  The systems and agent architectures shown on this site represent proven, production-tested blueprints. If your team spends hours on copy-pasting, multi-platform scrapers, custom DB loaders, or manual routing, I will engineer a custom script optimized for your exact system requirements on request.
                 </p>
               </div>
 
@@ -465,205 +429,169 @@ export default function App() {
       </section>
 
       {/* WHAT I'VE BUILT / PROJECTS SECTION */}
-      <section id="projects-section" className={`py-20 border-t border-b transition-colors duration-300 ${theme === 'dark' ? 'bg-[#060810]/80 border-zinc-900/60' : 'bg-white border-zinc-200'}`}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="projects-section" className={`py-24 border-t border-b transition-colors duration-300 ${theme === 'dark' ? 'bg-[#060810] border-zinc-900/80' : 'bg-white border-zinc-200'}`}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="space-y-3 text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-mono tracking-widest text-[#4fffb0] uppercase">Strategic Case Studies</span>
-            <h2 className={`text-3xl font-display font-extrabold ${theme === 'dark' ? 'text-sophisticated-glow' : 'text-zinc-800'}`}>Systems Design & Mechanics</h2>
-            <div className="text-xs text-zinc-500 max-w-2xl mx-auto font-sans bg-zinc-950/40 p-3 rounded border border-zinc-900/60 leading-relaxed text-center">
-              Please note: The studies below showcase conceptual, custom high-fidelity workflow designs and pipeline structures mapped for brands. These represent spec work prototypes engineered to map system capabilities and are not live-production integrations serving customer endpoints.
-            </div>
-            <p className="text-[10px] text-[#4fffb0] mt-1 font-mono uppercase tracking-wider">
-              Click the step buttons on any card to study core system mechanics.
+          {/* Section Header */}
+          <div className="space-y-4 text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-mono tracking-widest text-[#4fffb0] uppercase font-medium">
+              Strategic Case Studies
+            </span>
+            <h2 className={`text-3xl sm:text-4xl md:text-5xl font-display font-bold tracking-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
+              Systems Design & Mechanics
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-400 font-sans max-w-2xl mx-auto leading-relaxed">
+              Production-grade systems engineering: architecture blueprints, orchestration logic, and end-to-end automation.
             </p>
           </div>
 
-          {filteredData.projects.length === 0 && (
-            <div className="bg-zinc-950 p-8 rounded-lg text-center text-zinc-500 max-w-sm mx-auto text-xs">
+          {filteredProjects.length === 0 && (
+            <div className="bg-zinc-950 p-8 rounded-xl border border-zinc-900 text-center text-zinc-500 max-w-sm mx-auto text-xs">
               No results found matching your active tags or search terms.
-              <button onClick={() => { setSearchTerm(''); setSelectedTag(null); }} className="block mx-auto mt-3 text-[#4fffb0] font-bold underline cursor-pointer">
+              <button 
+                onClick={() => { setSearchTerm(''); setSelectedTag(null); }} 
+                className="block mx-auto mt-3 text-[#4fffb0] font-bold underline cursor-pointer"
+              >
                 Clear all filters
               </button>
             </div>
           )}
 
-          <div className="space-y-12">
-            {filteredData.projects.map((proj) => {
-              const activeSlideIdx = projectSlideIndex[proj.id] || 0;
-              const activeSlide = proj.mockupSlides[activeSlideIdx] || proj.mockupSlides[0];
+          {/* Clean Horizontal Project Cards */}
+          <div className="space-y-6">
+            {filteredProjects.map((proj, pIdx) => {
+              const projectNumber = String(pIdx + 1).padStart(2, '0');
+              const hasImages = proj.images && proj.images.length > 0;
 
               return (
                 <div 
                   key={proj.id}
-                  className={`rounded-2xl border overflow-hidden transition-all duration-300 p-6 md:p-8 text-left ${theme === 'dark' ? 'card-vibe' : 'bg-[#fcfcfc] border-zinc-200'}`}
+                  className={`group relative rounded-xl border transition-all duration-200 p-6 sm:p-7 md:p-8 hover:-translate-y-0.5 text-left ${
+                    theme === 'dark' 
+                      ? 'bg-[#090b11] border-zinc-800/70 hover:border-zinc-700/90' 
+                      : 'bg-[#fafafa] border-zinc-200 hover:border-zinc-300 shadow-sm'
+                  }`}
                 >
-                  <div className="grid lg:grid-cols-12 gap-8 items-start">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     
-                    {/* Visual Asset Showcase Column */}
-                    <div className="lg:col-span-6 space-y-4">
+                    {/* Main Content Area */}
+                    <div className="flex-1 space-y-3.5">
                       
-                      {/* Image Viewer Container */}
-                      <div className="relative rounded-xl border border-zinc-800 bg-[#060810] aspect-video overflow-hidden group">
-                        
-                        {/* If using the real generated image URL */}
-                        {proj.images[activeSlideIdx] && !proj.images[activeSlideIdx].includes('slide-') ? (
-                          <img 
-                            src={proj.images[activeSlideIdx]} 
-                            alt={activeSlide.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            referrerPolicy="no-referrer"
-                          />
-                        ) : (
-                          // High-fidelity fully responsive visual system mockup placeholder with pure CSS/SVG
-                          <div className="w-full h-full p-6 flex flex-col justify-between relative bg-gradient-to-br from-[#0b0e1c] to-[#04060b] text-[#4fffb0] duration-300">
-                            
-                            <div className="flex items-center justify-between border-b border-zinc-900 pb-2">
-                              <span className="text-[10px] font-mono tracking-widest uppercase">Agent #{proj.agentNumber} Interactive Board</span>
-                              <div className="flex items-center gap-1.5">
-                                <span className="w-2 h-2 rounded-full bg-[#4fffb0] animate-pulse"></span>
-                                <span className="text-[9px] font-mono text-zinc-500">Node Sync Active</span>
-                              </div>
-                            </div>
-
-                            <div className="space-y-2 py-4">
-                              <span className="text-[10px] bg-[#4fffb0]/10 border border-[#4fffb0]/30 text-[#4fffb0] px-2 py-0.5 rounded uppercase font-mono tracking-widest block w-max">
-                                {activeSlide.metrics}
-                              </span>
-                              <p className="text-xl font-display font-medium text-white">{activeSlide.title}</p>
-                              <p className="text-xs text-zinc-400 font-sans leading-relaxed">{activeSlide.description}</p>
-                            </div>
-
-                            <div className="flex items-center justify-between border-t border-zinc-900/40 pt-2 text-[9px] text-zinc-500 font-mono">
-                              <span>Step {activeSlideIdx + 1} of {proj.mockupSlides.length}</span>
-                              <span>Target: Skincare Brand Growth</span>
-                            </div>
-
-                          </div>
+                      {/* Project number & category */}
+                      <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono">
+                        <span className="text-zinc-500 font-medium tracking-wider">
+                          {projectNumber}
+                        </span>
+                        <span className="text-zinc-700 select-none">/</span>
+                        <span className="text-zinc-400 tracking-wider uppercase">
+                          {proj.category}
+                        </span>
+                        {proj.badge && (
+                          <>
+                            <span className="text-zinc-700 select-none">·</span>
+                            <span className="text-[11px] text-[#4fffb0]/80 tracking-wide font-medium">
+                              {proj.badge}
+                            </span>
+                          </>
                         )}
+                      </div>
 
-                        {/* Top layout banner on hover */}
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                          <span className="text-xs bg-[#060810] text-[#4fffb0] border border-[#4fffb0]/30 px-3 py-1.5 rounded-full font-mono font-bold">
-                            Interactive Studio Frame
+                      {/* Project Name */}
+                      <h3 
+                        onClick={() => setSelectedProject(proj)}
+                        className={`text-xl sm:text-2xl font-bold tracking-tight transition-colors duration-200 cursor-pointer hover:text-[#4fffb0] ${
+                          theme === 'dark' ? 'text-white' : 'text-zinc-900'
+                        }`}
+                      >
+                        {proj.title}
+                      </h3>
+
+                      {/* Concise Description */}
+                      <p className="text-sm sm:text-[15px] text-zinc-300/90 leading-relaxed font-sans max-w-3xl">
+                        {proj.description}
+                      </p>
+
+                      {/* Core Technologies / Capabilities */}
+                      <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs font-mono text-zinc-400 pt-1">
+                        {proj.tags.map((tag, tIdx) => (
+                          <span key={tIdx} className="flex items-center gap-2">
+                            {tIdx > 0 && <span className="text-zinc-600 select-none">·</span>}
+                            <span className="tracking-wide uppercase text-zinc-400">{tag}</span>
                           </span>
-                        </div>
+                        ))}
                       </div>
 
-                      {/* Interactive Slide selectors for controlling 3-5 images/slides */}
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-[10px] font-mono text-zinc-500">Jump to section:</span>
-                        {proj.mockupSlides.map((slide, sIdx) => {
-                          let stepLabel = `Step ${sIdx + 1}: ${slide.title.split(' ')[0]}`;
-                          if (proj.agentNumber === 1) {
-                            const labels = ['workflow', 'notion', 'notion'];
-                            stepLabel = `step 1: workflow`; // Custom match
-                            if (sIdx === 0) stepLabel = `step 1: workflow`;
-                            if (sIdx === 1) stepLabel = `step 2: notion`;
-                            if (sIdx === 2) stepLabel = `step 3: notion`;
-                          } else if (proj.agentNumber === 2) {
-                            if (sIdx === 0) stepLabel = `step 1: outreach`;
-                            if (sIdx === 1) stepLabel = `step 2: followup`;
-                            if (sIdx === 2) stepLabel = `step 3: replytracker`;
-                            if (sIdx === 3) stepLabel = `step 4: sheets`;
-                            if (sIdx === 4) stepLabel = `step 5: mail`;
-                          } else if (proj.agentNumber === 3) {
-                            if (sIdx === 0) stepLabel = `step 1: curl`;
-                            if (sIdx === 1) stepLabel = `step 2: workflow`;
-                            if (sIdx === 2) stepLabel = `step 3: sheets`;
-                          } else if (proj.agentNumber === 4) {
-                            if (sIdx === 0) stepLabel = `step 1: audit`;
-                            if (sIdx === 1) stepLabel = `step 2: pitch`;
-                            if (sIdx === 2) stepLabel = `step 3: alerts`;
-                          } else if (proj.agentNumber === 5) {
-                            if (sIdx === 0) stepLabel = `step 1: gmail 24h`;
-                            if (sIdx === 1) stepLabel = `step 2: groq triage`;
-                            if (sIdx === 2) stepLabel = `step 3: telegram`;
-                          }
-                          return (
+                      {/* Subtle Visuals Preview (if screenshots are available) */}
+                      {hasImages && (
+                        <div className="pt-2 flex flex-wrap items-center gap-2">
+                          <span className="text-[11px] font-mono text-zinc-500 mr-1">Telemetry:</span>
+                          {proj.images.slice(0, 3).map((imgUrl, imgIdx) => (
                             <button
-                              key={sIdx}
-                              onClick={() => {
-                                setProjectSlideIndex(prev => ({
-                                  ...prev,
-                                  [proj.id]: sIdx
-                                }));
-                              }}
-                              className={`px-2.5 py-1 text-[10px] font-mono rounded transition-colors duration-200 cursor-pointer ${activeSlideIdx === sIdx ? 'bg-[#4fffb0]/15 text-[#4fffb0] border border-[#4fffb0]/55 font-bold' : 'bg-zinc-900 text-zinc-400 hover:text-white border border-transparent'}`}
+                              key={imgIdx}
+                              type="button"
+                              onClick={() => openLightbox(proj.images, proj.title, imgIdx)}
+                              className="relative h-11 w-18 sm:h-12 sm:w-20 rounded-lg overflow-hidden border border-zinc-800 bg-zinc-950 hover:border-zinc-700 transition-all duration-200 cursor-pointer group/thumb"
+                              title={`View telemetry visual #${imgIdx + 1}`}
                             >
-                              {stepLabel}
+                              <img 
+                                src={imgUrl} 
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                                className="w-full h-full object-cover opacity-65 group-hover/thumb:opacity-100 group-hover/thumb:scale-[1.02] transition-all duration-300"
+                              />
+                              <div className="absolute inset-0 bg-black/30 opacity-0 group-hover/thumb:opacity-100 flex items-center justify-center transition-opacity">
+                                <Maximize2 className="w-3 h-3 text-[#4fffb0]" />
+                              </div>
                             </button>
-                          );
-                        })}
-                      </div>
+                          ))}
+                          <button
+                            type="button"
+                            onClick={() => openLightbox(proj.images, proj.title, 0)}
+                            className="text-[11px] font-mono text-zinc-400 hover:text-[#4fffb0] transition-colors cursor-pointer px-2.5 py-1 rounded bg-zinc-900/80 border border-zinc-800 flex items-center gap-1.5"
+                          >
+                            <Maximize2 className="w-3 h-3" />
+                            <span>{proj.images.length} Visuals</span>
+                          </button>
+                        </div>
+                      )}
 
                     </div>
 
-                    {/* Metadata Detail Copy Column */}
-                    <div className="lg:col-span-6 space-y-6 flex flex-col justify-between h-full">
-                      
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-3">
-                          <span className={`text-xs font-mono px-3 py-1 rounded ${theme === 'dark' ? 'bg-[#060810] text-[#4fffb0] border border-white/5' : 'bg-zinc-100 text-[#0c101d] border border-zinc-200'}`}>
-                            Agent #{proj.agentNumber}
-                          </span>
-                          <span className="text-xs text-zinc-500 font-mono uppercase tracking-wider">{proj.category}</span>
-                        </div>
+                    {/* Right-Side Action Area */}
+                    <div className="shrink-0 flex flex-col md:items-end justify-center gap-3 pt-4 md:pt-0 border-t md:border-t-0 border-zinc-800/40">
+                      <button 
+                        type="button"
+                        onClick={() => setSelectedProject(proj)}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-200 group-hover:text-[#4fffb0] transition-colors duration-200 cursor-pointer py-1"
+                      >
+                        <span>View System</span>
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                      </button>
 
-                        <h3 className={`text-2xl font-display font-bold leading-normal ${theme === 'dark' ? 'text-sophisticated-glow' : 'text-zinc-800'}`}>
-                          {proj.title}
-                        </h3>
-
-                        <p className="text-xs sm:text-sm text-zinc-400 dark:text-zinc-350 leading-relaxed font-sans">
-                          {proj.description}
-                        </p>
-
-                        {/* Slide specific descriptive callout */}
-                        <div className={`p-3.5 rounded-xl space-y-1.5 transition-all duration-300 ${theme === 'dark' ? 'bg-[#060810]/80 border border-white/5' : 'bg-zinc-50 border border-zinc-200'}`}>
-                          <div className="flex items-center gap-2">
-                            <Sliders className="w-3.5 h-3.5 text-[#4fffb0]" />
-                            <span className="text-[10px] uppercase font-mono text-zinc-500 tracking-wider">Automated Metric Details</span>
-                          </div>
-                          <p className={`text-xs font-bold ${theme === 'dark' ? 'text-zinc-100' : 'text-zinc-800'}`}>{activeSlide.title}</p>
-                          <p className="text-[10px] text-zinc-400 leading-normal">{activeSlide.description}</p>
-                          <p className="text-[10px] font-mono text-[#4fffb0] font-semibold">{activeSlide.metrics}</p>
-                        </div>
+                      {/* Secondary Clean Direct Links */}
+                      <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-zinc-500">
+                        {(proj.notionUrl || proj.githubUrl) && (
+                          <a 
+                            href={proj.notionUrl || proj.githubUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="hover:text-zinc-300 transition-colors flex items-center gap-1"
+                          >
+                            <FileText className="w-3.5 h-3.5 text-zinc-500" /> Project & architecture
+                          </a>
+                        )}
+                        {proj.loomUrl && (
+                          <a 
+                            href={proj.loomUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="hover:text-zinc-300 transition-colors flex items-center gap-1"
+                          >
+                            Loom
+                          </a>
+                        )}
                       </div>
-
-                      <div className="space-y-4 pt-4 border-t border-zinc-900/60">
-                        <div className="flex flex-wrap gap-1.5">
-                          {proj.tags.map((tag, tIdx) => (
-                            <span key={tIdx} className="text-[9px] font-mono bg-[#4fffb0]/5 text-zinc-500 border border-zinc-900 px-2.5 py-0.5 rounded">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Interactive Notion & Loom trigger links */}
-                        <div className="flex flex-wrap gap-3">
-                          {proj.notionUrl && (
-                            <a 
-                              href={proj.notionUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-3.5 py-1.5 rounded bg-zinc-950 hover:bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 text-[11px] font-mono flex items-center gap-1.5 transition"
-                            >
-                              📚 Notion Readout <ExternalLink className="w-3 h-3" />
-                            </a>
-                          )}
-                          {proj.loomUrl && (
-                            <a 
-                              href={proj.loomUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-3.5 py-1.5 rounded bg-zinc-950 hover:bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 text-[11px] font-mono flex items-center gap-1.5 transition"
-                            >
-                              🎥 Loom Video <ExternalLink className="w-3 h-3" />
-                            </a>
-                          )}
-                        </div>
-                      </div>
-
                     </div>
 
                   </div>
@@ -672,68 +600,40 @@ export default function App() {
             })}
           </div>
 
-          {/* GITHUB REPOSITORY SPOTLIGHT CARD */}
-          <div className="mt-12 p-6 md:p-8 rounded-2xl bg-[#060810] border border-zinc-800 hover:border-[#4fffb0]/40 transition-all duration-300 text-left relative overflow-hidden group shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-[#4fffb0]/5 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+          {/* GitHub Repository Spotlight Card */}
+          <div className="mt-14 p-6 sm:p-8 rounded-xl bg-[#090b11] border border-zinc-800 hover:border-zinc-700 transition-all duration-200 text-left">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
               <div className="space-y-3 max-w-2xl">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-[10px] font-mono tracking-widest text-[#4fffb0] uppercase font-bold px-2.5 py-0.5 rounded bg-[#4fffb0]/10 border border-[#4fffb0]/20 flex items-center gap-1.5">
-                    <Github className="w-3.5 h-3.5" /> FEATURED REPOSITORY
+                <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
+                  <span className="text-[#4fffb0] font-medium flex items-center gap-1.5">
+                    <Github className="w-3.5 h-3.5" /> REPOSITORY
                   </span>
-                  <span className="text-[10px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2.5 py-0.5 rounded">
-                    Samhita1008 / edit-theory-agents
-                  </span>
-                  <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2.5 py-0.5 rounded">
-                    5 Production Automation Agents
-                  </span>
+                  <span className="text-zinc-600 select-none">·</span>
+                  <span className="text-zinc-400">Samhita1008 / edit-theory-agents</span>
+                  <span className="text-zinc-600 select-none">·</span>
+                  <span className="text-zinc-500">6 Production Systems & Post-Mortems</span>
                 </div>
 
-                <h3 className="text-xl md:text-2xl font-display font-extrabold text-white group-hover:text-[#4fffb0] transition-colors">
-                  edit-theory-agents: Production Source Code & Post-Mortems
+                <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+                  Production Architecture & Incident Post-Mortems
                 </h3>
 
                 <p className="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed">
-                  My GitHub repository consists of full source code for 5 deployed AI automation agents, alongside detailed post-mortems on <span className="text-white font-semibold">what actually broke in production</span> (API rate limits, webhook drops, non-deterministic formatting, proxy blocks) and <span className="text-[#4fffb0] font-semibold">how each issue was diagnosed, refactored, and fixed</span>.
+                  Project workflows and architecture breakdowns for 6 deployed AI automation systems, alongside detailed post-mortems documenting production edge cases (API rate limits, webhook drops, non-deterministic outputs, proxy blocks) and their architectural remediations.
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
+              <div className="shrink-0 flex items-center">
                 <a 
                   href="https://github.com/Samhita1008/edit-theory-agents" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3.5 rounded-xl bg-[#4fffb0] text-[#060810] hover:bg-[#4fffb0]/90 font-bold transition duration-300 text-xs flex items-center justify-center gap-2 cursor-pointer text-center shadow-[0_0_20px_rgba(79,255,176,0.15)] hover:shadow-[0_0_25px_rgba(79,255,176,0.3)]"
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="px-5 py-2.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-zinc-700 text-xs font-mono font-medium flex items-center gap-2 transition-colors duration-200 cursor-pointer"
                 >
-                  <Github className="w-4 h-4" /> View Repository on GitHub <ExternalLink className="w-3.5 h-3.5" />
+                  <Github className="w-4 h-4" /> View on GitHub <ExternalLink className="w-3.5 h-3.5 opacity-60" />
                 </a>
-                <span className="text-[10px] font-mono text-zinc-500 text-center">
-                  Open Source • MIT License
-                </span>
               </div>
             </div>
-          </div>
-
-          {/* Dedicated Systems built banner - keeping the option somewhere on the page, not just top nav */}
-          <div className="mt-12 p-6 md:p-8 rounded-2xl bg-gradient-to-r from-[#4fffb0]/10 via-[#4fffb0]/5 to-transparent border border-[#4fffb0]/25 text-left flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-2">
-              <span className="text-[10px] font-mono tracking-widest text-[#4fffb0] uppercase font-bold px-2 py-0.5 rounded bg-[#4fffb0]/10 border border-[#4fffb0]/20">
-                LIVE TELEMETRY HUB
-              </span>
-              <h3 className="text-xl font-display font-extrabold text-white">
-                Want to explore the live logs, scrapers, and cron schedulers?
-              </h3>
-              <p className="text-xs text-zinc-400 max-w-xl font-sans leading-relaxed">
-                I maintain a dedicated, fully-interactive system archive complete with real audit engine error detectors, templates AI outputs, and CRM rotators.
-              </p>
-            </div>
-            <a 
-              href="/projects.html" 
-              className="w-full md:w-auto px-6 py-3 rounded-xl bg-[#4fffb0] text-[#060810] hover:bg-[#4fffb0]/90 font-bold transition duration-300 text-xs flex items-center justify-center gap-2 cursor-pointer shrink-0 text-center shadow-[0_0_20px_rgba(79,255,176,0.15)] hover:shadow-[0_0_25px_rgba(79,255,176,0.3)]"
-            >
-              Explore Interactive Systems <ArrowRight className="w-3.5 h-3.5" />
-            </a>
           </div>
 
         </div>
@@ -1090,8 +990,8 @@ export default function App() {
           {/* Quick Footer Navigation Links */}
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-zinc-500 font-mono my-4 sm:my-0">
             <a href="#about-section" className="hover:text-[#4fffb0] transition">About</a>
-            <a href="#services-section" className="hover:text-[#4fffb0] transition">Services</a>
-            <a href="/projects.html" className="hover:text-[#4fffb0] transition font-bold text-[#4fffb0]">Systems Built</a>
+            <a href="#projects-section" className="hover:text-[#4fffb0] transition font-bold text-[#4fffb0]">Systems Built</a>
+            <a href="#process-section" className="hover:text-[#4fffb0] transition">Work Process</a>
             <a href="#contact-section" className="hover:text-[#4fffb0] transition">Contact</a>
           </div>
 
@@ -1135,6 +1035,26 @@ export default function App() {
 
         </div>
       </footer>
+
+      {/* Single Project Focused Detail View Modal */}
+      <ProjectDetailModal
+        project={selectedProject}
+        allProjects={PROJECTS}
+        isOpen={!!selectedProject}
+        theme={theme}
+        onClose={() => setSelectedProject(null)}
+        onSelectProject={(proj) => setSelectedProject(proj)}
+        onOpenLightbox={openLightbox}
+      />
+
+      {/* Fullscreen / Lightbox Gallery Component */}
+      <ImageViewer 
+        isOpen={viewerOpen}
+        onClose={() => setViewerOpen(false)}
+        images={viewerImages}
+        currentIndex={viewerIndex}
+        onNavigate={setViewerIndex}
+      />
 
     </div>
   );
