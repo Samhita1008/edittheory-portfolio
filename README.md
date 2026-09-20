@@ -27,5 +27,5 @@ npm run dev
 📫 samhitatavutu@gmail.com · [LinkedIn](https://linkedin.com/in/samhita-tavutu-b17b2a37b/)
 
 <div align="center">
-Built by <a href="https://github.com/Samhita1008">Samhita</a>, founder of <a href="https://github.com/Samhita1008/edit-theory-agents">Edit Theory</a>
+Samhita — Edit Theory
 </div>
