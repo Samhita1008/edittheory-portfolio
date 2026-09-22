@@ -44,13 +44,15 @@ export const PROJECTS: Project[] = [
     id: 'project-concierge',
     agentNumber: 6,
     title: 'Edit Theory Concierge',
-    category: 'AI Automation',
-    badge: 'Flagship System',
-    oneLiner: 'Universal booking automation for local service businesses.',
-    description: 'An autonomous booking assistant that converts natural-language requests into validated reservations and coordinates the complete booking workflow.',
-    overview: 'Local service businesses—restaurants, studios, salons, and boutique parlours—lose high-intent clients due to manual booking latency. Edit Theory Concierge was built as a customer-facing product rather than an internal script. It combines a clean client interface with an autonomous n8n orchestration engine, resolving spatial venue inquiries, validating reservation parameters, logging atomic state to Google Sheets, and dispatching instant confirmation itineraries via Gmail.',
-    architectureImage: '/images/agent6-architecture.svg',
-    architectureExplanation: 'Full-stack reactive orchestration. The user client communicates through a deterministic n8n webhook core that coordinates geo-spatial search, atomic transaction locking in Google Sheets CRM, and multi-channel notification dispatch.',
+    category: 'Full-Stack AI Product',
+    badge: 'Flagship Product',
+    isFlagship: true,
+    oneLiner: 'Full-stack AI booking platform (React/TypeScript + n8n) for local service businesses.',
+    description: 'A customer-facing, full-stack product combining a clean React frontend with an autonomous n8n orchestration engine, resolving spatial venue inquiries, validating reservation parameters, and coordinating booking workflows.',
+    overview: 'Local service businesses—restaurants, studios, salons, and boutique parlours—lose high-intent clients due to manual booking latency. Edit Theory Concierge was built as a complete customer-facing product (React/TypeScript frontend + autonomous n8n backend) rather than an internal automation script. It pairs a live client interface with a deterministic orchestration engine, resolving spatial venue inquiries, validating reservation parameters, logging atomic state to Google Sheets CRM, and dispatching instant confirmation itineraries via Gmail.',
+    demoModeNote: 'Runs in demo mode by design (free venue data, simulated venue confirmation). Production integrations (Google Places API, WhatsApp Business API) are fully built and swap-ready pending client credentials—a deliberate architectural design for zero-cost, verifiable client evaluation.',
+    architectureImage: '/images/concierge-workflow.png',
+    architectureExplanation: 'Full-stack reactive orchestration. The React/TypeScript client interface communicates through a deterministic n8n webhook core that coordinates geo-spatial search, atomic transaction locking in Google Sheets CRM, and multi-channel notification dispatch.',
     howItWorks: [
       {
         step: '01',
@@ -78,15 +80,35 @@ export const PROJECTS: Project[] = [
         description: 'The client interface polls reservation state in real time, tracking state transitions with zero page refreshes.'
       }
     ],
-    technologyLine: 'React · n8n · Groq · OpenStreetMap · Google Sheets · Gmail API',
-    githubUrl: 'https://github.com/Samhita1008/edit-theory-agents/tree/main/6-edit-theory-concierge',
-    liveUrl: '/projects.html',
-    images: ['/images/agent6-output.svg'],
+    technologyLine: 'React · TypeScript · n8n · Groq · OpenStreetMap · Google Sheets · Gmail API',
+    githubUrl: 'https://github.com/Samhita1008/edit-theory-concierge',
+    liveUrl: 'https://edit-theory-concierge-s6ra.vercel.app',
+    images: [
+      '/images/concierge-workflow.png',
+      '/images/concierge-website.png',
+      '/images/concierge-leads.png',
+      '/images/concierge-mail.png'
+    ],
     outputImages: [
       {
-        url: '/images/agent6-output.svg',
-        title: 'Customer Itinerary & Verification Payload',
-        caption: 'Confirmed booking state #BK-7729 with instant calendar dispatch and atomic Google Sheets synchronization.'
+        url: '/images/concierge-workflow.png',
+        title: 'Orchestration Workflow (n8n)',
+        caption: 'Autonomous multi-node n8n orchestration workflow connecting webhooks, spatial discovery, and verification.'
+      },
+      {
+        url: '/images/concierge-website.png',
+        title: 'Website Client Interface',
+        caption: 'Customer-facing React frontend interface with real-time state polling and dynamic reservation booking form.'
+      },
+      {
+        url: '/images/concierge-leads.png',
+        title: 'Google Sheets Lead CRM',
+        caption: 'Atomic reservation records, unique tracking IDs, party size parameters, and synchronized lead states.'
+      },
+      {
+        url: '/images/concierge-mail.png',
+        title: 'Confirmation Email Dispatched',
+        caption: 'Automated itinerary confirmation email with booking reference, calendar details, and venue directions.'
       }
     ],
     mockupSlides: [
@@ -116,92 +138,14 @@ export const PROJECTS: Project[] = [
         metrics: 'Live state tracking'
       }
     ],
-    tags: ['React', 'n8n', 'Groq', 'Google Sheets', 'Gmail API', 'Full-Stack Architecture']
-  },
-  {
-    id: 'project-restaurant-outreach',
-    agentNumber: 4,
-    title: 'Restaurant Outreach AI System',
-    category: 'Outreach Architecture',
-    badge: 'v2.0 Production Hardened',
-    oneLiner: 'High-reliability B2B outreach engine with structured 8-point auditing and idempotent dispatch protection.',
-    description: 'A production-hardened outreach pipeline engineered with an objective 8-point website audit engine, exception-safe scraping boundaries, deduplication logic, and rate-safe Gmail dispatch.',
-    overview: 'Cold outreach campaigns frequently fail from two flaws: generic templates that get ignored, and fragile scraping scripts that drop leads when websites crash or send duplicate emails. This system hardens outreach into a deployable product. It deterministically audits prospect websites across 8 operational criteria, handles timeouts gracefully without dropping leads, enforces idempotent deduplication before dispatch, and respects mailbox safety caps with live Telegram reply alerts.',
-    architectureImage: '/images/agent4-architecture.svg',
-    architectureExplanation: 'Decoupled outreach pipeline. Separates credentials from workflow logic, applies an 8-point website audit checklist, and filters through a deduplication shield before dispatching through Gmail API.',
-    howItWorks: [
-      {
-        step: '01',
-        title: 'STRUCTURED 8-POINT AUDIT',
-        description: 'Deterministically evaluates restaurant websites across 8 criteria (HTTP status, load speed, mobile viewport, menus, contact info, booking widgets, and UI layout) with written rationale.'
-      },
-      {
-        step: '02',
-        title: 'EXCEPTION BOUNDARIES',
-        description: 'Traps timeouts, SSL drops, and DNS resolution failures without dropping leads, tagging records cleanly as Site_Unreachable in CRM.'
-      },
-      {
-        step: '03',
-        title: 'DEDUPLICATION SHIELD',
-        description: 'Prevents race conditions in Google Sheets row synchronization and blocks duplicate outbound emails using idempotent lead hashing.'
-      },
-      {
-        step: '04',
-        title: 'CONTEXTUAL PITCH GENERATION',
-        description: 'Groq Llama 3.3 drafts hyper-personalized outreach pitches specifically citing the findings and strengths identified during the audit.'
-      },
-      {
-        step: '05',
-        title: 'RATE-SAFE DISPATCH & ALERTS',
-        description: 'Enforces human-in-the-loop review gates, respects 15 emails/hr domain safety limits, and fires instant Telegram alerts upon incoming replies.'
-      }
-    ],
-    technologyLine: 'n8n · Groq Llama 3.3 · Gmail API · Google Sheets · Telegram Alerts',
-    githubUrl: 'https://github.com/Samhita1008/edit-theory-agents',
-    liveUrl: '/projects.html',
-    images: ['/images/agent4-output.svg'],
-    outputImages: [
-      {
-        url: '/images/agent4-output.svg',
-        title: '8-Point Audit Report & Generated Pitch',
-        caption: 'Objective checklist classification paired with custom pitch citing verified mobile reservation friction.'
-      }
-    ],
-    mockupSlides: [
-      {
-        title: 'Structured 8-Point Audit Engine',
-        description: 'Deterministically evaluates restaurant sites across 8 operational criteria (HTTP status, load speed, mobile viewport, menu availability, booking widgets, and UI layout) with explicit written rationale.',
-        metrics: '8-point objective evaluation'
-      },
-      {
-        title: 'Graceful Error Boundaries',
-        description: 'Traps timeouts, SSL drops, and DNS resolution failures without dropping leads, tagging records cleanly as Site_Unreachable in CRM.',
-        metrics: 'Zero unhandled lead drops'
-      },
-      {
-        title: 'Row-Match & Deduplication Shield',
-        description: 'Prevents race conditions in Google Sheets row synchronization and blocks duplicate outbound emails using lead hash checks.',
-        metrics: 'Idempotent dispatch protection'
-      },
-      {
-        title: 'Customer-Deployable Packaging',
-        description: 'Decoupled environment variables and credentials from canvas logic, paired with a standardized onboarding sheet template for turnkey deployment.',
-        metrics: 'GCP Marketplace prep ready'
-      },
-      {
-        title: 'Rate-Throttled Dispatch & Reply Alerts',
-        description: 'Enforces human-in-the-loop review blocks, respects 15 emails/hr domain safety limits, and fires instant Telegram alerts upon incoming replies.',
-        metrics: '15/hr safe delivery cap'
-      }
-    ],
-    tags: ['n8n', 'Groq Llama 3.3', 'Audit Engine', 'Gmail API', 'Google Sheets', 'Telegram Alerts']
+    tags: ['React + TypeScript', 'n8n Orchestration', 'Groq', 'Google Sheets CRM', 'Gmail API', 'Full-Stack Product']
   },
   {
     id: 'project-glossier',
     agentNumber: 1,
-    title: 'Glossier Content Repurposing',
+    title: 'Content Repurposing System',
     category: 'Content Repurposing',
-    badge: 'Production System',
+    badge: 'Workflow Published on GitHub',
     oneLiner: 'Transforms long-form founder podcasts into 10 multi-platform editorial assets with brand-voice consistency.',
     description: 'An automated content extraction engine that parses long-form interview transcripts, extracts core narrative hooks, and generates 10 tailored distribution assets synced directly to Notion.',
     overview: 'Producing high-caliber founder interviews requires substantial creative energy, but manually extracting quotes, drafting carousels, writing newsletter segments, and formatting video reel scripts creates a heavy editorial bottleneck. This system ingests long-form transcripts via webhook, processes narrative hooks with Groq AI, and automatically generates 10 distinct distribution assets synced directly into a structured Notion database.',
@@ -230,7 +174,8 @@ export const PROJECTS: Project[] = [
       }
     ],
     technologyLine: 'n8n · Groq AI · Notion CRM · Railway · Media Processing',
-    notionUrl: 'https://www.notion.so/How-I-would-turn-a-D2C-founder-podcast-into-10-assets-for-skincare-brand-growth-362fd196edb0800cbdb6eaf166c36b0e?source=copy_link',
+    githubUrl: 'https://github.com/Samhita1008/edit-theory-agents/blob/main/1-content-repurposing/workflow.json',
+    notionUrl: 'https://www.notion.so/How-I-would-turn-a-D2C-founder-podcast-into-10-assets-for-skincare-brand-growth-362fd196edb080cbdb6eaf166c36b0e?source=copy_link',
     loomUrl: 'https://www.loom.com/share/24a0f13f63ad440787e40cb3967c8e24',
     liveUrl: '/projects.html',
     images: [
@@ -263,7 +208,7 @@ export const PROJECTS: Project[] = [
       {
         title: 'Notion Assets: Columns 6-10',
         description: 'Second half of the Notion asset grid containing automated Newsletters, Quote Posts, Instagram Captions, X Threads, and complete Ad Concepts.',
-        metrics: '98.4% brand-voice tone matching rating'
+        metrics: 'Tone-matched asset synthesis'
       }
     ],
     tags: ['Media Processing', 'n8n', 'Groq AI', 'Notion CRM', 'Railway']
@@ -271,9 +216,10 @@ export const PROJECTS: Project[] = [
   {
     id: 'project-dew-co',
     agentNumber: 2,
-    title: 'Dew & Co. Outreach System',
+    title: 'AI Outreach System',
     category: 'Outreach Automation',
-    badge: 'Production System',
+    badge: 'Private Implementation',
+    codeAvailabilityNote: 'Implementation kept private (available on request)',
     oneLiner: 'Multi-stage cold email sequence with dynamic ICP segmentation and automated reply tracking.',
     description: 'An automated outreach sequence that dynamically segments prospect accounts, tailors introductory hooks, and coordinates a 3-stage follow-up cadence.',
     overview: 'Outreach campaigns often fail due to lack of contextual nuance across customer segments or failure to follow up systematically. This system personalizes cold outreach across three target buyer personas, dispatches intelligent follow-ups at 3, 7, and 10 days, and routes incoming replies into appropriate conversion stages inside Google Sheets and CRM.',
@@ -352,7 +298,7 @@ export const PROJECTS: Project[] = [
     agentNumber: 3,
     title: 'Lead Discovery System',
     category: 'Lead Extraction',
-    badge: 'Production System',
+    badge: 'Workflow Published on GitHub',
     oneLiner: 'Automated prospect scraping and qualification workflow indexing target retail niches.',
     description: 'A robust lead scraping engine that queries public platforms, evaluates lead qualification parameters, and outputs clean structured records.',
     overview: 'Manual prospecting and email verification is a major drain on sales capacity. This extraction system automates directory indexing, evaluates domain health and engagement metrics against strict criteria, and exports structured CSV and Google Sheet databases ready for direct outreach campaigns.',
@@ -381,6 +327,7 @@ export const PROJECTS: Project[] = [
       }
     ],
     technologyLine: 'n8n · Web Scraping · Google Sheets CRM · Railway',
+    githubUrl: 'https://github.com/Samhita1008/edit-theory-agents/blob/main/3-lead-scraper/workflow.json',
     notionUrl: 'https://www.notion.so/How-I-would-market-a-D2C-skincare-product-using-content-outreach-and-repurposing-363fd196edb0809890b1da9223fa9c5c?source=copy_link',
     liveUrl: '/projects.html',
     images: [
@@ -408,7 +355,7 @@ export const PROJECTS: Project[] = [
       {
         title: 'n8n Scraper Engine',
         description: 'Automated extraction canvas on Railway. Expands search tags, parses public profiles, scores leads, and validates contacts.',
-        metrics: '200+ profiles processed / min'
+        metrics: 'Concurrent profile extraction'
       },
       {
         title: 'Google Sheets Lead Database',
@@ -419,11 +366,109 @@ export const PROJECTS: Project[] = [
     tags: ['Web Scraping', 'Data Extraction', 'Google Sheets CRM', 'n8n Pipeline']
   },
   {
+    id: 'project-restaurant-outreach',
+    agentNumber: 4,
+    title: 'Restaurant Outreach AI System',
+    category: 'Outreach Architecture',
+    badge: 'Private Implementation',
+    codeAvailabilityNote: 'Implementation kept private (available on request)',
+    oneLiner: 'High-reliability B2B outreach engine with structured 8-point auditing and idempotent dispatch protection.',
+    description: 'A production-hardened outreach pipeline engineered with an objective 8-point website audit engine, exception-safe scraping boundaries, deduplication logic, and rate-safe Gmail dispatch.',
+    overview: 'Cold outreach campaigns frequently fail from two flaws: generic templates that get ignored, and fragile scraping scripts that drop leads when websites crash or send duplicate emails. This system hardens outreach into a deployable product. It deterministically audits prospect websites across 8 operational criteria, handles timeouts gracefully without dropping leads, enforces idempotent deduplication before dispatch, and respects mailbox safety caps with live Telegram reply alerts.',
+    architectureImage: '/images/restaurant-workflow.png',
+    architectureExplanation: 'Decoupled outreach pipeline. Separates credentials from workflow logic, applies an 8-point website audit checklist, and filters through a deduplication shield before dispatching through Gmail API.',
+    howItWorks: [
+      {
+        step: '01',
+        title: 'STRUCTURED 8-POINT AUDIT',
+        description: 'Deterministically evaluates restaurant websites across 8 criteria (HTTP status, load speed, mobile viewport, menus, contact info, booking widgets, and UI layout) with written rationale.'
+      },
+      {
+        step: '02',
+        title: 'EXCEPTION BOUNDARIES',
+        description: 'Traps timeouts, SSL drops, and DNS resolution failures without dropping leads, tagging records cleanly as Site_Unreachable in CRM.'
+      },
+      {
+        step: '03',
+        title: 'DEDUPLICATION SHIELD',
+        description: 'Prevents race conditions in Google Sheets row synchronization and blocks duplicate outbound emails using idempotent lead hashing.'
+      },
+      {
+        step: '04',
+        title: 'CONTEXTUAL PITCH GENERATION',
+        description: 'Groq Llama 3.3 drafts hyper-personalized outreach pitches specifically citing the findings and strengths identified during the audit.'
+      },
+      {
+        step: '05',
+        title: 'RATE-SAFE DISPATCH & ALERTS',
+        description: 'Enforces human-in-the-loop review gates, respects 15 emails/hr domain safety limits, and fires instant Telegram alerts upon incoming replies.'
+      }
+    ],
+    technologyLine: 'n8n · Groq Llama 3.3 · Gmail API · Google Sheets · Telegram Alerts',
+    liveUrl: '/projects.html',
+    images: [
+      '/images/restaurant-workflow.png',
+      '/images/restaurant-leads.png',
+      '/images/restaurant-mail.png',
+      '/images/restaurant-telegram.png'
+    ],
+    outputImages: [
+      {
+        url: '/images/restaurant-workflow.png',
+        title: 'n8n Outreach & Audit Workflow',
+        caption: 'Autonomous orchestration pipeline with structured 8-point auditing, deduplication, and conditional routing.'
+      },
+      {
+        url: '/images/restaurant-leads.png',
+        title: 'Google Sheets Lead Database',
+        caption: 'Enriched restaurant leads, site audit scoring, contact details, and tracked delivery status.'
+      },
+      {
+        url: '/images/restaurant-mail.png',
+        title: 'Personalized Outreach Email',
+        caption: 'Cold email tailored with dynamic audit insights, mobile booking evaluation, and direct value proposition.'
+      },
+      {
+        url: '/images/restaurant-telegram.png',
+        title: 'Instant Telegram Notification',
+        caption: 'Real-time mobile alerting for positive reply detection, lead notifications, and workflow alerts.'
+      }
+    ],
+    mockupSlides: [
+      {
+        title: 'Structured 8-Point Audit Engine',
+        description: 'Deterministically evaluates restaurant sites across 8 operational criteria (HTTP status, load speed, mobile viewport, menu availability, booking widgets, and UI layout) with explicit written rationale.',
+        metrics: '8-point objective evaluation'
+      },
+      {
+        title: 'Graceful Error Boundaries',
+        description: 'Traps timeouts, SSL drops, and DNS resolution failures without dropping leads, tagging records cleanly as Site_Unreachable in CRM.',
+        metrics: 'Zero unhandled lead drops'
+      },
+      {
+        title: 'Row-Match & Deduplication Shield',
+        description: 'Prevents race conditions in Google Sheets row synchronization and blocks duplicate outbound emails using lead hash checks.',
+        metrics: 'Idempotent dispatch protection'
+      },
+      {
+        title: 'Customer-Deployable Packaging',
+        description: 'Decoupled environment variables and credentials from canvas logic, paired with a standardized onboarding sheet template for turnkey deployment.',
+        metrics: 'Turnkey deployment architecture'
+      },
+      {
+        title: 'Rate-Throttled Dispatch & Reply Alerts',
+        description: 'Enforces human-in-the-loop review blocks, respects 15 emails/hr domain safety limits, and fires instant Telegram alerts upon incoming replies.',
+        metrics: '15/hr safe delivery cap'
+      }
+    ],
+    tags: ['n8n', 'Groq Llama 3.3', 'Audit Engine', 'Gmail API', 'Google Sheets', 'Telegram Alerts']
+  },
+  {
     id: 'project-email-summary',
     agentNumber: 5,
-    title: 'Email Summary Agent',
+    title: 'Email Digest Agent',
     category: 'Autonomous Triage',
-    badge: 'Background Daemon',
+    badge: 'Workflow Published on GitHub',
     oneLiner: 'Continuous background daemon that monitors priority email threads and delivers mobile action digests.',
     description: 'An autonomous inbox assistant that continuously monitors priority email threads, extracts actionable items with Groq LLM, and pushes real-time alerts to Telegram.',
     overview: 'High-volume communication causes critical requests and client deadlines to get lost in inbox clutter. Operating as a continuous background daemon, this agent polls incoming emails via the Gmail API, analyzes urgency and required deliverables with Groq LLM inference, and sends succinct, actionable digests straight to a private Telegram channel.',
@@ -452,7 +497,7 @@ export const PROJECTS: Project[] = [
       }
     ],
     technologyLine: 'Gmail API · Groq LLM · Telegram Bot · Python / n8n · Cron Automation',
-    githubUrl: 'https://github.com/Samhita1008/edit-theory-agents',
+    githubUrl: 'https://github.com/Samhita1008/edit-theory-agents/blob/main/5-email-digest/workflow.json',
     liveUrl: '/projects.html',
     images: ['/images/agent5-output.svg'],
     outputImages: [

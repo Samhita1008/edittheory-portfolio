@@ -560,26 +560,65 @@ export default function App() {
 
                     {/* Right-Side Action Area */}
                     <div className="shrink-0 flex flex-col md:items-end justify-center gap-3 pt-4 md:pt-0 border-t md:border-t-0 border-zinc-800/40">
-                      <button 
-                        type="button"
-                        onClick={() => setSelectedProject(proj)}
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-200 group-hover:text-[#4fffb0] transition-colors duration-200 cursor-pointer py-1"
-                      >
-                        <span>View System</span>
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-                      </button>
+                      {proj.isFlagship ? (
+                        <div className="flex flex-wrap items-center gap-2.5">
+                          {proj.liveUrl && (
+                            <a
+                              href={proj.liveUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#4fffb0] text-[#060810] font-bold text-xs hover:bg-[#4fffb0]/90 transition-colors shadow-sm"
+                            >
+                              <span>Live Demo</span>
+                              <ExternalLink className="w-3.5 h-3.5" />
+                            </a>
+                          )}
+                          <button 
+                            type="button"
+                            onClick={() => setSelectedProject(proj)}
+                            className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-200 group-hover:text-[#4fffb0] transition-colors duration-200 cursor-pointer py-1"
+                          >
+                            <span>Case Study</span>
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                          </button>
+                        </div>
+                      ) : (
+                        <button 
+                          type="button"
+                          onClick={() => setSelectedProject(proj)}
+                          className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-200 group-hover:text-[#4fffb0] transition-colors duration-200 cursor-pointer py-1"
+                        >
+                          <span>View System</span>
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                        </button>
+                      )}
 
                       {/* Secondary Clean Direct Links */}
                       <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-zinc-500">
-                        {(proj.notionUrl || proj.githubUrl) && (
+                        {proj.isFlagship && proj.githubUrl && (
+                          <a 
+                            href={proj.githubUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="hover:text-zinc-300 transition-colors flex items-center gap-1 text-[#4fffb0]/90"
+                          >
+                            <Github className="w-3.5 h-3.5" /> Case Study / Code
+                          </a>
+                        )}
+                        {!proj.isFlagship && (proj.notionUrl || proj.githubUrl) && (
                           <a 
                             href={proj.notionUrl || proj.githubUrl} 
                             target="_blank" 
                             rel="noopener noreferrer" 
                             className="hover:text-zinc-300 transition-colors flex items-center gap-1"
                           >
-                            <FileText className="w-3.5 h-3.5 text-zinc-500" /> Project & architecture
+                            <FileText className="w-3.5 h-3.5 text-zinc-500" /> {proj.githubUrl ? 'Workflow / Code' : 'Project & architecture'}
                           </a>
+                        )}
+                        {proj.codeAvailabilityNote && (
+                          <span className="text-zinc-500 flex items-center gap-1">
+                            🔒 Available on request
+                          </span>
                         )}
                         {proj.loomUrl && (
                           <a 

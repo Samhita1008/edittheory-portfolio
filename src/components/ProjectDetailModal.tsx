@@ -223,16 +223,46 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
           {/* Project & Architecture Links */}
           <div className="pt-1 flex flex-wrap items-center gap-6 text-xs font-mono">
-            {(project.notionUrl || project.githubUrl) && (
+            {project.isFlagship && project.liveUrl && (
               <a
-                href={project.notionUrl || project.githubUrl}
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#4fffb0] text-[#060810] font-bold hover:bg-[#4fffb0]/90 transition-colors shadow-sm"
+              >
+                <span>Live Demo</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
+
+            {project.isFlagship && project.githubUrl && (
+              <a
+                href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-[#4fffb0] hover:underline underline-offset-4 cursor-pointer font-medium"
               >
-                <span>Project & architecture</span>
+                <span>Case Study / Code</span>
                 <span className="text-sm leading-none">→</span>
               </a>
+            )}
+
+            {!project.isFlagship && (project.githubUrl || project.notionUrl) && (
+              <a
+                href={project.githubUrl || project.notionUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[#4fffb0] hover:underline underline-offset-4 cursor-pointer font-medium"
+              >
+                <span>{project.githubUrl ? 'View Workflow / Code' : 'Project & architecture'}</span>
+                <span className="text-sm leading-none">→</span>
+              </a>
+            )}
+
+            {project.codeAvailabilityNote && (
+              <span className="inline-flex items-center gap-1.5 text-zinc-400 font-mono text-xs">
+                <span>🔒 {project.codeAvailabilityNote}</span>
+              </span>
             )}
 
             {project.loomUrl && (
@@ -248,6 +278,14 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
               </a>
             )}
           </div>
+
+          {/* Architecture / Demo Note */}
+          {project.demoModeNote && (
+            <div className="p-3.5 rounded-lg bg-zinc-900/80 border border-zinc-800 text-xs font-mono text-zinc-400 leading-relaxed max-w-[700px]">
+              <span className="text-[#4fffb0] font-semibold">Architecture Note: </span>
+              {project.demoModeNote}
+            </div>
+          )}
 
           {/* Compact Project Metadata Row (Subtle, No Large Badges) */}
           <div className="pt-3.5 mt-2 border-t border-zinc-800/40 flex flex-wrap items-center gap-x-8 gap-y-2 text-xs font-mono">

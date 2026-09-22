@@ -26,6 +26,9 @@ export interface Project {
   githubUrl?: string;
   liveUrl?: string;
   badge?: string;
+  demoModeNote?: string;
+  codeAvailabilityNote?: string;
+  isFlagship?: boolean;
   images: string[];
   mockupSlides: {
     title: string;
