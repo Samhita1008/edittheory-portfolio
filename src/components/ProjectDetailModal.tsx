@@ -212,9 +212,18 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           </div>
 
           {/* Dominant Project Title */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold text-white tracking-tight leading-[1.1]">
-            {project.title}
-          </h1>
+          <div>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold text-white tracking-tight leading-[1.1]">
+              {project.title}
+            </h1>
+            {project.engagementNote && (
+              <div className="mt-2.5">
+                <span className="inline-block text-xs font-mono text-amber-400/90 bg-amber-400/10 border border-amber-400/20 px-2.5 py-1 rounded">
+                  {project.engagementNote}
+                </span>
+              </div>
+            )}
+          </div>
 
           {/* Short One- or Two-Sentence Explanation */}
           <p className="text-base sm:text-lg text-zinc-300 font-sans leading-relaxed max-w-[700px]">

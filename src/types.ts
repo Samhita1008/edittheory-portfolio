@@ -28,6 +28,7 @@ export interface Project {
   badge?: string;
   demoModeNote?: string;
   codeAvailabilityNote?: string;
+  engagementNote?: string;
   isFlagship?: boolean;
   images: string[];
   mockupSlides: {

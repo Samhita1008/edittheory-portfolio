@@ -281,9 +281,6 @@ AI Agent for ${brandName}`,
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10 border-b border-zinc-900 pb-6 mb-6">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900/80 border border-zinc-800 text-[#4fffb0] text-xs font-mono mb-3">
-            <Lock className="w-3 h-3 animate-pulse" /> Secure Client Room (OAuth 2.0 Mode)
-          </div>
           <h3 className={`text-xl md:text-2xl font-display font-semibold ${theme === 'dark' ? 'text-sophisticated-glow' : 'text-zinc-800'}`}>
             Edit Theory Studio Portal
           </h3>

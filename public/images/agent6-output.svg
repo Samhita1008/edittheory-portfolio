@@ -14,35 +14,35 @@
     
     <g transform="translate(24, 24)">
       <text x="0" y="16" fill="#4fffb0" font-size="11" font-family="monospace" letter-spacing="1">STATUS: CONFIRMED</text>
-      <text x="0" y="44" fill="#ffffff" font-size="20" font-weight="700">Equinox Soho Club</text>
-      <text x="0" y="66" fill="#a1a1aa" font-size="12">568 Broadway, New York, NY 10012</text>
+      <text x="0" y="44" fill="#ffffff" font-size="20" font-weight="700">Bloom Wellness Studio</text>
+      <text x="0" y="66" fill="#a1a1aa" font-size="12">142 Maplewood Avenue, Suite 2B</text>
       
       <line x1="0" y1="84" x2="400" y2="84" stroke="#1f2638" stroke-width="1"/>
       
       <g transform="translate(0, 105)">
         <text x="0" y="0" fill="#71717a" font-size="10" font-family="monospace">DATE &amp; TIME</text>
-        <text x="0" y="20" fill="#ffffff" font-size="14" font-weight="600">Friday, Oct 24 • 18:30 EST</text>
+        <text x="0" y="20" fill="#ffffff" font-size="14" font-weight="600">Friday, Oct 24 • 18:30</text>
       </g>
       <g transform="translate(220, 105)">
         <text x="0" y="0" fill="#71717a" font-size="10" font-family="monospace">GUESTS</text>
-        <text x="0" y="20" fill="#ffffff" font-size="14" font-weight="600">2 Attendees (Guest Pass)</text>
+        <text x="0" y="20" fill="#ffffff" font-size="14" font-weight="600">2 Attendees</text>
       </g>
       
       <g transform="translate(0, 165)">
         <text x="0" y="0" fill="#71717a" font-size="10" font-family="monospace">SESSION TYPE</text>
-        <text x="0" y="20" fill="#ffffff" font-size="14" font-weight="600">Private Studio Training</text>
+        <text x="0" y="20" fill="#ffffff" font-size="14" font-weight="600">Yoga &amp; Movement Session</text>
       </g>
       <g transform="translate(220, 165)">
-        <text x="0" y="0" fill="#71717a" font-size="10" font-family="monospace">LOCK TRANSACTION</text>
-        <text x="0" y="20" fill="#4fffb0" font-size="14" font-family="monospace" font-weight="600">#BK-7729-AUTH</text>
+        <text x="0" y="0" fill="#71717a" font-size="10" font-family="monospace">BOOKING REFERENCE</text>
+        <text x="0" y="20" fill="#4fffb0" font-size="14" font-family="monospace" font-weight="600">#BK-7729</text>
       </g>
 
       <line x1="0" y1="210" x2="400" y2="210" stroke="#1f2638" stroke-width="1"/>
       
-      <text x="0" y="235" fill="#a1a1aa" font-size="11" font-family="monospace">AUTOMATED CRM STATE:</text>
-      <text x="0" y="255" fill="#71717a" font-size="11" font-family="monospace">→ Appended to Google Sheets CRM (Row 412)</text>
-      <text x="0" y="275" fill="#71717a" font-size="11" font-family="monospace">→ Dispatched Gmail itinerary (.ics calendar attached)</text>
-      <text x="0" y="295" fill="#71717a" font-size="11" font-family="monospace">→ Instant client state synchronization verified</text>
+      <text x="0" y="235" fill="#a1a1aa" font-size="11" font-family="monospace">AUTOMATED WORKFLOW STEPS:</text>
+      <text x="0" y="255" fill="#71717a" font-size="11" font-family="monospace">→ Saved to Google Sheets booking log</text>
+      <text x="0" y="275" fill="#71717a" font-size="11" font-family="monospace">→ Sent confirmation email with calendar invite</text>
+      <text x="0" y="295" fill="#71717a" font-size="11" font-family="monospace">→ Booking status updated in real-time</text>
 
       <rect x="0" y="320" width="160" height="34" rx="6" fill="#4fffb0" opacity="0.9"/>
       <text x="80" y="342" fill="#090b12" font-size="11" font-weight="700" text-anchor="middle">VIEW CALENDAR (.ICS)</text>
@@ -59,7 +59,7 @@
       <text x="0" y="60" fill="#38bdf8" font-size="10" font-family="monospace">200 OK • POST /api/book-session</text>
       <text x="0" y="80" fill="#71717a" font-size="10" font-family="monospace">{"status": "CONFIRMED",</text>
       <text x="10" y="100" fill="#71717a" font-size="10" font-family="monospace"> "bookingId": "BK-7729",</text>
-      <text x="10" y="120" fill="#71717a" font-size="10" font-family="monospace"> "venue": "Equinox Soho Club",</text>
+      <text x="10" y="120" fill="#71717a" font-size="10" font-family="monospace"> "venue": "Bloom Wellness Studio",</text>
       <text x="10" y="140" fill="#71717a" font-size="10" font-family="monospace"> "slot": "2026-10-24T18:30:00Z",</text>
       <text x="10" y="160" fill="#71717a" font-size="10" font-family="monospace"> "customerEmail": "alex@example.com",</text>
       <text x="10" y="180" fill="#71717a" font-size="10" font-family="monospace"> "sheetsRow": 412,</text>
@@ -67,9 +67,9 @@
       <text x="10" y="220" fill="#71717a" font-size="10" font-family="monospace"> "executionTimeMs": 680}</text>
 
       <line x1="0" y1="240" x2="320" y2="240" stroke="#1a2030" stroke-width="1"/>
-      <text x="0" y="265" fill="#4fffb0" font-size="11" font-family="monospace">VERIFIED PIPELINE EXECUTION</text>
-      <text x="0" y="285" fill="#71717a" font-size="10">Sub-second transaction latency</text>
-      <text x="0" y="305" fill="#71717a" font-size="10">Deterministic state persistence</text>
+      <text x="0" y="265" fill="#4fffb0" font-size="11" font-family="monospace">WORKFLOW EXECUTION</text>
+      <text x="0" y="285" fill="#71717a" font-size="10">Prevents double-booking same slot</text>
+      <text x="0" y="305" fill="#71717a" font-size="10">Direct Google Sheets and email sync</text>
     </g>
   </g>
 </svg>

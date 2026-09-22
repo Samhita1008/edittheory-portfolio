@@ -221,12 +221,6 @@ export default function App() {
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-20 space-y-6 md:space-y-8">
           
-          {/* Eyebrow Dot Banner - With slow breathing pulse expand/contract animation */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-zinc-900/40 dark:bg-zinc-950/80 border border-zinc-800 text-xs font-mono text-[#4fffb0]">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#4fffb0] animate-breathing-glow shadow-[0_0_12px_#4fffb0]"></span>
-            <span>SYSTEM CONSOLE ONLINE</span>
-          </div>
-
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-extrabold tracking-tight leading-tight max-w-3xl mx-auto text-sophisticated-glow">
             I build custom <span className="text-[#4fffb0] [-webkit-text-fill-color:#4fffb0]">AI systems</span> for D2C brands to solve growth and workflow bottlenecks.
           </h1>
@@ -345,7 +339,7 @@ export default function App() {
                 <ul className="space-y-3 pt-2">
                   <li className="flex items-start gap-2.5 text-xs">
                     <span className="font-mono text-[#4fffb0] shrink-0 font-bold">✓</span>
-                    <span className="text-zinc-500 dark:text-zinc-400"><strong>Custom AI Agents:</strong> Self-running n8n, Make, or custom Node script logic chains.</span>
+                    <span className="text-zinc-500 dark:text-zinc-400"><strong>Custom AI Agents:</strong> Self-running n8n, custom Node.js scripts.</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-xs">
                     <span className="font-mono text-[#4fffb0] shrink-0 font-bold">✓</span>
@@ -497,14 +491,23 @@ export default function App() {
                       </div>
 
                       {/* Project Name */}
-                      <h3 
-                        onClick={() => setSelectedProject(proj)}
-                        className={`text-xl sm:text-2xl font-bold tracking-tight transition-colors duration-200 cursor-pointer hover:text-[#4fffb0] ${
-                          theme === 'dark' ? 'text-white' : 'text-zinc-900'
-                        }`}
-                      >
-                        {proj.title}
-                      </h3>
+                      <div>
+                        <h3 
+                          onClick={() => setSelectedProject(proj)}
+                          className={`text-xl sm:text-2xl font-bold tracking-tight transition-colors duration-200 cursor-pointer hover:text-[#4fffb0] ${
+                            theme === 'dark' ? 'text-white' : 'text-zinc-900'
+                          }`}
+                        >
+                          {proj.title}
+                        </h3>
+                        {proj.engagementNote && (
+                          <div className="mt-1">
+                            <span className="inline-block text-[11px] font-mono text-amber-400/90 bg-amber-400/10 border border-amber-400/20 px-2 py-0.5 rounded">
+                              {proj.engagementNote}
+                            </span>
+                          </div>
+                        )}
+                      </div>
 
                       {/* Concise Description */}
                       <p className="text-sm sm:text-[15px] text-zinc-300/90 leading-relaxed font-sans max-w-3xl">
@@ -520,41 +523,6 @@ export default function App() {
                           </span>
                         ))}
                       </div>
-
-                      {/* Subtle Visuals Preview (if screenshots are available) */}
-                      {hasImages && (
-                        <div className="pt-2 flex flex-wrap items-center gap-2">
-                          <span className="text-[11px] font-mono text-zinc-500 mr-1">Telemetry:</span>
-                          {proj.images.slice(0, 3).map((imgUrl, imgIdx) => (
-                            <button
-                              key={imgIdx}
-                              type="button"
-                              onClick={() => openLightbox(proj.images, proj.title, imgIdx)}
-                              className="relative h-11 w-18 sm:h-12 sm:w-20 rounded-lg overflow-hidden border border-zinc-800 bg-zinc-950 hover:border-zinc-700 transition-all duration-200 cursor-pointer group/thumb"
-                              title={`View telemetry visual #${imgIdx + 1}`}
-                            >
-                              <img 
-                                src={imgUrl} 
-                                alt=""
-                                loading="lazy"
-                                decoding="async"
-                                className="w-full h-full object-cover opacity-65 group-hover/thumb:opacity-100 group-hover/thumb:scale-[1.02] transition-all duration-300"
-                              />
-                              <div className="absolute inset-0 bg-black/30 opacity-0 group-hover/thumb:opacity-100 flex items-center justify-center transition-opacity">
-                                <Maximize2 className="w-3 h-3 text-[#4fffb0]" />
-                              </div>
-                            </button>
-                          ))}
-                          <button
-                            type="button"
-                            onClick={() => openLightbox(proj.images, proj.title, 0)}
-                            className="text-[11px] font-mono text-zinc-400 hover:text-[#4fffb0] transition-colors cursor-pointer px-2.5 py-1 rounded bg-zinc-900/80 border border-zinc-800 flex items-center gap-1.5"
-                          >
-                            <Maximize2 className="w-3 h-3" />
-                            <span>{proj.images.length} Visuals</span>
-                          </button>
-                        </div>
-                      )}
 
                     </div>
 
@@ -708,10 +676,6 @@ export default function App() {
 
                   <h3 className={`text-sm font-display font-bold group-hover:text-[#4fffb0] transition-colors ${theme === 'dark' ? 'text-zinc-100' : 'text-zinc-800'}`}>{step.title}</h3>
                   <p className="text-xs text-zinc-400 leading-relaxed font-sans">{step.description}</p>
-                </div>
-
-                <div className="text-[10px] font-mono text-zinc-600 mt-4 border-t border-zinc-900/60 pt-2 flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#4fffb0]" /> Task validation: ok
                 </div>
               </div>
             ))}
