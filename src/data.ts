@@ -527,6 +527,81 @@ export const PROJECTS: Project[] = [
       }
     ],
     tags: ['Gmail API', 'Groq LLM', 'Telegram Bot', 'Cron Automation', 'Python / n8n']
+  },
+  {
+    id: 'project-rwa-society',
+    agentNumber: 7,
+    title: 'RWA Complaint and Vendor Coordination',
+    category: 'Society Operations',
+    badge: 'Private Implementation',
+    codeAvailabilityNote: 'Workflow file private (on request)',
+    demoModeNote: 'Built and tested end to end on test data. Not piloted with a real society yet. Vendor messages need a manual WhatsApp tap until the WhatsApp API is connected.',
+    oneLiner: 'Runs complaints, vendor dispatch, resolution tracking and notices for an apartment society over Telegram, with the secretary approving everything that goes outside the building.',
+    description: 'An automation engine for residential society management that handles complaint logging, vendor dispatch with secretary approval, resolution tracking, and broadcast notices over Telegram.',
+    overview: 'Managing residential community requests manually leads to lost complaints, unapproved vendor messages, and missed resident notices. This system runs complaints, vendor dispatch, resolution tracking and notices for an apartment society over Telegram, with the secretary approving everything that goes outside the building.',
+    architectureImage: '/images/agent7-architecture.svg',
+    architectureExplanation: 'Resident operations workflow in n8n. Ingests resident messages via a single Telegram webhook, classifies urgency and logs tickets to Google Sheets, routes vendor dispatches for secretary approval, and handles broadcast notices.',
+    howItWorks: [
+      {
+        step: '01',
+        title: 'INTAKE',
+        description: 'A resident messages the Telegram bot ("Water leakage in B-402"). AI classifies category and urgency, and a ticket is logged to Google Sheets. The resident gets a ticket ID.'
+      },
+      {
+        step: '02',
+        title: 'DISPATCH',
+        description: 'AI drafts a message to the right vendor. The secretary approves it on Telegram before anything goes out.'
+      },
+      {
+        step: '03',
+        title: 'TRACKING',
+        description: 'The secretary resolves a ticket with one command. The resident is notified automatically.'
+      },
+      {
+        step: '04',
+        title: 'NOTICES',
+        description: 'The secretary writes a notice once, approves a preview, and it reaches every resident. Acknowledgements are logged so she can see who has not read it.'
+      }
+    ],
+    engineeringNotes: [
+      'A Telegram bot has one webhook, so every command enters through a single trigger and is split downstream.',
+      'A stray "=" in a Fixed-mode field made a resident lookup silently match nothing.',
+      'Google Sheets "By List" stays disabled until the Drive API is enabled.'
+    ],
+    technologyLine: 'n8n · Groq · Google Sheets · Telegram',
+    githubUrl: 'https://github.com/Samhita1008/edit-theory-agents/tree/main/7-rwa-society-agent',
+    liveUrl: '/projects.html',
+    images: ['/images/agent7-output.svg'],
+    outputImages: [
+      {
+        url: '/images/agent7-output.svg',
+        title: 'Telegram Bot Interface & Secretary Dispatch Stream',
+        caption: 'Resident ticket intake, automated Google Sheets sync, secretary vendor approval action, and broadcast notices.'
+      }
+    ],
+    mockupSlides: [
+      {
+        title: 'Complaint Intake',
+        description: 'Resident messages Telegram bot, AI classifies category and urgency, logs ticket to Google Sheets, and returns ticket ID.',
+        metrics: 'Automated ticket creation'
+      },
+      {
+        title: 'Vendor Dispatch with Secretary Approval',
+        description: 'AI drafts vendor dispatch note, routed to society secretary on Telegram for approval before transmission.',
+        metrics: 'Human-in-the-loop approval'
+      },
+      {
+        title: 'One-Command Resolution Tracking',
+        description: 'Secretary resolves tickets with a single Telegram command, triggering automated resident resolution alert.',
+        metrics: 'Instant resident notification'
+      },
+      {
+        title: 'Broadcast Notices and Acknowledgement Log',
+        description: 'Notice drafted and approved once, delivered to all residents with read receipt logging.',
+        metrics: 'Read receipt tracking'
+      }
+    ],
+    tags: ['n8n', 'Groq', 'Google Sheets', 'Telegram']
   }
 ];
 

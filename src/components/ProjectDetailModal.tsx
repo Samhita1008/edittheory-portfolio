@@ -124,6 +124,8 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
         return { role: 'DATA SCRAPING & ENRICHMENT', type: 'LEAD DISCOVERY ENGINE', status: 'BUILT' };
       case 5:
         return { role: 'INBOX TRIAGE & SUMMARIZATION', type: 'AUTONOMOUS DAEMON', status: 'BUILT' };
+      case 7:
+        return { role: 'OPERATIONS AUTOMATION', type: 'COMMUNITY WORKFLOW ENGINE', status: 'BUILT' };
       default:
         return { role: 'SYSTEM DESIGN + AUTOMATION', type: `${project.category.toUpperCase()} SYSTEM`, status: 'BUILT' };
     }
@@ -263,7 +265,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-[#4fffb0] hover:underline underline-offset-4 cursor-pointer font-medium"
               >
-                <span>{project.githubUrl ? 'View Workflow / Code' : 'Project & architecture'}</span>
+                <span>{project.githubUrl ? (project.codeAvailabilityNote ? 'GitHub Repository' : 'View Workflow / Code') : 'Project & architecture'}</span>
                 <span className="text-sm leading-none">→</span>
               </a>
             )}
@@ -288,11 +290,11 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             )}
           </div>
 
-          {/* Architecture / Demo Note */}
-          {project.demoModeNote && (
+          {/* Architecture / Status Note (Same place as other agents' demo/status notes) */}
+          {(project.demoModeNote || project.statusNote) && (
             <div className="p-3.5 rounded-lg bg-zinc-900/80 border border-zinc-800 text-xs font-mono text-zinc-400 leading-relaxed max-w-[700px]">
-              <span className="text-[#4fffb0] font-semibold">Architecture Note: </span>
-              {project.demoModeNote}
+              <span className="text-[#4fffb0] font-semibold">{project.agentNumber === 7 ? 'Status: ' : 'Architecture Note: '}</span>
+              {project.demoModeNote || project.statusNote}
             </div>
           )}
 
@@ -397,6 +399,23 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             {techLine}
           </p>
         </section>
+
+        {/* ENGINEERING NOTES SECTION */}
+        {project.engineeringNotes && project.engineeringNotes.length > 0 && (
+          <section className="space-y-3 pt-6 border-t border-zinc-800/40">
+            <h2 className="text-xs font-mono font-semibold tracking-widest text-zinc-500 uppercase">
+              ENGINEERING NOTES
+            </h2>
+            <ul className="space-y-2.5 max-w-[720px]">
+              {project.engineeringNotes.map((note, nIdx) => (
+                <li key={nIdx} className="flex items-start gap-2.5 text-xs sm:text-sm font-mono text-zinc-400">
+                  <span className="text-[#4fffb0] select-none">•</span>
+                  <span>{note}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {/* 6. SYSTEM OUTPUT SECTION (Curated Gallery) */}
         {outputImagesList.length > 0 && (

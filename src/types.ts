@@ -27,6 +27,8 @@ export interface Project {
   liveUrl?: string;
   badge?: string;
   demoModeNote?: string;
+  statusNote?: string;
+  engineeringNotes?: string[];
   codeAvailabilityNote?: string;
   engagementNote?: string;
   isFlagship?: boolean;

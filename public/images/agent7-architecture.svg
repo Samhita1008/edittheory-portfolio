@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="100%" height="100%" style="background: #080a11; font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;">
+  <defs>
+    <linearGradient id="g7-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0e18"/>
+      <stop offset="100%" stop-color="#07080f"/>
+    </linearGradient>
+    <pattern id="g7-grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#171b29" stroke-width="0.75"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="680" fill="url(#g7-bg)"/>
+  <rect width="1200" height="680" fill="url(#g7-grid)" opacity="0.6"/>
+
+  <!-- Architecture Header Banner -->
+  <g transform="translate(60, 45)">
+    <text x="0" y="0" fill="#4fffb0" font-size="11" font-family="monospace" letter-spacing="2" font-weight="600">AGENT 07 • SOCIETY OPERATIONS ARCHITECTURE</text>
+    <text x="0" y="28" fill="#ffffff" font-size="22" font-weight="700" letter-spacing="-0.5">RWA Complaint &amp; Vendor Coordination Workflow</text>
+    <text x="0" y="50" fill="#71717a" font-size="13">Resident Telegram Intake ↔ Groq AI Classification &amp; Sheets CRM ↔ Secretary Approval Gate ↔ Vendor Dispatch</text>
+  </g>
+
+  <!-- Flow Connector Lines -->
+  <g stroke="#262b3d" stroke-width="2" fill="none">
+    <path d="M 285 260 L 345 260"/>
+    <path d="M 595 260 L 655 260"/>
+    <path d="M 905 260 L 965 260"/>
+    <path d="M 470 340 L 470 430 L 520 430"/>
+    <path d="M 780 340 L 780 430 L 830 430"/>
+  </g>
+
+  <!-- Stage 1: Resident Intake -->
+  <g transform="translate(60, 180)">
+    <rect width="225" height="160" rx="10" fill="#0f121e" stroke="#242b3e" stroke-width="1"/>
+    <text x="16" y="28" fill="#4fffb0" font-size="10" font-family="monospace" font-weight="700">STAGE 01 • INTAKE</text>
+    <text x="16" y="48" fill="#ffffff" font-size="14" font-weight="700">Telegram Bot Webhook</text>
+    <text x="16" y="68" fill="#a1a1aa" font-size="11">Single Trigger Ingestion</text>
+    <line x1="16" y1="80" x2="209" y2="80" stroke="#1f2434" stroke-width="1"/>
+    <text x="16" y="100" fill="#71717a" font-size="10" font-family="monospace">• Single bot webhook endpoint</text>
+    <text x="16" y="118" fill="#71717a" font-size="10" font-family="monospace">• Resident issue message input</text>
+    <text x="16" y="136" fill="#71717a" font-size="10" font-family="monospace">• Downstream command splitting</text>
+  </g>
+
+  <!-- Stage 2: AI Classification & Ticket Logging -->
+  <g transform="translate(345, 180)">
+    <rect width="250" height="160" rx="10" fill="#0f121e" stroke="#242b3e" stroke-width="1"/>
+    <text x="16" y="28" fill="#38bdf8" font-size="10" font-family="monospace" font-weight="700">STAGE 02 • CLASSIFICATION</text>
+    <text x="16" y="48" fill="#ffffff" font-size="14" font-weight="700">Groq AI &amp; Google Sheets</text>
+    <text x="16" y="68" fill="#a1a1aa" font-size="11">Triage &amp; Ticket Persistence</text>
+    <line x1="16" y1="80" x2="234" y2="80" stroke="#1f2434" stroke-width="1"/>
+    <text x="16" y="100" fill="#71717a" font-size="10" font-family="monospace">• Classifies category and urgency</text>
+    <text x="16" y="118" fill="#71717a" font-size="10" font-family="monospace">• Logs row in Google Sheets CRM</text>
+    <text x="16" y="136" fill="#71717a" font-size="10" font-family="monospace">• Returns ticket ID to resident</text>
+  </g>
+
+  <!-- Stage 3: Human-in-the-Loop Secretary Approval -->
+  <g transform="translate(655, 180)">
+    <rect width="250" height="160" rx="10" fill="#0f121e" stroke="#242b3e" stroke-width="1"/>
+    <text x="16" y="28" fill="#f59e0b" font-size="10" font-family="monospace" font-weight="700">STAGE 03 • APPROVAL GATE</text>
+    <text x="16" y="48" fill="#ffffff" font-size="14" font-weight="700">Secretary Telegram Bot</text>
+    <text x="16" y="68" fill="#a1a1aa" font-size="11">Human-in-the-Loop Signoff</text>
+    <line x1="16" y1="80" x2="234" y2="80" stroke="#1f2434" stroke-width="1"/>
+    <text x="16" y="100" fill="#71717a" font-size="10" font-family="monospace">• AI drafts vendor dispatch note</text>
+    <text x="16" y="118" fill="#71717a" font-size="10" font-family="monospace">• Telegram interactive approval</text>
+    <text x="16" y="136" fill="#71717a" font-size="10" font-family="monospace">• Nothing exits without approval</text>
+  </g>
+
+  <!-- Stage 4: Resolution & Resident Broadcast -->
+  <g transform="translate(965, 180)">
+    <rect width="175" height="160" rx="10" fill="#0f121e" stroke="#242b3e" stroke-width="1"/>
+    <text x="16" y="28" fill="#10b981" font-size="10" font-family="monospace" font-weight="700">STAGE 04 • RESOLUTION</text>
+    <text x="16" y="48" fill="#ffffff" font-size="14" font-weight="700">Tracking &amp; Notices</text>
+    <text x="16" y="68" fill="#a1a1aa" font-size="11">Closeout &amp; Broadcast</text>
+    <line x1="16" y1="80" x2="159" y2="80" stroke="#1f2434" stroke-width="1"/>
+    <text x="16" y="100" fill="#71717a" font-size="10" font-family="monospace">• 1-command ticket close</text>
+    <text x="16" y="118" fill="#71717a" font-size="10" font-family="monospace">• Auto resident update</text>
+    <text x="16" y="136" fill="#71717a" font-size="10" font-family="monospace">• Notice read receipts</text>
+  </g>
+
+  <!-- Lower Architecture Callouts: Engineering Details -->
+  <g transform="translate(60, 390)">
+    <!-- Callout 1 -->
+    <g transform="translate(0, 0)">
+      <rect width="340" height="110" rx="8" fill="#0b0e17" stroke="#1d2333" stroke-width="1"/>
+      <text x="16" y="24" fill="#4fffb0" font-size="10" font-family="monospace" font-weight="700">TELEGRAM WEBHOOK ARCHITECTURE</text>
+      <text x="16" y="46" fill="#ffffff" font-size="12" font-weight="600">Single Webhook Ingestion</text>
+      <text x="16" y="68" fill="#71717a" font-size="11" font-family="monospace">Telegram bots support one webhook URL.</text>
+      <text x="16" y="86" fill="#71717a" font-size="11" font-family="monospace">All incoming triggers split downstream in n8n.</text>
+    </g>
+
+    <!-- Callout 2 -->
+    <g transform="translate(370, 0)">
+      <rect width="340" height="110" rx="8" fill="#0b0e17" stroke="#1d2333" stroke-width="1"/>
+      <text x="16" y="24" fill="#38bdf8" font-size="10" font-family="monospace" font-weight="700">GOOGLE SHEETS DATA INTEGRITY</text>
+      <text x="16" y="46" fill="#ffffff" font-size="12" font-weight="600">Fixed-Mode Field Formatting</text>
+      <text x="16" y="68" fill="#71717a" font-size="11" font-family="monospace">Avoids syntax mismatches in lookup queries.</text>
+      <text x="16" y="86" fill="#71717a" font-size="11" font-family="monospace">Drive API enabled for 'By List' mode access.</text>
+    </g>
+
+    <!-- Callout 3 -->
+    <g transform="translate(740, 0)">
+      <rect width="340" height="110" rx="8" fill="#0b0e17" stroke="#1d2333" stroke-width="1"/>
+      <text x="16" y="24" fill="#f59e0b" font-size="10" font-family="monospace" font-weight="700">DISPATCH CONTROL BOUNDARY</text>
+      <text x="16" y="46" fill="#ffffff" font-size="12" font-weight="600">Human Approval Gate</text>
+      <text x="16" y="68" fill="#71717a" font-size="11" font-family="monospace">Vendor messages require secretary signoff.</text>
+      <text x="16" y="86" fill="#71717a" font-size="11" font-family="monospace">Prevents unverified dispatches exiting building.</text>
+    </g>
+  </g>
+
+  <!-- Footer Technical Summary -->
+  <g transform="translate(60, 540)">
+    <rect width="1080" height="80" rx="8" fill="#0b0e17" stroke="#1d2333" stroke-width="1"/>
+    <text x="20" y="28" fill="#4fffb0" font-size="10" font-family="monospace" font-weight="700">OPERATIONAL SPECIFICATION</text>
+    <text x="20" y="52" fill="#d4d4d8" font-size="12">n8n Workflow Engine · Groq LLM Triage · Google Sheets Ticket CRM · Telegram Bot API (Resident &amp; Secretary Channels)</text>
+  </g>
+</svg>

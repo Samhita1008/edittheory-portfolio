@@ -573,19 +573,29 @@ export default function App() {
                             <Github className="w-3.5 h-3.5" /> Case Study / Code
                           </a>
                         )}
-                        {!proj.isFlagship && (proj.notionUrl || proj.githubUrl) && (
+                        {!proj.isFlagship && proj.githubUrl && (
                           <a 
-                            href={proj.notionUrl || proj.githubUrl} 
+                            href={proj.githubUrl} 
                             target="_blank" 
                             rel="noopener noreferrer" 
                             className="hover:text-zinc-300 transition-colors flex items-center gap-1"
                           >
-                            <FileText className="w-3.5 h-3.5 text-zinc-500" /> {proj.githubUrl ? 'Workflow / Code' : 'Project & architecture'}
+                            <Github className="w-3.5 h-3.5 text-zinc-500" /> {proj.codeAvailabilityNote ? 'GitHub' : 'Workflow / Code'}
+                          </a>
+                        )}
+                        {!proj.isFlagship && !proj.githubUrl && proj.notionUrl && (
+                          <a 
+                            href={proj.notionUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="hover:text-zinc-300 transition-colors flex items-center gap-1"
+                          >
+                            <FileText className="w-3.5 h-3.5 text-zinc-500" /> Project & architecture
                           </a>
                         )}
                         {proj.codeAvailabilityNote && (
                           <span className="text-zinc-500 flex items-center gap-1">
-                            🔒 Available on request
+                            🔒 {proj.codeAvailabilityNote.includes('request') && !proj.codeAvailabilityNote.includes('Workflow') ? 'Available on request' : proj.codeAvailabilityNote}
                           </span>
                         )}
                         {proj.loomUrl && (
@@ -618,7 +628,7 @@ export default function App() {
                   <span className="text-zinc-600 select-none">·</span>
                   <span className="text-zinc-400">Samhita1008 / edit-theory-agents</span>
                   <span className="text-zinc-600 select-none">·</span>
-                  <span className="text-zinc-500">6 Production Systems & Post-Mortems</span>
+                  <span className="text-zinc-500">7 Production Systems & Post-Mortems</span>
                 </div>
 
                 <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
@@ -626,7 +636,7 @@ export default function App() {
                 </h3>
 
                 <p className="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed">
-                  Project workflows and architecture breakdowns for 6 deployed AI automation systems, alongside detailed post-mortems documenting production edge cases (API rate limits, webhook drops, non-deterministic outputs, proxy blocks) and their architectural remediations.
+                  Project workflows and architecture breakdowns for 7 deployed AI automation systems, alongside detailed post-mortems documenting production edge cases (API rate limits, webhook drops, non-deterministic outputs, proxy blocks) and their architectural remediations.
                 </p>
               </div>
 
