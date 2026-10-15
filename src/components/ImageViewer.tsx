@@ -231,7 +231,7 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
         >
           <img
             src={currentImg.url}
-            alt={currentImg.title || 'System Diagram'}
+            alt={currentImg.title ? `${currentImg.title} - Fullscreen Diagram Preview` : 'System Architecture and Output Diagram'}
             loading="lazy"
             decoding="async"
             draggable={false}

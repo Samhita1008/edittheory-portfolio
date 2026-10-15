@@ -215,9 +215,9 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
           {/* Dominant Project Title */}
           <div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold text-white tracking-tight leading-[1.1]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold text-white tracking-tight leading-[1.1]">
               {project.title}
-            </h1>
+            </h2>
             {project.engagementNote && (
               <div className="mt-2.5">
                 <span className="inline-block text-xs font-mono text-amber-400/90 bg-amber-400/10 border border-amber-400/20 px-2.5 py-1 rounded">
@@ -317,9 +317,9 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
         {/* 2. OVERVIEW SECTION */}
         <section className="space-y-3 pt-6 border-t border-zinc-800/40">
-          <h2 className="text-xs font-mono font-semibold tracking-widest text-zinc-500 uppercase">
+          <h3 className="text-xs font-mono font-semibold tracking-widest text-zinc-500 uppercase">
             OVERVIEW
-          </h2>
+          </h3>
           <p className="text-base sm:text-[17px] text-zinc-300 font-sans leading-relaxed max-w-[700px]">
             {overviewText}
           </p>
@@ -328,9 +328,9 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
         {/* 3. ARCHITECTURE SECTION (Visual Hero) */}
         <section className="space-y-4 pt-6 border-t border-zinc-800/40">
           <div className="space-y-1.5">
-            <h2 className="text-xs font-mono font-semibold tracking-widest text-zinc-500 uppercase">
+            <h3 className="text-xs font-mono font-semibold tracking-widest text-zinc-500 uppercase">
               ARCHITECTURE
-            </h2>
+            </h3>
             {project.architectureExplanation && (
               <p className="text-sm sm:text-base text-zinc-400 font-sans leading-relaxed max-w-[700px]">
                 {project.architectureExplanation}
@@ -346,7 +346,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             >
               <img
                 src={project.architectureImage}
-                alt={`${project.title} Architecture Workflow`}
+                alt={`${project.title} - Architecture Workflow Diagram`}
                 loading="lazy"
                 decoding="async"
                 className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-[1.01]"
@@ -363,9 +363,9 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
         {/* 4. HOW IT WORKS SECTION (Clean Numbered Sequence) */}
         <section className="space-y-6 pt-6 border-t border-zinc-800/40">
-          <h2 className="text-xs font-mono font-semibold tracking-widest text-zinc-500 uppercase">
+          <h3 className="text-xs font-mono font-semibold tracking-widest text-zinc-500 uppercase">
             HOW IT WORKS
-          </h2>
+          </h3>
 
           <div className="space-y-6 max-w-[720px]">
             {steps.map((stepItem, index) => (
@@ -378,9 +378,9 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                   {stepItem.step}
                 </div>
                 <div className="space-y-1 flex-1">
-                  <h3 className="text-base sm:text-lg font-semibold text-white tracking-wide">
+                  <h4 className="text-base sm:text-lg font-semibold text-white tracking-wide">
                     {stepItem.title}
-                  </h3>
+                  </h4>
                   <p className="text-sm sm:text-[15px] text-zinc-400 font-sans leading-relaxed mt-1 max-w-[660px]">
                     {stepItem.description}
                   </p>
@@ -392,9 +392,9 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
         {/* 5. TECHNOLOGY SECTION (Understated Single Line) */}
         <section className="space-y-2.5 pt-6 border-t border-zinc-800/40">
-          <h2 className="text-xs font-mono font-semibold tracking-widest text-zinc-500 uppercase">
+          <h3 className="text-xs font-mono font-semibold tracking-widest text-zinc-500 uppercase">
             TECHNOLOGY
-          </h2>
+          </h3>
           <p className="text-sm sm:text-base font-mono text-zinc-300">
             {techLine}
           </p>
@@ -403,9 +403,9 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
         {/* ENGINEERING NOTES SECTION */}
         {project.engineeringNotes && project.engineeringNotes.length > 0 && (
           <section className="space-y-3 pt-6 border-t border-zinc-800/40">
-            <h2 className="text-xs font-mono font-semibold tracking-widest text-zinc-500 uppercase">
+            <h3 className="text-xs font-mono font-semibold tracking-widest text-zinc-500 uppercase">
               ENGINEERING NOTES
-            </h2>
+            </h3>
             <ul className="space-y-2.5 max-w-[720px]">
               {project.engineeringNotes.map((note, nIdx) => (
                 <li key={nIdx} className="flex items-start gap-2.5 text-xs sm:text-sm font-mono text-zinc-400">
@@ -421,9 +421,9 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
         {outputImagesList.length > 0 && (
           <section className="space-y-5 pt-6 border-t border-zinc-800/40">
             <div className="space-y-1">
-              <h2 className="text-xs font-mono font-semibold tracking-widest text-zinc-500 uppercase">
+              <h3 className="text-xs font-mono font-semibold tracking-widest text-zinc-500 uppercase">
                 SYSTEM OUTPUT
-              </h2>
+              </h3>
               <p className="text-xs font-mono text-zinc-400">
                 Click any image to inspect in full resolution
               </p>
@@ -438,7 +438,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 >
                   <img
                     src={featuredOutput.url}
-                    alt={featuredOutput.title || 'System Output'}
+                    alt={`${project.title} - ${featuredOutput.title || 'Live System Output'}`}
                     loading="lazy"
                     decoding="async"
                     className="w-full h-auto max-h-[520px] object-contain mx-auto transition-transform duration-300 group-hover:scale-[1.01]"
@@ -466,7 +466,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                       <div className="p-2 flex items-center justify-center bg-black/20">
                         <img
                           src={item.url}
-                          alt={item.title || 'System Output'}
+                          alt={`${project.title} - ${item.title || 'Live System Output Demonstration'}`}
                           loading="lazy"
                           decoding="async"
                           className="w-full h-44 sm:h-52 object-contain transition-transform duration-300 group-hover:scale-[1.01]"

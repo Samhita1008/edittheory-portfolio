@@ -167,7 +167,7 @@ export default function App() {
           <a href="#" className="flex items-center gap-2.5 hover:opacity-90 transition">
             <img 
               src={EDIT_THEORY_LOGO_URL} 
-              alt="Edit Theory Logo" 
+              alt="Edit Theory Logo - AI Automation Systems for D2C Brands" 
               className="w-10 h-10 object-contain rounded-full shadow-[0_0_12px_rgba(79,255,176,0.2)]" 
               referrerPolicy="no-referrer"
             />
@@ -261,7 +261,7 @@ export default function App() {
                   <div className="w-20 h-20 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-600 relative overflow-hidden">
                     <img 
                       src="/images/sam.jpeg" 
-                      alt="Samhita Tavutu Profile" 
+                      alt="Samhita Tavutu - Systems Architect and AI Automation Engineer" 
                       className="w-full h-full object-cover" 
                       referrerPolicy="no-referrer"
                     />
@@ -269,7 +269,7 @@ export default function App() {
                   </div>
 
                   <div>
-                    <h4 className="text-sm font-display font-bold text-white">Samhita Tavutu</h4>
+                    <p className="text-sm font-display font-bold text-white">Samhita Tavutu</p>
                     <p className="text-[10px] font-mono text-zinc-500 mt-0.5">Systems Architect</p>
                   </div>
 
@@ -827,7 +827,7 @@ export default function App() {
 
           <div className="mt-10 p-5 rounded-2xl bg-[#4fffb0]/5 border border-[#4fffb0]/20 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-left space-y-1">
-              <h4 className="text-xs font-bold text-white">Got a specific workflow bottleneck?</h4>
+              <h3 className="text-xs font-bold text-white">Got a specific workflow bottleneck?</h3>
               <p className="text-[11px] text-zinc-400">Let's design a custom-tailored automation system optimized for your exact conversion rate requirements.</p>
             </div>
             <a 
@@ -919,7 +919,7 @@ export default function App() {
                 <div className="w-12 h-12 rounded-full bg-[#4fffb0]/10 border border-[#4fffb0]/30 flex items-center justify-center mx-auto text-[#4fffb0]">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
-                <h4 className="text-sm font-bold text-white">Opening Mail Client...</h4>
+                <h3 className="text-sm font-bold text-white">Opening Mail Client...</h3>
                 <p className="text-xs text-zinc-400 max-w-xs mx-auto leading-normal">
                   Your customized automation outline metadata is loaded. Clicking ok launches your desktop composer immediately.
                 </p>
@@ -990,7 +990,7 @@ export default function App() {
           <div className="flex items-center gap-3">
             <img 
               src={EDIT_THEORY_LOGO_URL}
-              alt="Edit Theory Logo" 
+              alt="Edit Theory Logo - AI Automation Systems" 
               className="w-8 h-8 rounded-full" 
               referrerPolicy="no-referrer"
             />

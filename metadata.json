@@ -1,6 +1,6 @@
 {
   "name": "EditTheory",
-  "description": "AI Systems for D2C Brands. Portfolio of Samhita Tavutu.",
+  "description": "I build custom AI systems for D2C brands: lead scraping, personalized outreach, and content distribution. See the 5 agents I've shipped.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -83,7 +83,7 @@ export default function ClientPortal({ theme }: ClientPortalProps) {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
               </svg>
             </div>
-            <h1 class="text-xl font-bold text-zinc-100">OAuth 2.0 Secure Grant</h1>
+            <h2 class="text-xl font-bold text-zinc-100">OAuth 2.0 Secure Grant</h2>
             <p class="text-xs text-zinc-400 mt-2">Connecting with <strong class="text-white">${provider === 'google' ? 'Google Social ID' : 'GitHub Developer ID'}</strong></p>
           </div>
 
@@ -294,7 +294,7 @@ AI Agent for ${brandName}`,
             <div className="flex items-center gap-3 bg-zinc-950 p-2.5 rounded-xl border border-zinc-800">
               <img
                 src={authState.user.avatarUrl}
-                alt={authState.user.name}
+                alt={authState.user.name ? `${authState.user.name} Profile Avatar` : 'User Profile Avatar'}
                 className="w-9 h-9 rounded-full border border-[#4fffb0]/30"
                 referrerPolicy="no-referrer"
               />
