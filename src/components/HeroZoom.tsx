@@ -37,6 +37,43 @@ function computeLayout(vw: number, vh: number): Layout | null {
   const w100 = LINES.map((l) => ctx.measureText(l).width);
   if (!cap100 || !w100[0]) return null;
   const capRatio = cap100 / 100;
+  // Measure the real ink of the T (stem and top bar) at 400px, so the zoom
+  // lands exactly on the junction and ends once the strokes fill the screen.
+  const probe = document.createElement('canvas');
+  probe.width = 700;
+  probe.height = 700;
+  const pc = probe.getContext('2d', { willReadFrequently: true });
+  let stemL = 0.4;
+  let stemR = 0.6;
+  let barL = 0.1;
+  let barR = 0.9;
+  let barT = 0.2;
+  if (pc) {
+    pc.font = `400px ${FONT}`;
+    pc.textBaseline = 'alphabetic';
+    pc.fillStyle = '#000';
+    const OX = 100;
+    const BASE = 560;
+    pc.fillText('T', OX, BASE);
+    const capPx = pc.measureText('T').actualBoundingBoxAscent;
+    const ink = (x: number, y: number) => pc.getImageData(x, y, 1, 1).data[3] > 128;
+    const span = (y: number) => {
+      let a = -1;
+      let b = -1;
+      for (let x = 0; x < 700; x++) if (ink(x, y)) { if (a < 0) a = x; b = x; }
+      return [a, b] as const;
+    };
+    const [sa, sb] = span(Math.round(BASE - capPx * 0.4));
+    const [ba, bb] = span(Math.round(BASE - capPx + 4));
+    if (sa >= 0) { stemL = (sa - OX) / 400; stemR = (sb + 1 - OX) / 400; }
+    if (ba >= 0) { barL = (ba - OX) / 400; barR = (bb + 1 - OX) / 400; }
+    const col = Math.max(0, sa - 10);
+    let y = Math.round(BASE - capPx + 2);
+    while (y < BASE && ink(col, y)) y++;
+    barT = Math.max(0.05, (y - (BASE - capPx)) / 400);
+  }
+  const stemCenterEm = (stemL + stemR) / 2;
+  const barWEm = Math.max(0.2, barR - barL);
   const F = Math.min((vw * 0.9) / (Math.max(...w100) / 100), (0.28 * vh) / capRatio);
   const k = F / 100;
   const cap = cap100 * k;
@@ -55,11 +92,10 @@ function computeLayout(vw: number, vh: number): Layout | null {
     [...line].forEach((ch, i) => {
       const x = left + ctx.measureText(line.slice(0, i)).width * k;
       glyphs.push({ ch, x, y: base[li], line: li, i });
-      if (li === 0 && i === 3) tx = x + (ctx.measureText(ch).width * k) / 2;
+      if (li === 0 && i === 3) tx = x + stemCenterEm * F;
     });
   });
-  const ty = base[0] - cap * 0.5;
-  const diag = Math.hypot(vw, vh);
+  const ty = base[0] - cap + (barT * F) / 2;
   return {
     F,
     cap,
@@ -68,7 +104,7 @@ function computeLayout(vw: number, vh: number): Layout | null {
     tx,
     ty,
     bulb: { cx: tx, cy: capTop1 - bulbR * 0.98, r: bulbR },
-    kmax: (1.25 * diag) / (0.1 * F),
+    kmax: Math.max((1.3 * vh) / (barT * F), (1.2 * vw) / (barWEm * F)),
   };
 }
 
@@ -190,7 +226,7 @@ export default function HeroZoom({ stageRef }: { stageRef: RefObject<HTMLElement
   const sceneOpacity = useTransform(t, (v) => clamp((v - 0.45) / 0.4));
   const sceneEvents = useTransform(t, (v) => (v > 0.8 ? 'auto' : 'none'));
 
-  const gRef = useRef<SVGGElement>(null);
+    const gRef = useRef<SVGGElement>(null);
   useEffect(() => {
     const apply = (v: string) => gRef.current?.setAttribute('transform', v);
     apply(attrTransform.get());
