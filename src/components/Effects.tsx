@@ -57,13 +57,13 @@ export function ParticleBackground({ theme }: { theme: Theme }) {
       ctx.clearRect(0, 0, width, height);
 
       // Pulse colors according to dark/light theme
-      const particleColor = theme === 'dark' ? '79, 255, 176' : '6, 8, 16';
+      const particleColor = theme === 'dark' ? '255, 178, 36' : '6, 8, 16';
 
       particles.forEach((p) => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${particleColor}, ${p.opacity})`;
-        ctx.shadowColor = theme === 'dark' ? '#4fffb0' : 'transparent';
+        ctx.shadowColor = theme === 'dark' ? '#ffb224' : 'transparent';
         ctx.shadowBlur = theme === 'dark' ? 4 : 0;
         ctx.fill();
 
@@ -104,7 +104,7 @@ export function DrawIcon({
   name: 'repurposing' | 'outreach' | 'scraping' | 'glossier' | 'dew' | 'discovery';
   className?: string;
 }) {
-  const strokeColor = "#4fffb0"; // Mint green highlight
+  const strokeColor = "#ffb224"; // Mint green highlight
 
   // SVG parameters customizable
   switch (name) {
@@ -316,7 +316,7 @@ export function ProcessConnectLine() {
           y1="50%"
           x2="100%"
           y2="50%"
-          stroke="#4fffb0"
+          stroke="#ffb224"
           strokeWidth="3"
           className="animate-flow-dash opacity-70"
         />

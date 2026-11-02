@@ -1,12 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Syne:wght@500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Syne", sans-serif;
-  --color-bg-theme: #060810;
-  --color-card-theme: #0c101d;
-  --color-accent-theme: #4fffb0;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", sans-serif;
+  --color-bg-theme: #1e0f2e;
+  --color-card-theme: #2b183f;
+  --color-accent-theme: #ffb224;
+  --color-ink: #1e0f2e;
+  --color-paper: #f7ebdd;
+  --color-marigold: #ffb224;
+  --color-rose: #ee5a7e;
+  --color-mauve: #5b3a7a;
 }
 
 @layer utilities {
@@ -31,15 +36,15 @@ body {
 
 /* Sleek Sophisticated Dark Cards */
 .card-vibe {
-  background-color: #0c101d !important;
+  background-color: #2b183f !important;
   border-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 /* Case Study / Pill Badges */
 .contact-pill {
-  background-color: rgba(79, 255, 176, 0.1) !important;
-  border: 1px solid #4fffb0 !important;
-  color: #4fffb0 !important;
+  background-color: rgba(255, 178, 36, 0.1) !important;
+  border: 1px solid #ffb224 !important;
+  color: #ffb224 !important;
   padding: 4px 12px !important;
   border-radius: 100px !important;
   font-size: 11px !important;
@@ -72,11 +77,11 @@ body {
 /* Pulse breathing effect */
 @keyframes breathing-glow {
   0%, 100% {
-    filter: drop-shadow(0 0 2px rgba(79, 255, 176, 0.4));
+    filter: drop-shadow(0 0 2px rgba(255, 178, 36, 0.4));
     transform: scale(1);
   }
   50% {
-    filter: drop-shadow(0 0 12px rgba(79, 255, 176, 0.9));
+    filter: drop-shadow(0 0 12px rgba(255, 178, 36, 0.9));
     transform: scale(1.15);
   }
 }
@@ -100,8 +105,8 @@ body {
 /* Interactive custom grid background */
 .bg-grid-overlay {
   background-size: 40px 40px;
-  background-image: linear-gradient(rgba(79, 255, 176, 0.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(79, 255, 176, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(255, 178, 36, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 178, 36, 0.03) 1px, transparent 1px);
 }
 
 .bg-grid-overlay-light {
@@ -130,11 +135,11 @@ body {
   background: transparent;
 }
 .theme-dark ::-webkit-scrollbar-thumb {
-  background: rgba(79, 255, 176, 0.15);
+  background: rgba(255, 178, 36, 0.15);
   border-radius: 4px;
 }
 .theme-dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(79, 255, 176, 0.3);
+  background: rgba(255, 178, 36, 0.3);
 }
 .theme-light ::-webkit-scrollbar-thumb {
   background: rgba(6, 8, 16, 0.1);
@@ -142,4 +147,15 @@ body {
 }
 .theme-light ::-webkit-scrollbar-thumb:hover {
   background: rgba(6, 8, 16, 0.25);
+}
+
+html { background: #1e0f2e; scroll-behavior: auto; }
+body { background: #1e0f2e; color: #f7ebdd; }
+:focus-visible { outline: 2px solid #ffb224; outline-offset: 3px; }
+.text-sophisticated-glow { background: none; -webkit-text-fill-color: currentColor; color: #f7ebdd; }
+@keyframes flow { to { stroke-dashoffset: -48; } }
+.flow-line { stroke-dasharray: 6 8; animation: flow 3s linear infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@media (prefers-reduced-motion: reduce) {
+  .flow-line, .animate-float-orb-1, .animate-float-orb-2, .animate-breathing-glow, .animate-flow-dash { animation: none !important; }
 }
