@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
-import { AnimatePresence, MotionValue, motion, useScroll, useTransform } from 'motion/react';
+import { AnimatePresence, MotionConfig, MotionValue, motion, useInView, useScroll, useSpring, useTransform } from 'motion/react';
 import { ArrowRight, ChevronDown, ExternalLink, FileText, Github, Instagram, Linkedin, Lock, Mail, Send } from 'lucide-react';
-import { CLIENT_TIERS, PROCESS_STEPS, PROJECTS } from './data';
+import { CLIENT_TIERS, PROCESS_STEPS, PROJECTS, SERVICES } from './data';
 import { Project } from './types';
 import ClientPortal from './components/ClientPortal';
 import { ImageViewer, ViewerImage } from './components/ImageViewer';
@@ -9,6 +9,77 @@ import { ProjectDetailModal } from './components/ProjectDetailModal';
 import HeroZoom, { STAGE_STOPS, scrollToStage } from './components/HeroZoom';
 
 const LOGO = '/images/Edit Theory.png';
+
+const EASE = [0.2, 0.7, 0.2, 1] as const;
+
+/** Headline that rises out of a mask when it enters the screen. */
+function RevealLine({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const seen = useInView(ref, { once: true, margin: '0px 0px -12% 0px' });
+  return (
+    <span ref={ref} className="block overflow-hidden pb-[0.14em]">
+      <motion.span className="block" initial={{ y: '108%' }} animate={{ y: seen ? 0 : '108%' }} transition={{ duration: 0.95, ease: EASE }}>
+        {children}
+      </motion.span>
+    </span>
+  );
+}
+
+/** Quiet fade-and-lift for blocks, staggered by `i`. */
+function Rise({ children, i = 0, className = '' }: { children: React.ReactNode; i?: number; className?: string }) {
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '0px 0px -8% 0px' }}
+      transition={{ duration: 0.8, ease: EASE, delay: i * 0.1 }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function ScrollBar() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.4 });
+  return <motion.div aria-hidden="true" className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-[#dcd6ee]" style={{ scaleX }} />;
+}
+
+/** Service names drift sideways as the band scrolls through. */
+function ServiceBand() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const x = useTransform(scrollYProgress, [0, 1], ['6%', '-38%']);
+  const words = [...SERVICES, ...SERVICES].map((s) => s.title);
+  return (
+    <div ref={ref} aria-label={SERVICES.map((s) => s.title).join(', ')} className="overflow-hidden bg-[#2e211a] py-10 md:py-14">
+      <motion.div style={{ x }} className="flex w-max items-center gap-10 whitespace-nowrap font-anton text-[clamp(44px,8vw,112px)] uppercase leading-none text-[#e5e4e2]" aria-hidden="true">
+        {words.map((w, i) => (
+          <span key={i} className="flex items-center gap-10">
+            <span className={i % 2 ? 'outline-text' : ''}>{w}</span>
+            <span className="h-3 w-3 shrink-0 bg-[#dcd6ee]" />
+          </span>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+/** The end-of-page wordmark that slides sideways as you reach the bottom. */
+function GiantName() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end end'] });
+  const x = useTransform(scrollYProgress, [0, 1], ['12%', '-18%']);
+  return (
+    <div ref={ref} className="overflow-hidden pb-4">
+      <motion.div style={{ x }} className="whitespace-nowrap font-anton text-[clamp(80px,24vw,360px)] uppercase leading-[0.9] text-[#e5e4e2]" aria-label="Edit Theory">
+        Edit Theory
+      </motion.div>
+    </div>
+  );
+}
+
 
 const BUILD_ITEMS = [
   ['Custom AI Agents:', 'Self-running n8n, custom Node.js scripts.'],
@@ -25,9 +96,7 @@ function BuildSection() {
   return (
     <section id="build-section" className="bg-[#dcd6ee] px-4 py-24 text-[#2e211a] sm:px-8">
       <div className="mx-auto max-w-6xl">
-        <h2 className="max-w-3xl font-display text-[clamp(2rem,4.6vw,3.8rem)] font-bold leading-[1.03] tracking-tight">
-          Focused on real client conversions.
-        </h2>
+        <h2 className="max-w-3xl font-display text-[clamp(2rem,4.6vw,3.8rem)] font-bold leading-[1.03] tracking-tight"><RevealLine>Focused on real client conversions.</RevealLine></h2>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-[#2e211a]/80">
           I don't build generic AI chatbots. I design highly specialized systems that replace hours of manual work with reliable autonomous pipelines.
         </p>
@@ -35,8 +104,9 @@ function BuildSection() {
           {[
             { h: 'What I Build', p: 'Specialized, single-purpose automation sequences connected directly to your existing workspace.', items: BUILD_ITEMS },
             { h: 'Who I Help', p: 'Simplifying operations for founders, marketers, and operations leaders.', items: HELP_ITEMS },
-          ].map((col) => (
-            <div key={col.h} className="border-t-2 border-[#2e211a] pt-5">
+          ].map((col, ci) => (
+            <Rise key={col.h} i={ci} className="border-t-2 border-[#2e211a] pt-5">
+            <div>
               <h3 className="font-display text-2xl font-bold">{col.h}</h3>
               <p className="mt-2 text-sm leading-relaxed text-[#2e211a]/75">{col.p}</p>
               <ul className="mt-5 space-y-3 text-sm leading-relaxed">
@@ -47,8 +117,10 @@ function BuildSection() {
                 ))}
               </ul>
             </div>
+            </Rise>
           ))}
-          <div className="border-t-2 border-[#2e211a] pt-5">
+          <Rise i={2} className="border-t-2 border-[#2e211a] pt-5">
+          <div>
             <h3 className="font-display text-2xl font-bold">Custom Solutions</h3>
             <p className="mt-2 text-sm font-medium leading-relaxed">“If you have a workflow bottleneck, I can design a tailored AI solution for it.”</p>
             <p className="mt-5 text-sm leading-relaxed text-[#2e211a]/80">
@@ -63,6 +135,7 @@ function BuildSection() {
               </a>
             </div>
           </div>
+          </Rise>
         </div>
       </div>
     </section>
@@ -140,9 +213,7 @@ function ProcessStory() {
             <Pipeline progress={lit} />
           </div>
           <div>
-            <h2 className="font-display text-[clamp(1.8rem,4vw,3.4rem)] font-bold leading-[1.04] tracking-tight">
-              How I transform ideas into engines.
-            </h2>
+            <h2 className="font-display text-[clamp(1.8rem,4vw,3.4rem)] font-bold leading-[1.04] tracking-tight"><RevealLine>How I transform ideas into engines.</RevealLine></h2>
             <p className="mt-3 text-sm text-[#2e211a]/70">Observe the active data pulse travelling along the pipeline.</p>
 
             <ol className="mt-8 space-y-2">
@@ -258,7 +329,9 @@ export default function App() {
   const navLink = 'whitespace-nowrap rounded-sm px-3 py-1.5 text-sm text-[#e5e4e2]/80 transition hover:text-[#dcd6ee]';
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className="min-h-screen bg-[#2e211a] font-sans text-[#e5e4e2]">
+      <ScrollBar />
       {/* NAV */}
       <nav className="fixed inset-x-0 top-0 z-50 mix-blend-normal">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-8">
@@ -286,6 +359,7 @@ export default function App() {
         <HeroZoom stageRef={stageRef} />
       </section>
 
+      <ServiceBand />
       <BuildSection />
 
       {/* PROJECTS */}
@@ -293,7 +367,7 @@ export default function App() {
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 pt-16">
             <p className="text-base text-[#dcd6ee]">Strategic Case Studies</p>
-            <h2 className="mt-2 font-display text-[clamp(2.2rem,6vw,5rem)] font-bold leading-[0.98] tracking-tight">Systems Design &amp; Mechanics</h2>
+            <h2 className="mt-2 font-display text-[clamp(2.2rem,6vw,5rem)] font-bold leading-[0.98] tracking-tight"><RevealLine>Systems Design &amp; Mechanics</RevealLine></h2>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[#e5e4e2]/80">
               Production-grade systems engineering: architecture blueprints, orchestration logic, and end-to-end automation.
             </p>
@@ -485,16 +559,17 @@ export default function App() {
       <section id="pricing-section" className="bg-[#e5e4e2] px-4 py-24 text-[#2e211a] sm:px-8">
         <div className="mx-auto max-w-6xl">
           <p className="text-base text-[#4a372c]">The Pricing Framework</p>
-          <h2 className="mt-2 font-display text-[clamp(2rem,4.6vw,3.8rem)] font-bold leading-[1.02] tracking-tight">How I partner for leverage.</h2>
+          <h2 className="mt-2 font-display text-[clamp(2rem,4.6vw,3.8rem)] font-bold leading-[1.02] tracking-tight"><RevealLine>How I partner for leverage.</RevealLine></h2>
           <p className="mt-4 max-w-2xl text-base text-[#2e211a]/75">
             I usually begin with a small, focused pilot build so you can see the workflow in action with zero risk.
           </p>
 
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             {CLIENT_TIERS.map((tier, i) => (
+              <Rise key={tier.tier} i={i} className="flex">
               <div
                 key={tier.tier}
-                className={`flex flex-col rounded-sm p-7 ${i === 1 ? 'bg-[#2e211a] text-[#e5e4e2]' : 'border border-[#2e211a]/20'}`}
+                className={`flex w-full flex-col rounded-sm p-7 ${i === 1 ? 'bg-[#2e211a] text-[#e5e4e2]' : 'border border-[#2e211a]/20'}`}
               >
                 <p className={`text-sm ${i === 1 ? 'text-[#dcd6ee]' : 'text-[#4a372c]'}`}>Pricing Plan</p>
                 <h3 className="mt-1 font-display text-2xl font-bold">{tier.tier}</h3>
@@ -516,6 +591,7 @@ export default function App() {
                   Select Pilot Setup
                 </a>
               </div>
+              </Rise>
             ))}
           </div>
 
@@ -529,7 +605,7 @@ export default function App() {
       <section id="faq-section" className="bg-[#2e211a] px-4 py-24 sm:px-8">
         <div className="mx-auto max-w-3xl">
           <p className="text-base text-[#dcd6ee]">Frequently Asked Questions</p>
-          <h2 className="mt-2 font-display text-[clamp(2rem,4.4vw,3.4rem)] font-bold leading-[1.04] tracking-tight">Clear Answers on Automation.</h2>
+          <h2 className="mt-2 font-display text-[clamp(2rem,4.4vw,3.4rem)] font-bold leading-[1.04] tracking-tight"><RevealLine>Clear Answers on Automation.</RevealLine></h2>
           <p className="mt-4 text-base text-[#e5e4e2]/75">
             Everything you need to know about partnering for custom AI automation setups and custom workflow development.
           </p>
@@ -588,7 +664,7 @@ export default function App() {
       <section id="contact-section" className="relative overflow-hidden bg-[#dcd6ee] px-4 py-24 text-[#2e211a] sm:px-8">
         <div className="relative mx-auto max-w-6xl">
           <p className="text-base">Connect Today</p>
-          <h2 className="mt-2 font-display text-[clamp(2.6rem,7vw,5.6rem)] font-bold leading-[0.95] tracking-tight">Let's Build Something.</h2>
+          <h2 className="mt-2 font-display text-[clamp(2.6rem,7vw,5.6rem)] font-bold leading-[0.95] tracking-tight"><RevealLine>Let's Build Something.</RevealLine></h2>
           <p className="mt-5 max-w-xl text-lg">
             Reach out to schedule an automation review session. I respond within 24 hours with a personalized breakdown.
           </p>
@@ -675,7 +751,9 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-[#2e211a] px-4 py-8 sm:px-8">
+      <footer className="overflow-hidden bg-[#2e211a] px-4 pb-8 pt-20 sm:px-8">
+        <GiantName />
+        <div className="mt-6" />
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-[#e5e4e2]/65 md:flex-row">
           <span>© 2025 - 2026. AI Systems for D2C Brands.</span>
           <div className="flex items-center gap-5">
@@ -710,5 +788,6 @@ export default function App() {
         onNavigate={setViewerIndex}
       />
     </div>
+    </MotionConfig>
   );
 }
