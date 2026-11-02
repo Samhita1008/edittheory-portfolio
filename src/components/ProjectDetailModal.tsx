@@ -181,7 +181,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             aria-label="Back to systems"
             className="group inline-flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-white transition-colors cursor-pointer"
           >
-            <ArrowLeft className="w-3.5 h-3.5 text-zinc-500 group-hover:text-[#ffb224] transition-colors" />
+            <ArrowLeft className="w-3.5 h-3.5 text-zinc-500 group-hover:text-[#dcd6ee] transition-colors" />
             <span className="tracking-wide">Back to Systems</span>
           </button>
 
@@ -208,7 +208,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
         <section className="space-y-4 sm:space-y-5">
           {/* Subtle Category & Number */}
           <div className="text-xs font-mono text-zinc-400 tracking-wider flex items-center gap-2 select-none">
-            <span className="text-[#ffb224] font-semibold">{projectNumber}</span>
+            <span className="text-[#dcd6ee] font-semibold">{projectNumber}</span>
             <span className="text-zinc-600">/</span>
             <span className="uppercase">{project.category}</span>
           </div>
@@ -220,7 +220,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             </h2>
             {project.engagementNote && (
               <div className="mt-2.5">
-                <span className="inline-block text-xs font-mono text-amber-400/90 bg-amber-400/10 border border-amber-400/20 px-2.5 py-1 rounded">
+                <span className="inline-block text-xs font-mono text-stone-300/90 bg-stone-300/10 border border-stone-300/20 px-2.5 py-1 rounded">
                   {project.engagementNote}
                 </span>
               </div>
@@ -239,7 +239,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#ffb224] text-[#1e0f2e] font-bold hover:bg-[#ffb224]/90 transition-colors shadow-sm"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#dcd6ee] text-[#2e211a] font-bold hover:bg-[#dcd6ee]/90 transition-colors shadow-sm"
               >
                 <span>Live Demo</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -251,7 +251,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[#ffb224] hover:underline underline-offset-4 cursor-pointer font-medium"
+                className="inline-flex items-center gap-1.5 text-[#dcd6ee] hover:underline underline-offset-4 cursor-pointer font-medium"
               >
                 <span>Case Study / Code</span>
                 <span className="text-sm leading-none">→</span>
@@ -263,7 +263,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 href={project.githubUrl || project.notionUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[#ffb224] hover:underline underline-offset-4 cursor-pointer font-medium"
+                className="inline-flex items-center gap-1.5 text-[#dcd6ee] hover:underline underline-offset-4 cursor-pointer font-medium"
               >
                 <span>{project.githubUrl ? (project.codeAvailabilityNote ? 'GitHub Repository' : 'View Workflow / Code') : 'Project & architecture'}</span>
                 <span className="text-sm leading-none">→</span>
@@ -272,7 +272,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
             {project.codeAvailabilityNote && (
               <span className="inline-flex items-center gap-1.5 text-zinc-400 font-mono text-xs">
-                <span>🔒 {project.codeAvailabilityNote}</span>
+                <span>{project.codeAvailabilityNote}</span>
               </span>
             )}
 
@@ -281,7 +281,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 href={project.loomUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-zinc-300 hover:text-[#ffb224] hover:underline underline-offset-4 cursor-pointer transition-colors"
+                className="inline-flex items-center gap-1.5 text-zinc-300 hover:text-[#dcd6ee] hover:underline underline-offset-4 cursor-pointer transition-colors"
               >
                 <Video className="w-3.5 h-3.5 text-zinc-400" />
                 <span>Video Walkthrough</span>
@@ -292,8 +292,8 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
           {/* Architecture / Status Note (Same place as other agents' demo/status notes) */}
           {(project.demoModeNote || project.statusNote) && (
-            <div className="p-3.5 rounded-lg bg-zinc-900/80 border border-zinc-800 text-xs font-mono text-zinc-400 leading-relaxed max-w-[700px]">
-              <span className="text-[#ffb224] font-semibold">{project.agentNumber === 7 ? 'Status: ' : 'Architecture Note: '}</span>
+            <div className="p-3.5 rounded bg-zinc-900/80 border border-zinc-800 text-xs font-mono text-zinc-400 leading-relaxed max-w-[700px]">
+              <span className="text-[#dcd6ee] font-semibold">{project.agentNumber === 7 ? 'Status: ' : 'Architecture Note: '}</span>
               {project.demoModeNote || project.statusNote}
             </div>
           )}
@@ -342,7 +342,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           {project.architectureImage && (
             <div 
               onClick={() => handleOpenImage(project.architectureImage!)}
-              className="group relative rounded-xl overflow-hidden border border-zinc-800/80 bg-[#090b13] cursor-pointer shadow-xl transition-colors duration-200 hover:border-zinc-700/90"
+              className="group relative rounded-md overflow-hidden border border-zinc-800/80 bg-[#090b13] cursor-pointer shadow-xl transition-colors duration-200 hover:border-zinc-700/90"
             >
               <img
                 src={project.architectureImage}
@@ -409,7 +409,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             <ul className="space-y-2.5 max-w-[720px]">
               {project.engineeringNotes.map((note, nIdx) => (
                 <li key={nIdx} className="flex items-start gap-2.5 text-xs sm:text-sm font-mono text-zinc-400">
-                  <span className="text-[#ffb224] select-none">•</span>
+                  <span className="text-[#dcd6ee] select-none">•</span>
                   <span>{note}</span>
                 </li>
               ))}
@@ -434,7 +434,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
               {featuredOutput && (
                 <div
                   onClick={() => handleOpenImage(featuredOutput.url)}
-                  className="group relative rounded-xl overflow-hidden border border-zinc-800/80 bg-[#090b13] cursor-pointer shadow-lg transition-colors duration-200 hover:border-zinc-700"
+                  className="group relative rounded-md overflow-hidden border border-zinc-800/80 bg-[#090b13] cursor-pointer shadow-lg transition-colors duration-200 hover:border-zinc-700"
                 >
                   <img
                     src={featuredOutput.url}
@@ -461,7 +461,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                     <div
                       key={idx}
                       onClick={() => handleOpenImage(item.url)}
-                      className="group rounded-lg overflow-hidden border border-zinc-800/80 bg-[#090b13] cursor-pointer transition-colors duration-200 hover:border-zinc-700 flex flex-col justify-between"
+                      className="group rounded overflow-hidden border border-zinc-800/80 bg-[#090b13] cursor-pointer transition-colors duration-200 hover:border-zinc-700 flex flex-col justify-between"
                     >
                       <div className="p-2 flex items-center justify-center bg-black/20">
                         <img
@@ -493,9 +493,9 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             onClick={() => onSelectProject(prevProject)}
             className="group flex items-center gap-2 text-zinc-400 hover:text-white transition-colors cursor-pointer"
           >
-            <ArrowLeft className="w-4 h-4 text-zinc-500 group-hover:text-[#ffb224] transition-colors" />
+            <ArrowLeft className="w-4 h-4 text-zinc-500 group-hover:text-[#dcd6ee] transition-colors" />
             <span className="hidden sm:inline text-xs text-zinc-500">Previous:</span>
-            <span className="font-semibold text-zinc-300 group-hover:text-[#ffb224] transition-colors">
+            <span className="font-semibold text-zinc-300 group-hover:text-[#dcd6ee] transition-colors">
               {prevProject.title}
             </span>
           </button>
@@ -506,10 +506,10 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             className="group flex items-center gap-2 text-zinc-400 hover:text-white transition-colors cursor-pointer"
           >
             <span className="hidden sm:inline text-xs text-zinc-500">Next:</span>
-            <span className="font-semibold text-zinc-300 group-hover:text-[#ffb224] transition-colors">
+            <span className="font-semibold text-zinc-300 group-hover:text-[#dcd6ee] transition-colors">
               {nextProject.title}
             </span>
-            <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-[#ffb224] transition-colors" />
+            <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-[#dcd6ee] transition-colors" />
           </button>
         </nav>
 

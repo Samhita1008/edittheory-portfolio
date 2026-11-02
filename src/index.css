@@ -1,17 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+@import '@fontsource/anton/400.css';
+@import '@fontsource-variable/archivo/index.css';
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Bricolage Grotesque", sans-serif;
-  --color-bg-theme: #1e0f2e;
-  --color-card-theme: #2b183f;
-  --color-accent-theme: #ffb224;
-  --color-ink: #1e0f2e;
-  --color-paper: #f7ebdd;
-  --color-marigold: #ffb224;
-  --color-rose: #ee5a7e;
-  --color-mauve: #5b3a7a;
+  --font-sans: "Archivo Variable", "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo Variable", "Archivo", sans-serif;
+  --color-bg-theme: #2e211a;
+  --color-card-theme: #40302a;
+  --color-accent-theme: #dcd6ee;
+  --color-ink: #2e211a;
+  --color-paper: #e5e4e2;
+  --color-lavender: #dcd6ee;
+  
+  
 }
 
 @layer utilities {
@@ -36,15 +37,15 @@ body {
 
 /* Sleek Sophisticated Dark Cards */
 .card-vibe {
-  background-color: #2b183f !important;
+  background-color: #40302a !important;
   border-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 /* Case Study / Pill Badges */
 .contact-pill {
-  background-color: rgba(255, 178, 36, 0.1) !important;
-  border: 1px solid #ffb224 !important;
-  color: #ffb224 !important;
+  background-color: rgba(220, 214, 238, 0.1) !important;
+  border: 1px solid #dcd6ee !important;
+  color: #dcd6ee !important;
   padding: 4px 12px !important;
   border-radius: 100px !important;
   font-size: 11px !important;
@@ -77,11 +78,11 @@ body {
 /* Pulse breathing effect */
 @keyframes breathing-glow {
   0%, 100% {
-    filter: drop-shadow(0 0 2px rgba(255, 178, 36, 0.4));
+    filter: drop-shadow(0 0 2px rgba(220, 214, 238, 0.4));
     transform: scale(1);
   }
   50% {
-    filter: drop-shadow(0 0 12px rgba(255, 178, 36, 0.9));
+    filter: drop-shadow(0 0 12px rgba(220, 214, 238, 0.9));
     transform: scale(1.15);
   }
 }
@@ -105,8 +106,8 @@ body {
 /* Interactive custom grid background */
 .bg-grid-overlay {
   background-size: 40px 40px;
-  background-image: linear-gradient(rgba(255, 178, 36, 0.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255, 178, 36, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(220, 214, 238, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(220, 214, 238, 0.03) 1px, transparent 1px);
 }
 
 .bg-grid-overlay-light {
@@ -135,11 +136,11 @@ body {
   background: transparent;
 }
 .theme-dark ::-webkit-scrollbar-thumb {
-  background: rgba(255, 178, 36, 0.15);
+  background: rgba(220, 214, 238, 0.15);
   border-radius: 4px;
 }
 .theme-dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 178, 36, 0.3);
+  background: rgba(220, 214, 238, 0.3);
 }
 .theme-light ::-webkit-scrollbar-thumb {
   background: rgba(6, 8, 16, 0.1);
@@ -149,13 +150,21 @@ body {
   background: rgba(6, 8, 16, 0.25);
 }
 
-html { background: #1e0f2e; scroll-behavior: auto; }
-body { background: #1e0f2e; color: #f7ebdd; }
-:focus-visible { outline: 2px solid #ffb224; outline-offset: 3px; }
-.text-sophisticated-glow { background: none; -webkit-text-fill-color: currentColor; color: #f7ebdd; }
+html { background: #2e211a; scroll-behavior: auto; }
+.font-anton { font-family: "Anton", Impact, sans-serif; }
+body { background: #2e211a; color: #e5e4e2; }
+:focus-visible { outline: 2px solid #dcd6ee; outline-offset: 3px; }
+.text-sophisticated-glow { background: none; -webkit-text-fill-color: currentColor; color: #e5e4e2; }
 @keyframes flow { to { stroke-dashoffset: -48; } }
 .flow-line { stroke-dasharray: 6 8; animation: flow 3s linear infinite; }
 @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 @media (prefers-reduced-motion: reduce) {
   .flow-line, .animate-float-orb-1, .animate-float-orb-2, .animate-breathing-glow, .animate-flow-dash { animation: none !important; }
 }
+
+@keyframes rise { from { transform: translateY(var(--rise, 300px)); } to { transform: translateY(0); } }
+@keyframes bulb-on { 0% { opacity: 0; } 30% { opacity: .35; } 45% { opacity: .15; } 70% { opacity: 1; } 100% { opacity: 1; } }
+@keyframes ray { from { opacity: 0; } to { opacity: 1; } }
+.glyph-rise { animation: rise 1s cubic-bezier(.19,.9,.22,1) both; }
+.bulb-on { animation: bulb-on 1.4s ease-out both; }
+@media (prefers-reduced-motion: reduce) { .glyph-rise, .bulb-on { animation: none !important; } }

@@ -12,6 +12,7 @@ export default defineConfig(() => {
       },
     },
     build: {
+      assetsInlineLimit: 400000,
       rollupOptions: {
         input: {
           main: path.resolve(__dirname, 'index.html'),

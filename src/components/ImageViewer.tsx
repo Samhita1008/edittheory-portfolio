@@ -166,7 +166,7 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
               if (!nextZoom) setPan({ x: 0, y: 0 });
             }}
             aria-label={isZoomed ? "Zoom out" : "Zoom in"}
-            className="p-2 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 transition text-xs font-mono flex items-center gap-1.5 cursor-pointer"
+            className="p-2 rounded bg-zinc-900/90 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 transition text-xs font-mono flex items-center gap-1.5 cursor-pointer"
             title={isZoomed ? "Reset zoom" : "Zoom in"}
           >
             {isZoomed ? <ZoomOut className="w-3.5 h-3.5" /> : <ZoomIn className="w-3.5 h-3.5" />}
@@ -178,7 +178,7 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
             type="button"
             onClick={onClose}
             aria-label="Close image viewer"
-            className="p-2 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 transition cursor-pointer"
+            className="p-2 rounded bg-zinc-900/90 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 transition cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -235,7 +235,7 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
             loading="lazy"
             decoding="async"
             draggable={false}
-            className="max-h-[76vh] max-w-[90vw] sm:max-w-[85vw] object-contain rounded-lg border border-zinc-800/80 shadow-2xl pointer-events-auto"
+            className="max-h-[76vh] max-w-[90vw] sm:max-w-[85vw] object-contain rounded border border-zinc-800/80 shadow-2xl pointer-events-auto"
           />
         </div>
 
