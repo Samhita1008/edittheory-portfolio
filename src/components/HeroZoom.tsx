@@ -264,13 +264,13 @@ export default function HeroZoom({ stageRef }: { stageRef: RefObject<HTMLElement
 
           {/* About */}
           <div className="mx-auto max-w-6xl px-6 sm:px-10" style={{ minHeight: '100dvh' }}>
-            <div className="grid items-center gap-10 py-24 md:grid-cols-[minmax(0,7fr)_minmax(0,4fr)]" style={{ minHeight: '100dvh' }}>
-              <div>
+            <div className="grid items-center gap-10 py-24 md:grid-cols-[minmax(0,1fr)_auto] md:gap-16" style={{ minHeight: '100dvh' }}>
+              <div className="max-w-3xl">
                 <p className="text-sm font-medium text-[#4a372c]">The Engineer</p>
-                <h2 className="mt-2 font-display text-[clamp(1.8rem,3.4vw,3rem)] font-bold leading-[1.06] tracking-tight text-[#2e211a]">
+                <h2 className="mt-2 font-display text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.06] tracking-tight text-[#2e211a]">
                   Building custom automation systems for scaling brands.
                 </h2>
-                <p className="mt-5 text-base leading-relaxed text-[#2e211a]/85">
+                <p className="mt-5 text-lg leading-relaxed text-[#2e211a]/90">
                   I’m Samhita, a CSE student at Pondicherry Central University building AI-powered systems for D2C brands. I started this because I noticed how much time founders lose recreating content and writing cold messages manually — so I began building systems that automate that work.
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-[#2e211a]/70">
@@ -284,11 +284,11 @@ export default function HeroZoom({ stageRef }: { stageRef: RefObject<HTMLElement
                   ))}
                 </ul>
               </div>
-              <figure className="mx-auto w-full max-w-[320px]">
+              <figure className="mx-auto flex max-w-[200px] flex-col items-center text-center md:mx-0">
                 <img
                   src="/images/sam.jpeg"
                   alt="Samhita Tavutu - Systems Architect and AI Automation Engineer"
-                  className="aspect-[4/5] w-full rounded-sm object-cover"
+                  className="h-32 w-32 rounded-full object-cover ring-2 ring-[#2e211a]/20 md:h-36 md:w-36"
                   referrerPolicy="no-referrer"
                 />
                 <figcaption className="mt-3 text-sm text-[#2e211a]">

@@ -602,6 +602,77 @@ export const PROJECTS: Project[] = [
       }
     ],
     tags: ['n8n', 'Groq', 'Google Sheets', 'Telegram']
+  },
+  {
+    id: 'project-contract-redlining',
+    agentNumber: 8,
+    title: 'Contract Redlining and Legal Risk Review',
+    category: 'Legal Operations',
+    badge: 'Workflow Published on GitHub',
+    statusNote: 'Built and validated in n8n. Not yet run end to end on a real contract. Starter playbook rows are samples, and the system supports a lawyer rather than giving legal advice.',
+    oneLiner: 'Reviews a contract clause by clause against a company playbook, scores the risk, and sends it to counsel for approval before anything goes out.',
+    description: 'An n8n workflow that reads each clause of a contract against a playbook, scores the risk from 0 to 100, routes it to the right lawyer, and books an outcome-based fee only after counsel approves.',
+    overview: 'Reviewing contracts by hand is slow, and a missed red-line clause is expensive. This workflow takes a contract by webhook (PDF or pasted text), hashes it for an audit trail, splits it into clauses, and has an AI agent review each clause against the client playbook in a Google Sheet. It returns a risk level, whether a red line is breached, the deviation, and suggested redline language with a fallback. A second agent writes the executive summary. Counsel receives an HTML redline report with Approve and Reject links, and nothing is ever sent to the counterparty automatically.',
+    howItWorks: [
+      {
+        step: '01',
+        title: 'INTAKE',
+        description: 'A webhook takes the contract plus client, counterparty, contract type, deal value, governing law and which side we are on. Bad requests get a 400 before any AI call is made.'
+      },
+      {
+        step: '02',
+        title: 'PREPARE',
+        description: 'Text is extracted, hashed with SHA-256, and split into clauses. The playbook is loaded from a Google Sheet.'
+      },
+      {
+        step: '03',
+        title: 'CLAUSE REVIEW',
+        description: 'An AI agent reads each clause against the playbook and returns a risk level, red-line status, the deviation, and suggested redline language with a fallback.'
+      },
+      {
+        step: '04',
+        title: 'SCORE AND ROUTE',
+        description: 'Risk is scored 0 to 100. Critical findings, red-line breaches or unparsed AI output escalate to general counsel. High findings go to counsel review. Everything else is fast-tracked with an FYI email.'
+      },
+      {
+        step: '05',
+        title: 'APPROVAL AND OUTCOME',
+        description: 'Counsel gets the report with Approve and Reject links and the workflow waits up to 48 hours. The decision and fee are logged, and the outcome-based fee is booked only after approval.'
+      }
+    ],
+    engineeringNotes: [
+      'The Crypto node changed between versions: the SHA-256 hash action exists only in version 1, so the workflow pins version 1.',
+      'Pushing a workflow through the API dropped every credential, and the success message did not say so. Reading the stored workflow back caught it.',
+      'AI Agent nodes drop the incoming fields, so a Merge node after each agent reattaches the clause and contract data.',
+      'If the AI output cannot be parsed, that clause is marked high and the contract escalates to a human.'
+    ],
+    technologyLine: 'n8n · Anthropic Claude · Google Sheets · Gmail',
+    githubUrl: 'https://github.com/Samhita1008/edit-theory-agents/tree/main/8-contract-redlining-agent',
+    liveUrl: '/projects.html',
+    images: [],
+    mockupSlides: [
+      {
+        title: 'Playbook-Based Clause Review',
+        description: 'Each clause is checked against the client playbook and returns a risk level, deviation and suggested redline language.',
+        metrics: 'Clause by clause'
+      },
+      {
+        title: 'Risk Scoring and Routing',
+        description: 'Scores the contract 0 to 100 and routes it to escalate, counsel review, or fast track.',
+        metrics: 'Fails toward a human'
+      },
+      {
+        title: 'Counsel Approval Gate',
+        description: 'Counsel approves or rejects from an emailed report. Nothing goes to the counterparty automatically.',
+        metrics: 'Human in the loop'
+      },
+      {
+        title: 'Outcome-Based Fee Tracking',
+        description: 'Fees per critical and high catch are logged, and only booked as billable after counsel approves.',
+        metrics: 'Pay on outcome'
+      }
+    ],
+    tags: ['n8n', 'Anthropic Claude', 'Google Sheets', 'Gmail', 'Legal Review']
   }
 ];
 

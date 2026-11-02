@@ -527,11 +527,11 @@ export default function App() {
             <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-center">
               <div className="max-w-2xl space-y-3">
                 <p className="flex flex-wrap items-center gap-2 text-sm text-[#e5e4e2]/80">
-                  <Github className="h-4 w-4" aria-hidden="true" /> Repository: Samhita1008 / edit-theory-agents. 7 Production Systems &amp; Post-Mortems
+                  <Github className="h-4 w-4" aria-hidden="true" /> Repository: Samhita1008 / edit-theory-agents. 8 Systems &amp; Post-Mortems
                 </p>
                 <h3 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">Production Architecture &amp; Incident Post-Mortems</h3>
                 <p className="text-sm leading-relaxed text-[#e5e4e2]/85 sm:text-base">
-                  Project workflows and architecture breakdowns for 7 deployed AI automation systems, alongside detailed post-mortems documenting production edge cases (API rate limits, webhook drops, non-deterministic outputs, proxy blocks) and their architectural remediations.
+                  Project workflows and architecture breakdowns for 8 AI automation systems, alongside detailed post-mortems documenting production edge cases (API rate limits, webhook drops, non-deterministic outputs, proxy blocks) and their architectural remediations.
                 </p>
               </div>
               <a
