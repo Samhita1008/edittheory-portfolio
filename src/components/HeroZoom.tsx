@@ -8,9 +8,9 @@ import { ArrowRight } from 'lucide-react';
  * open up inside it, then the page keeps scrolling normally.
  */
 
-const MOCHA = '#2e211a';
-const PLATINUM = '#e5e4e2';
-const LAVENDER = '#dcd6ee';
+const MOCHA = '#6C151E';
+const PLATINUM = '#F5DABF';
+const LAVENDER = '#F5DABF';
 const FONT = '"Anton", Impact, sans-serif';
 const LINES = ['EDIT', 'THEORY'];
 
@@ -122,7 +122,7 @@ function Bulb({ r }: { r: number }) {
         </radialGradient>
       </defs>
       <circle r="92" fill="url(#bulb-glow)" />
-      <circle r="49" fill="#5b4a40" fillOpacity="0.55" stroke={PLATINUM} strokeOpacity="0.45" strokeWidth="1.6" />
+      <circle r="49" fill="#8c2a35" fillOpacity="0.55" stroke={PLATINUM} strokeOpacity="0.45" strokeWidth="1.6" />
       <path
         d="M-14 8C-24 -2 -24 -24 -9 -31C0 -35 9 -35 16 -30C28 -22 27 -4 17 8C13 13 12 16 12 21H-9C-9 16 -10 12 -14 8Z"
         transform="translate(-1.5 -4)"
@@ -240,22 +240,22 @@ export default function HeroZoom({ stageRef }: { stageRef: RefObject<HTMLElement
         <Pan progress={p} range={[0.58, 0.98]}>
           {/* Intro */}
           <div className="mx-auto flex max-w-6xl flex-col justify-center px-6 sm:px-10" style={{ minHeight: '100dvh' }}>
-            <h1 className="max-w-4xl font-display text-[clamp(2rem,4.6vw,4.2rem)] font-bold leading-[1.04] tracking-tight text-[#2e211a]">
+            <h1 className="max-w-4xl font-display text-[clamp(2rem,4.6vw,4.2rem)] font-bold leading-[1.04] tracking-tight text-[#6C151E]">
               I build custom AI systems for D2C brands to solve growth and workflow bottlenecks.
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#2e211a]/80 sm:text-lg">
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#6C151E]/80 sm:text-lg">
               Eliminate manual bottlenecks. I design and launch tailored AI workflows that scrape qualified leads daily, automate personalized outbound outreach, and scale organic content distribution on autopilot.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#projects-section"
-                className="inline-flex items-center gap-2 rounded-sm bg-[#2e211a] px-6 py-3 text-sm font-semibold text-[#e5e4e2] transition hover:bg-[#4a372c]"
+                className="inline-flex items-center gap-2 rounded-sm bg-[#6C151E] px-6 py-3 text-sm font-semibold text-[#F5DABF] transition hover:bg-[#8c2a35]"
               >
                 See My Work <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </a>
               <a
                 href="#contact-section"
-                className="rounded-sm border border-[#2e211a]/60 px-6 py-3 text-sm font-semibold text-[#2e211a] transition hover:bg-[#dcd6ee]"
+                className="rounded-sm border border-[#6C151E]/60 px-6 py-3 text-sm font-semibold text-[#6C151E] transition hover:bg-[#F5DABF]"
               >
                 Get In Touch
               </a>
@@ -266,19 +266,19 @@ export default function HeroZoom({ stageRef }: { stageRef: RefObject<HTMLElement
           <div className="mx-auto max-w-6xl px-6 sm:px-10" style={{ minHeight: '100dvh' }}>
             <div className="grid items-center gap-10 py-24 md:grid-cols-[minmax(0,1fr)_auto] md:gap-16" style={{ minHeight: '100dvh' }}>
               <div className="max-w-3xl">
-                <p className="text-sm font-medium text-[#4a372c]">The Engineer</p>
-                <h2 className="mt-2 font-display text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.06] tracking-tight text-[#2e211a]">
+                <p className="text-sm font-medium text-[#8c2a35]">The Engineer</p>
+                <h2 className="mt-2 font-display text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.06] tracking-tight text-[#6C151E]">
                   Building custom automation systems for scaling brands.
                 </h2>
-                <p className="mt-5 text-lg leading-relaxed text-[#2e211a]/90">
+                <p className="mt-5 text-lg leading-relaxed text-[#6C151E]/90">
                   I’m Samhita, a CSE student at Pondicherry Central University building AI-powered systems for D2C brands. I started this because I noticed how much time founders lose recreating content and writing cold messages manually — so I began building systems that automate that work.
                 </p>
-                <p className="mt-3 text-sm leading-relaxed text-[#2e211a]/70">
+                <p className="mt-3 text-sm leading-relaxed text-[#6C151E]/70">
                   By modeling human research intuition in scripts and optimizing custom LLM prompts, I clear out routine manual tasks so brands can focus on high-intent relationship building.
                 </p>
-                <ul className="mt-6 flex flex-wrap gap-2 text-sm text-[#2e211a]">
+                <ul className="mt-6 flex flex-wrap gap-2 text-sm text-[#6C151E]">
                   {['CSE @ Pondicherry Central University', 'Python & TypeScript Scraping', 'Prompt Engineering & APIs'].map((b) => (
-                    <li key={b} className="rounded-sm border border-[#2e211a]/30 bg-[#dcd6ee]/60 px-3 py-1.5">
+                    <li key={b} className="rounded-sm border border-[#6C151E]/30 bg-[#F5DABF]/60 px-3 py-1.5">
                       {b}
                     </li>
                   ))}
@@ -288,13 +288,13 @@ export default function HeroZoom({ stageRef }: { stageRef: RefObject<HTMLElement
                 <img
                   src="/images/sam.jpeg"
                   alt="Samhita Tavutu - Systems Architect and AI Automation Engineer"
-                  className="h-32 w-32 rounded-full object-cover ring-2 ring-[#2e211a]/20 md:h-36 md:w-36"
+                  className="h-32 w-32 rounded-full object-cover ring-2 ring-[#6C151E]/20 md:h-36 md:w-36"
                   referrerPolicy="no-referrer"
                 />
-                <figcaption className="mt-3 text-sm text-[#2e211a]">
+                <figcaption className="mt-3 text-sm text-[#6C151E]">
                   <span className="block font-bold">Samhita Tavutu</span>
-                  <span className="block text-[#2e211a]/70">Systems Architect</span>
-                  <span className="block text-[#2e211a]/70">Pondicherry, IN</span>
+                  <span className="block text-[#6C151E]/70">Systems Architect</span>
+                  <span className="block text-[#6C151E]/70">Pondicherry, IN</span>
                 </figcaption>
               </figure>
             </div>
@@ -361,7 +361,7 @@ export default function HeroZoom({ stageRef }: { stageRef: RefObject<HTMLElement
 
       <h2 className="sr-only">Edit Theory</h2>
       <motion.p
-        className="pointer-events-none absolute bottom-3 left-0 right-0 text-center text-sm tracking-wide text-[#e5e4e2]/60"
+        className="pointer-events-none absolute bottom-3 left-0 right-0 text-center text-sm tracking-wide text-[#F5DABF]/60"
         style={{ opacity: cueOpacity, display: veilDisplay }}
       >
         Scroll to go inside

@@ -76,9 +76,9 @@ export default function ClientPortal({ theme }: ClientPortalProps) {
             h1, h2 { font-family: 'Syne', sans-serif; }
           </style>
         </head>
-        <body class="bg-[#2e211a] text-zinc-100 flex flex-col justify-between h-screen p-6 overflow-hidden">
+        <body class="bg-[#6C151E] text-zinc-100 flex flex-col justify-between h-screen p-6 overflow-hidden">
           <div class="text-center pt-4">
-            <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-zinc-900 border border-[#dcd6ee]/20 text-[#dcd6ee] mb-4">
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-zinc-900 border border-[#F5DABF]/20 text-[#F5DABF] mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
               </svg>
@@ -91,11 +91,11 @@ export default function ClientPortal({ theme }: ClientPortalProps) {
             <p class="text-zinc-300"><strong>Edit Theory Systems</strong> is requesting access to execute:</p>
             <ul class="space-y-2 text-zinc-400">
               <li class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#dcd6ee]"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-[#F5DABF]"></span>
                 Verify your email, name, and profile thumbnail.
               </li>
               <li class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#dcd6ee]"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-[#F5DABF]"></span>
                 Enable sandboxed AI automated generation instances.
               </li>
             </ul>
@@ -103,18 +103,18 @@ export default function ClientPortal({ theme }: ClientPortalProps) {
 
           <div class="space-y-4">
             <div class="bg-zinc-950 p-4 rounded border border-zinc-800 text-left space-y-3">
-              <span class="text-[10px] font-mono text-[#dcd6ee] uppercase tracking-wider block font-bold">Approve Link Account Details</span>
+              <span class="text-[10px] font-mono text-[#F5DABF] uppercase tracking-wider block font-bold">Approve Link Account Details</span>
               <div class="space-y-1.5">
                 <label class="block text-[10px] text-zinc-400 font-mono">Your Full Name</label>
-                <input id="input-name" type="text" class="w-full bg-[#2e211a] border border-zinc-800 rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-[#dcd6ee]" value="${customName}" />
+                <input id="input-name" type="text" class="w-full bg-[#6C151E] border border-zinc-800 rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-[#F5DABF]" value="${customName}" />
               </div>
               <div class="space-y-1.5">
                 <label class="block text-[10px] text-zinc-400 font-mono">${provider === 'google' ? 'Google Account Email' : 'GitHub Account Email / Username'}</label>
-                <input id="input-email" type="text" class="w-full bg-[#2e211a] border border-zinc-800 rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-[#dcd6ee]" value="${customEmail}" />
+                <input id="input-email" type="text" class="w-full bg-[#6C151E] border border-zinc-800 rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-[#F5DABF]" value="${customEmail}" />
               </div>
             </div>
 
-            <button id="auth-btn" class="w-full py-2.5 rounded bg-[#dcd6ee] text-[#2e211a] hover:bg-[#dcd6ee]/90 font-bold transition text-xs">
+            <button id="auth-btn" class="w-full py-2.5 rounded bg-[#F5DABF] text-[#6C151E] hover:bg-[#F5DABF]/90 font-bold transition text-xs">
               Approve & Authenticate Access
             </button>
             
@@ -276,7 +276,7 @@ AI Agent for ${brandName}`,
   return (
     <div id="client-portal-section" className={`rounded-md p-6 md:p-8 relative overflow-hidden transition-all duration-300 ${theme === 'dark' ? 'card-vibe' : 'bg-white border border-zinc-200'}`}>
       {/* Decorative gradient corners */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-[#dcd6ee]/5 blur-3xl rounded-full"></div>
+      <div className="absolute top-0 right-0 w-32 h-32 bg-[#F5DABF]/5 blur-3xl rounded-full"></div>
       <div className="absolute bottom-0 left-0 w-32 h-32 bg-stone-300/5 blur-3xl rounded-full"></div>
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10 border-b border-zinc-900 pb-6 mb-6">
@@ -295,7 +295,7 @@ AI Agent for ${brandName}`,
               <img
                 src={authState.user.avatarUrl}
                 alt={authState.user.name ? `${authState.user.name} Profile Avatar` : 'User Profile Avatar'}
-                className="w-9 h-9 rounded-full border border-[#dcd6ee]/30"
+                className="w-9 h-9 rounded-full border border-[#F5DABF]/30"
                 referrerPolicy="no-referrer"
               />
               <div className="text-left pr-2">
@@ -313,7 +313,7 @@ AI Agent for ${brandName}`,
           ) : (
             <button
               onClick={() => setIsAuthModalOpen(true)}
-              className="px-5 py-2.5 rounded-md bg-[#dcd6ee] text-[#2e211a] hover:bg-[#dcd6ee]/90 font-bold transition duration-300 shadow-[0_0_20px_rgba(220, 214, 238,0.15)] hover:shadow-[0_0_25px_rgba(220, 214, 238,0.3)] text-xs flex items-center gap-2 cursor-pointer"
+              className="px-5 py-2.5 rounded-md bg-[#F5DABF] text-[#6C151E] hover:bg-[#F5DABF]/90 font-bold transition duration-300 shadow-[0_0_20px_rgba(245, 218, 191,0.15)] hover:shadow-[0_0_25px_rgba(245, 218, 191,0.3)] text-xs flex items-center gap-2 cursor-pointer"
             >
               <Lock className="w-3.5 h-3.5" /> Sign In to Partner Portal
             </button>
@@ -343,7 +343,7 @@ AI Agent for ${brandName}`,
                       type="text"
                       value={customName}
                       onChange={(e) => setCustomName(e.target.value)}
-                      className="w-full bg-[#2e211a] border border-zinc-800 rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-[#dcd6ee]/50"
+                      className="w-full bg-[#6C151E] border border-zinc-800 rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-[#F5DABF]/50"
                       placeholder="e.g. Sarah Jenkins"
                     />
                   </div>
@@ -353,7 +353,7 @@ AI Agent for ${brandName}`,
                       type="text"
                       value={customEmail}
                       onChange={(e) => setCustomEmail(e.target.value)}
-                      className="w-full bg-[#2e211a] border border-zinc-800 rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-[#dcd6ee]/50"
+                      className="w-full bg-[#6C151E] border border-zinc-800 rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-[#F5DABF]/50"
                       placeholder="e.g. sarah.jenkins@gmail.com"
                     />
                   </div>
@@ -363,9 +363,9 @@ AI Agent for ${brandName}`,
               <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={() => handleConnect('google')}
-                  className="flex items-center justify-center gap-2.5 px-4 py-2.5 rounded bg-zinc-950 border border-zinc-800 hover:border-[#dcd6ee]/45 hover:bg-zinc-900 text-sm font-medium text-zinc-300 hover:text-white transition duration-200 cursor-pointer"
+                  className="flex items-center justify-center gap-2.5 px-4 py-2.5 rounded bg-zinc-950 border border-zinc-800 hover:border-[#F5DABF]/45 hover:bg-zinc-900 text-sm font-medium text-zinc-300 hover:text-white transition duration-200 cursor-pointer"
                 >
-                  <Mail className="w-4 h-4 text-[#dcd6ee]" /> Connect Google Account
+                  <Mail className="w-4 h-4 text-[#F5DABF]" /> Connect Google Account
                 </button>
                 <button
                   onClick={() => {
@@ -374,15 +374,15 @@ AI Agent for ${brandName}`,
                     }
                     handleConnect('github');
                   }}
-                  className="flex items-center justify-center gap-2.5 px-4 py-2.5 rounded bg-zinc-950 border border-zinc-800 hover:border-[#dcd6ee]/45 hover:bg-zinc-900 text-sm font-medium text-zinc-300 hover:text-white transition duration-200 cursor-pointer"
+                  className="flex items-center justify-center gap-2.5 px-4 py-2.5 rounded bg-zinc-950 border border-zinc-800 hover:border-[#F5DABF]/45 hover:bg-zinc-900 text-sm font-medium text-zinc-300 hover:text-white transition duration-200 cursor-pointer"
                 >
-                  <Github className="w-4 h-4 text-[#dcd6ee]" /> Connect GitHub Account
+                  <Github className="w-4 h-4 text-[#F5DABF]" /> Connect GitHub Account
                 </button>
               </div>
             </div>
           </div>
 
-          <div className={`p-6 rounded-md relative overflow-hidden flex flex-col items-center justify-center text-center space-y-3 min-h-[220px] ${theme === 'dark' ? 'bg-[#2e211a]/80 border border-white/5' : 'bg-zinc-50 border border-zinc-200'}`}>
+          <div className={`p-6 rounded-md relative overflow-hidden flex flex-col items-center justify-center text-center space-y-3 min-h-[220px] ${theme === 'dark' ? 'bg-[#6C151E]/80 border border-white/5' : 'bg-zinc-50 border border-zinc-200'}`}>
             <div className="w-14 h-14 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-500 mb-2">
               <Lock className="w-6 h-6" />
             </div>
@@ -397,9 +397,9 @@ AI Agent for ${brandName}`,
           {/* Authenticated Client Dashboard Panels */}
           <div className="grid lg:grid-cols-3 gap-6">
             {/* Control Sidebar Column */}
-            <div className={`lg:col-span-1 p-5 rounded-md border flex flex-col justify-between space-y-6 transition-all duration-300 ${theme === 'dark' ? 'bg-[#2e211a]/70 border-white/5' : 'bg-zinc-50 border border-zinc-250'}`}>
+            <div className={`lg:col-span-1 p-5 rounded-md border flex flex-col justify-between space-y-6 transition-all duration-300 ${theme === 'dark' ? 'bg-[#6C151E]/70 border-white/5' : 'bg-zinc-50 border border-zinc-250'}`}>
               <div className="space-y-4">
-                <span className="text-[10px] font-mono text-[#dcd6ee] uppercase tracking-widest block font-bold">System Sandbox Shell</span>
+                <span className="text-[10px] font-mono text-[#F5DABF] uppercase tracking-widest block font-bold">System Sandbox Shell</span>
                 
                 <div className="space-y-3">
                   <label className="block text-xs font-mono text-zinc-400">Your Brand Name</label>
@@ -407,7 +407,7 @@ AI Agent for ${brandName}`,
                     type="text"
                     value={brandName}
                     onChange={(e) => setBrandName(e.target.value)}
-                    className="w-full bg-[#2e211a] border border-zinc-800 rounded px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#dcd6ee]/60"
+                    className="w-full bg-[#6C151E] border border-zinc-800 rounded px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#F5DABF]/60"
                     placeholder="e.g. Glossier"
                   />
                 </div>
@@ -418,7 +418,7 @@ AI Agent for ${brandName}`,
                     type="text"
                     value={productType}
                     onChange={(e) => setProductType(e.target.value)}
-                    className="w-full bg-[#2e211a] border border-zinc-800 rounded px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#dcd6ee]/60"
+                    className="w-full bg-[#6C151E] border border-zinc-800 rounded px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#F5DABF]/60"
                     placeholder="e.g. Saffron Face Serum"
                   />
                 </div>
@@ -428,19 +428,19 @@ AI Agent for ${brandName}`,
                 <div className="flex flex-col gap-2">
                   <button
                     onClick={() => selectTab('email')}
-                    className={`px-3 py-2 rounded text-xs text-left font-mono transition flex items-center gap-2 ${activeTab === 'email' ? 'bg-[#dcd6ee]/10 text-[#dcd6ee] border-l-2 border-[#dcd6ee]' : 'text-zinc-400 hover:text-white hover:bg-zinc-900'}`}
+                    className={`px-3 py-2 rounded text-xs text-left font-mono transition flex items-center gap-2 ${activeTab === 'email' ? 'bg-[#F5DABF]/10 text-[#F5DABF] border-l-2 border-[#F5DABF]' : 'text-zinc-400 hover:text-white hover:bg-zinc-900'}`}
                   >
                     Email Outreach Sequence
                   </button>
                   <button
                     onClick={() => selectTab('repurpose')}
-                    className={`px-3 py-2 rounded text-xs text-left font-mono transition flex items-center gap-2 ${activeTab === 'repurpose' ? 'bg-[#dcd6ee]/10 text-[#dcd6ee] border-l-2 border-[#dcd6ee]' : 'text-zinc-400 hover:text-white hover:bg-zinc-900'}`}
+                    className={`px-3 py-2 rounded text-xs text-left font-mono transition flex items-center gap-2 ${activeTab === 'repurpose' ? 'bg-[#F5DABF]/10 text-[#F5DABF] border-l-2 border-[#F5DABF]' : 'text-zinc-400 hover:text-white hover:bg-zinc-900'}`}
                   >
                     Podcast Repurposer
                   </button>
                   <button
                     onClick={() => selectTab('scraping')}
-                    className={`px-3 py-2 rounded text-xs text-left font-mono transition flex items-center gap-2 ${activeTab === 'scraping' ? 'bg-[#dcd6ee]/10 text-[#dcd6ee] border-l-2 border-[#dcd6ee]' : 'text-zinc-400 hover:text-white hover:bg-zinc-900'}`}
+                    className={`px-3 py-2 rounded text-xs text-left font-mono transition flex items-center gap-2 ${activeTab === 'scraping' ? 'bg-[#F5DABF]/10 text-[#F5DABF] border-l-2 border-[#F5DABF]' : 'text-zinc-400 hover:text-white hover:bg-zinc-900'}`}
                   >
                     Multi-Source Scraper
                   </button>
@@ -449,7 +449,7 @@ AI Agent for ${brandName}`,
                 <button
                   onClick={executeAutomationSimulation}
                   disabled={isGenerating || !brandName}
-                  className="w-full py-2 bg-[#dcd6ee] hover:bg-[#dcd6ee]/90 text-[#2e211a] font-bold rounded text-xs transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40"
+                  className="w-full py-2 bg-[#F5DABF] hover:bg-[#F5DABF]/90 text-[#6C151E] font-bold rounded text-xs transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40"
                 >
                   <Play className="w-3.5 h-3.5 fill-current" /> Build System Demo
                 </button>
@@ -457,14 +457,14 @@ AI Agent for ${brandName}`,
             </div>
 
             {/* Simulated Live Output Console Column */}
-            <div className="lg:col-span-2 bg-[#2e211a] rounded-md border border-zinc-900/80 p-5 flex flex-col justify-between min-h-[340px] relative">
+            <div className="lg:col-span-2 bg-[#6C151E] rounded-md border border-zinc-900/80 p-5 flex flex-col justify-between min-h-[340px] relative">
               
               {/* Top Window Bar */}
               <div className="flex items-center justify-between border-b border-zinc-900 pb-3 mb-4">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-red-500/60"></span>
                   <span className="w-2.5 h-2.5 rounded-full bg-stone-300/60"></span>
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#dcd6ee]/60"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#F5DABF]/60"></span>
                   <span className="text-[10px] font-mono text-zinc-500 ml-2">EditTheory_Shell_Stream.log</span>
                 </div>
                 <span className="text-[10px] font-mono text-zinc-400 uppercase">Interactive Output</span>
@@ -474,7 +474,7 @@ AI Agent for ${brandName}`,
               <div className="flex-1 font-mono text-xs flex flex-col justify-center">
                 {isGenerating ? (
                   <div className="space-y-4 py-8 text-center text-zinc-400 flex flex-col items-center justify-center">
-                    <div className="w-8 h-8 rounded-full border-2 border-zinc-800 border-t-[#dcd6ee] animate-spin"></div>
+                    <div className="w-8 h-8 rounded-full border-2 border-zinc-800 border-t-[#F5DABF] animate-spin"></div>
                     <div className="space-y-1">
                       <p className="text-zinc-300 animate-pulse">Initializing pipeline workers...</p>
                       <p className="text-[10px] text-zinc-500">Integrating custom prompt parameters for {brandName}...</p>
@@ -486,7 +486,7 @@ AI Agent for ${brandName}`,
                       
                       {activeTab === 'email' && generatedResult.body && (
                         <>
-                          <p className="text-zinc-500">SUBJECT: <span className="text-[#dcd6ee]">{generatedResult.subject}</span></p>
+                          <p className="text-zinc-500">SUBJECT: <span className="text-[#F5DABF]">{generatedResult.subject}</span></p>
                           <hr className="border-zinc-900" />
                           <p className="text-zinc-300 whitespace-pre-wrap leading-relaxed select-all">{generatedResult.body}</p>
                         </>
@@ -494,11 +494,11 @@ AI Agent for ${brandName}`,
 
                       {activeTab === 'repurpose' && generatedResult.assets && (
                         <div className="space-y-3">
-                          <p className="text-[#dcd6ee] font-bold">{generatedResult.podcastSegment}</p>
+                          <p className="text-[#F5DABF] font-bold">{generatedResult.podcastSegment}</p>
                           <div className="space-y-2.5 pt-1.5">
                             {generatedResult.assets.map((ast: any, i: number) => (
                               <div key={i} className="text-zinc-300 text-xs border border-zinc-900 p-2.5 rounded bg-zinc-950/40">
-                                <span className="text-[#dcd6ee] font-bold text-[10px] tracking-wider uppercase block mb-1">{ast.type}</span>
+                                <span className="text-[#F5DABF] font-bold text-[10px] tracking-wider uppercase block mb-1">{ast.type}</span>
                                 {ast.content}
                               </div>
                             ))}
@@ -508,7 +508,7 @@ AI Agent for ${brandName}`,
 
                       {activeTab === 'scraping' && generatedResult.prospects && (
                         <div className="space-y-3">
-                          <p className="text-[#dcd6ee] font-bold">{generatedResult.campaignType}</p>
+                          <p className="text-[#F5DABF] font-bold">{generatedResult.campaignType}</p>
                           <div className="overflow-x-auto border border-zinc-900 rounded bg-zinc-950/20">
                             <table className="min-w-full text-left text-[11px] text-zinc-400 border-collapse">
                               <thead>
@@ -538,15 +538,15 @@ AI Agent for ${brandName}`,
                                     <td className="p-2.5 text-zinc-400 max-w-[180px] truncate" title={prs.recentTopic}>{prs.recentTopic}</td>
                                     <td className="p-2.5 text-zinc-300 max-w-[200px] truncate font-sans text-[10px] leading-relaxed" title={prs.generatedOpener}>{prs.generatedOpener}</td>
                                     <td className="p-2.5 text-zinc-400 max-w-[240px] truncate whitespace-pre-line font-sans text-[10px] leading-relaxed" title={prs.fullColdEmail}>{prs.fullColdEmail}</td>
-                                    <td className="p-2.5 text-[#dcd6ee]/90 font-mono whitespace-nowrap">{prs.email}</td>
+                                    <td className="p-2.5 text-[#F5DABF]/90 font-mono whitespace-nowrap">{prs.email}</td>
                                     <td className="p-2.5 text-zinc-500 whitespace-nowrap font-mono">{prs.dateSent}</td>
                                     <td className="p-2.5 whitespace-nowrap">
                                       <span className={`px-1.5 py-0.5 rounded text-[10px] ${
-                                        prs.status === 'Highly Qualified' ? 'bg-[#dcd6ee]/10 text-[#dcd6ee] border border-[#dcd6ee]/20' : 
+                                        prs.status === 'Highly Qualified' ? 'bg-[#F5DABF]/10 text-[#F5DABF] border border-[#F5DABF]/20' : 
                                         prs.status === 'High Intent' ? 'bg-stone-300/10 text-stone-300 border border-stone-300/20' : 'bg-zinc-800 text-zinc-400'
                                       }`}>{prs.status}</span>
                                     </td>
-                                    <td className="p-2.5 text-[#dcd6ee] font-bold text-right whitespace-nowrap font-mono">{prs.leadScore}</td>
+                                    <td className="p-2.5 text-[#F5DABF] font-bold text-right whitespace-nowrap font-mono">{prs.leadScore}</td>
                                   </tr>
                                 ))}
                               </tbody>
@@ -557,7 +557,7 @@ AI Agent for ${brandName}`,
 
                     </div>
 
-                    <div className="flex items-center gap-2 text-[#dcd6ee] bg-[#dcd6ee]/5 border border-[#dcd6ee]/20 rounded p-2.5 text-[10px]">
+                    <div className="flex items-center gap-2 text-[#F5DABF] bg-[#F5DABF]/5 border border-[#F5DABF]/20 rounded p-2.5 text-[10px]">
                       <Check className="w-3.5 h-3.5 shrink-0" />
                       <span>{generatedResult.highlight}</span>
                     </div>
@@ -574,10 +574,10 @@ AI Agent for ${brandName}`,
               {/* Bottom Console Controls */}
               {generatedResult && (
                 <div className="flex items-center justify-between border-t border-zinc-900/60 pt-3 mt-4 text-[11px] text-zinc-500">
-                  <span className="flex items-center gap-1.5"><Award className="w-3.5 h-3.5 text-[#dcd6ee]" /> Live sandbox sandbox token: active</span>
+                  <span className="flex items-center gap-1.5"><Award className="w-3.5 h-3.5 text-[#F5DABF]" /> Live sandbox sandbox token: active</span>
                   <button
                     onClick={() => setGeneratedResult(null)}
-                    className="flex items-center gap-1 select-none hover:text-[#dcd6ee] transition cursor-pointer"
+                    className="flex items-center gap-1 select-none hover:text-[#F5DABF] transition cursor-pointer"
                   >
                     <RotateCcw className="w-3 h-3" /> Clear Console
                   </button>
@@ -599,7 +599,7 @@ AI Agent for ${brandName}`,
             >
                           </button>
             <div className="text-center space-y-2">
-              <div className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center mx-auto text-[#dcd6ee] mb-1">
+              <div className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center mx-auto text-[#F5DABF] mb-1">
                 <Lock className="w-5 h-5" />
               </div>
               <h4 className="text-lg font-display font-semibold text-white">Select OAuth Identity</h4>
@@ -616,7 +616,7 @@ AI Agent for ${brandName}`,
                       type="text"
                       value={customName}
                       onChange={(e) => setCustomName(e.target.value)}
-                      className="w-full bg-[#2e211a] border border-zinc-800 rounded px-2.5 py-1.5 text-[11px] text-white focus:outline-none focus:border-[#dcd6ee]/55"
+                      className="w-full bg-[#6C151E] border border-zinc-800 rounded px-2.5 py-1.5 text-[11px] text-white focus:outline-none focus:border-[#F5DABF]/55"
                       placeholder="Your Name"
                     />
                   </div>
@@ -626,7 +626,7 @@ AI Agent for ${brandName}`,
                       type="text"
                       value={customEmail}
                       onChange={(e) => setCustomEmail(e.target.value)}
-                      className="w-full bg-[#2e211a] border border-zinc-800 rounded px-2.5 py-1.5 text-[11px] text-white focus:outline-none focus:border-[#dcd6ee]/55"
+                      className="w-full bg-[#6C151E] border border-zinc-800 rounded px-2.5 py-1.5 text-[11px] text-white focus:outline-none focus:border-[#F5DABF]/55"
                       placeholder="Account Email"
                     />
                   </div>
@@ -636,7 +636,7 @@ AI Agent for ${brandName}`,
               <div className="space-y-2">
                 <button
                   onClick={() => handleConnect('google')}
-                  className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-md bg-zinc-950 border border-zinc-800 hover:border-[#dcd6ee]/40 text-sm font-semibold text-zinc-200 hover:text-white transition cursor-pointer"
+                  className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-md bg-zinc-950 border border-zinc-800 hover:border-[#F5DABF]/40 text-sm font-semibold text-zinc-200 hover:text-white transition cursor-pointer"
                 >
                   <Mail className="w-4 h-4 text-red-500" /> Continue with Google OAuth
                 </button>
@@ -647,9 +647,9 @@ AI Agent for ${brandName}`,
                     }
                     handleConnect('github');
                   }}
-                  className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-md bg-zinc-950 border border-zinc-800 hover:border-[#dcd6ee]/40 text-sm font-semibold text-zinc-200 hover:text-white transition cursor-pointer"
+                  className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-md bg-zinc-950 border border-zinc-800 hover:border-[#F5DABF]/40 text-sm font-semibold text-zinc-200 hover:text-white transition cursor-pointer"
                 >
-                  <Github className="w-4 h-4 text-[#dcd6ee]" /> Continue with GitHub OAuth
+                  <Github className="w-4 h-4 text-[#F5DABF]" /> Continue with GitHub OAuth
                 </button>
               </div>
             </div>

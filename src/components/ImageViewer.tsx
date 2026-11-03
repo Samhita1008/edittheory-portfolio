@@ -130,7 +130,7 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
     <div
       ref={containerRef}
       id="lightbox-container"
-      className="fixed inset-0 z-50 bg-[#05070d]/95 backdrop-blur-md flex flex-col justify-between p-4 sm:p-6 transition-opacity duration-200 select-none animate-in fade-in"
+      className="fixed inset-0 z-50 bg-[#3a0a10]/95 backdrop-blur-md flex flex-col justify-between p-4 sm:p-6 transition-opacity duration-200 select-none animate-in fade-in"
       onClick={(e) => {
         if (e.target === containerRef.current) {
           onClose();

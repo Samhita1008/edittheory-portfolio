@@ -43,7 +43,7 @@ function Rise({ children, i = 0, className = '' }: { children: React.ReactNode; 
 function ScrollBar() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.4 });
-  return <motion.div aria-hidden="true" className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-[#dcd6ee]" style={{ scaleX }} />;
+  return <motion.div aria-hidden="true" className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-[#F5DABF]" style={{ scaleX }} />;
 }
 
 /** Service names drift sideways as the band scrolls through. */
@@ -53,12 +53,12 @@ function ServiceBand() {
   const x = useTransform(scrollYProgress, [0, 1], ['6%', '-38%']);
   const words = [...SERVICES, ...SERVICES].map((s) => s.title);
   return (
-    <div ref={ref} aria-label={SERVICES.map((s) => s.title).join(', ')} className="overflow-hidden bg-[#2e211a] py-10 md:py-14">
-      <motion.div style={{ x }} className="flex w-max items-center gap-10 whitespace-nowrap font-anton text-[clamp(44px,8vw,112px)] uppercase leading-none text-[#e5e4e2]" aria-hidden="true">
+    <div ref={ref} aria-label={SERVICES.map((s) => s.title).join(', ')} className="overflow-hidden bg-[#6C151E] py-10 md:py-14">
+      <motion.div style={{ x }} className="flex w-max items-center gap-10 whitespace-nowrap font-anton text-[clamp(44px,8vw,112px)] uppercase leading-none text-[#F5DABF]" aria-hidden="true">
         {words.map((w, i) => (
           <span key={i} className="flex items-center gap-10">
             <span className={i % 2 ? 'outline-text' : ''}>{w}</span>
-            <span className="h-3 w-3 shrink-0 bg-[#dcd6ee]" />
+            <span className="h-3 w-3 shrink-0 bg-[#F5DABF]" />
           </span>
         ))}
       </motion.div>
@@ -73,7 +73,7 @@ function GiantName() {
   const x = useTransform(scrollYProgress, [0, 1], ['12%', '-18%']);
   return (
     <div ref={ref} className="overflow-hidden pb-4">
-      <motion.div style={{ x }} className="whitespace-nowrap font-anton text-[clamp(80px,24vw,360px)] uppercase leading-[0.9] text-[#e5e4e2]" aria-label="Edit Theory">
+      <motion.div style={{ x }} className="whitespace-nowrap font-anton text-[clamp(80px,24vw,360px)] uppercase leading-[0.9] text-[#F5DABF]" aria-label="Edit Theory">
         Edit Theory
       </motion.div>
     </div>
@@ -94,10 +94,10 @@ const HELP_ITEMS = [
 
 function BuildSection() {
   return (
-    <section id="build-section" className="bg-[#dcd6ee] px-4 py-24 text-[#2e211a] sm:px-8">
+    <section id="build-section" className="bg-[#0F3D3A] px-4 py-24 text-[#F5DABF] sm:px-8">
       <div className="mx-auto max-w-6xl">
         <h2 className="max-w-3xl font-display text-[clamp(2rem,4.6vw,3.8rem)] font-bold leading-[1.03] tracking-tight"><RevealLine>Focused on real client conversions.</RevealLine></h2>
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-[#2e211a]/80">
+        <p className="mt-4 max-w-xl text-base leading-relaxed text-[#F5DABF]/80">
           I don't build generic AI chatbots. I design highly specialized systems that replace hours of manual work with reliable autonomous pipelines.
         </p>
         <div className="mt-14 grid gap-x-12 gap-y-12 md:grid-cols-3">
@@ -105,10 +105,10 @@ function BuildSection() {
             { h: 'What I Build', p: 'Specialized, single-purpose automation sequences connected directly to your existing workspace.', items: BUILD_ITEMS },
             { h: 'Who I Help', p: 'Simplifying operations for founders, marketers, and operations leaders.', items: HELP_ITEMS },
           ].map((col, ci) => (
-            <Rise key={col.h} i={ci} className="border-t-2 border-[#2e211a] pt-5">
+            <Rise key={col.h} i={ci} className="border-t-2 border-[#F5DABF] pt-5">
             <div>
               <h3 className="font-display text-2xl font-bold">{col.h}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#2e211a]/75">{col.p}</p>
+              <p className="mt-2 text-sm leading-relaxed text-[#F5DABF]/75">{col.p}</p>
               <ul className="mt-5 space-y-3 text-sm leading-relaxed">
                 {col.items.map(([a, b]) => (
                   <li key={a}>
@@ -119,18 +119,18 @@ function BuildSection() {
             </div>
             </Rise>
           ))}
-          <Rise i={2} className="border-t-2 border-[#2e211a] pt-5">
+          <Rise i={2} className="border-t-2 border-[#F5DABF] pt-5">
           <div>
             <h3 className="font-display text-2xl font-bold">Custom Solutions</h3>
             <p className="mt-2 text-sm font-medium leading-relaxed">“If you have a workflow bottleneck, I can design a tailored AI solution for it.”</p>
-            <p className="mt-5 text-sm leading-relaxed text-[#2e211a]/80">
+            <p className="mt-5 text-sm leading-relaxed text-[#F5DABF]/80">
               The systems and agent architectures shown on this site represent proven, production-tested blueprints. If your team spends hours on copy-pasting, multi-platform scrapers, custom DB loaders, or manual routing, I will engineer a custom script optimized for your exact system requirements on request.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href="https://topmate.io/samhita_tavutu" target="_blank" rel="noopener noreferrer" className="rounded-sm bg-[#2e211a] px-5 py-2.5 text-sm font-semibold text-[#e5e4e2] transition hover:bg-[#4a372c]">
+              <a href="https://topmate.io/samhita_tavutu" target="_blank" rel="noopener noreferrer" className="rounded-sm bg-[#F5DABF] px-5 py-2.5 text-sm font-semibold text-[#0F3D3A] transition hover:bg-[#8c2a35]">
                 Book Audit Call
               </a>
-              <a href="#contact-section" className="rounded-sm border border-[#2e211a]/60 px-5 py-2.5 text-sm font-semibold transition hover:bg-[#e5e4e2]">
+              <a href="#contact-section" className="rounded-sm border border-[#F5DABF]/60 px-5 py-2.5 text-sm font-semibold transition hover:bg-[#0F3D3A]">
                 Message Custom Scope
               </a>
             </div>
@@ -172,8 +172,8 @@ function Pipeline({ progress }: { progress: MotionValue<number> }) {
   const drawn = useTransform(progress, (v) => clampUnit(v));
   return (
     <svg viewBox="0 0 120 420" className="h-[66vh] w-auto" role="img" aria-label="Pipeline with four stages, filling in as you scroll">
-      <line x1="60" y1="30" x2="60" y2="390" stroke="#2e211a" strokeOpacity="0.2" strokeWidth="2" />
-      <motion.line x1="60" y1="30" x2="60" y2="390" stroke="#2e211a" strokeWidth="2" style={{ pathLength: drawn }} />
+      <line x1="60" y1="30" x2="60" y2="390" stroke="#6C151E" strokeOpacity="0.2" strokeWidth="2" />
+      <motion.line x1="60" y1="30" x2="60" y2="390" stroke="#6C151E" strokeWidth="2" style={{ pathLength: drawn }} />
       {PROCESS_STEPS.map((s, i) => (
         <PipeStop key={s.stepNumber} y={30 + (360 / (n - 1)) * i} i={i} n={n} progress={progress} label={String(s.stepNumber)} />
       ))}
@@ -184,12 +184,12 @@ function PipeStop({ y, i, n, progress, label }: { y: number; i: number; n: numbe
   const on = useTransform(progress, (v) => (v >= i / n - 0.001 ? 1 : 0));
   return (
     <g>
-      <circle cx="60" cy={y} r="17" fill="#e5e4e2" stroke="#2e211a" strokeWidth="2" />
-      <motion.circle cx="60" cy={y} r="17" fill="#2e211a" style={{ opacity: on }} />
-      <motion.text x="60" y={y + 5} textAnchor="middle" fontFamily="Archivo" fontWeight="700" fontSize="15" fill="#dcd6ee" style={{ opacity: on }}>
+      <circle cx="60" cy={y} r="17" fill="#F5DABF" stroke="#6C151E" strokeWidth="2" />
+      <motion.circle cx="60" cy={y} r="17" fill="#6C151E" style={{ opacity: on }} />
+      <motion.text x="60" y={y + 5} textAnchor="middle" fontFamily="Archivo" fontWeight="700" fontSize="15" fill="#F5DABF" style={{ opacity: on }}>
         {label}
       </motion.text>
-      <text x="60" y={y + 5} textAnchor="middle" fontFamily="Archivo" fontWeight="700" fontSize="15" fill="#2e211a" opacity="0.5">
+      <text x="60" y={y + 5} textAnchor="middle" fontFamily="Archivo" fontWeight="700" fontSize="15" fill="#6C151E" opacity="0.5">
         {label}
       </text>
     </g>
@@ -206,7 +206,7 @@ function ProcessStory() {
   const lit = useTransform(scrollYProgress, [0.02, 0.98], [0, 1]);
 
   return (
-    <section id="process-section" ref={ref} className="relative bg-[#e5e4e2] text-[#2e211a]" style={{ height: '420vh' }}>
+    <section id="process-section" ref={ref} className="relative bg-[#F5DABF] text-[#6C151E]" style={{ height: '420vh' }}>
       <div className="sticky top-0 flex h-screen items-center overflow-hidden" style={{ height: '100dvh' }}>
         <div className="mx-auto grid w-full max-w-6xl items-center gap-6 px-6 pt-16 sm:px-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-14">
           <div className="hidden justify-center md:flex">
@@ -214,7 +214,7 @@ function ProcessStory() {
           </div>
           <div>
             <h2 className="font-display text-[clamp(1.8rem,4vw,3.4rem)] font-bold leading-[1.04] tracking-tight"><RevealLine>How I transform ideas into engines.</RevealLine></h2>
-            <p className="mt-3 text-sm text-[#2e211a]/70">Observe the active data pulse travelling along the pipeline.</p>
+            <p className="mt-3 text-sm text-[#6C151E]/70">Observe the active data pulse travelling along the pipeline.</p>
 
             <ol className="mt-8 space-y-2">
               {PROCESS_STEPS.map((step, i) => {
@@ -223,20 +223,20 @@ function ProcessStory() {
                   <li
                     key={step.stepNumber}
                     className={`rounded-sm border px-5 py-4 transition-all duration-500 ${
-                      on ? 'border-[#2e211a] bg-[#2e211a] text-[#e5e4e2]' : 'border-[#2e211a]/15 text-[#2e211a]/55'
+                      on ? 'border-[#6C151E] bg-[#6C151E] text-[#F5DABF]' : 'border-[#6C151E]/15 text-[#6C151E]/55'
                     }`}
                   >
                     <div className="flex items-baseline justify-between gap-4">
                       <h3 className="font-display text-lg font-bold sm:text-xl">
                         {step.stepNumber}. {step.title}
                       </h3>
-                      <span className={`text-sm ${on ? 'text-[#dcd6ee]' : ''}`}>{step.badge}</span>
+                      <span className={`text-sm ${on ? 'text-[#F5DABF]' : ''}`}>{step.badge}</span>
                     </div>
                     <div
                       className="grid transition-all duration-500"
                       style={{ gridTemplateRows: on ? '1fr' : '0fr' }}
                     >
-                      <p className="overflow-hidden text-sm leading-relaxed text-[#e5e4e2]/85 sm:text-[15px]">
+                      <p className="overflow-hidden text-sm leading-relaxed text-[#F5DABF]/85 sm:text-[15px]">
                         <span className="block pt-2">{step.description}</span>
                       </p>
                     </div>
@@ -326,28 +326,28 @@ export default function App() {
     }, 800);
   };
 
-  const navLink = 'whitespace-nowrap rounded-sm px-3 py-1.5 text-sm text-[#e5e4e2]/80 transition hover:text-[#dcd6ee]';
+  const navLink = 'whitespace-nowrap rounded-sm px-3 py-1.5 text-sm text-[#F5DABF]/80 transition hover:text-[#F5DABF]';
 
   return (
     <MotionConfig reducedMotion="user">
-    <div className="min-h-screen bg-[#2e211a] font-sans text-[#e5e4e2]">
+    <div className="min-h-screen bg-[#6C151E] font-sans text-[#F5DABF]">
       <ScrollBar />
       {/* NAV */}
       <nav className="fixed inset-x-0 top-0 z-50 mix-blend-normal">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-8">
-          <a href="#" className="flex items-center gap-2.5 rounded-sm bg-[#2e211a]/70 py-1 pl-1 pr-4 backdrop-blur" aria-label="Edit Theory, home">
+          <a href="#" className="flex items-center gap-2.5 rounded-sm bg-[#6C151E]/70 py-1 pl-1 pr-4 backdrop-blur" aria-label="Edit Theory, home">
             <img src={LOGO} alt="" className="h-8 w-8 rounded-sm object-cover" />
             <span className="whitespace-nowrap font-display text-sm font-bold leading-none">Edit Theory</span>
-            <span className="hidden text-xs text-[#e5e4e2]/60 sm:inline">AI Automation Systems</span>
+            <span className="hidden text-xs text-[#F5DABF]/60 sm:inline">AI Automation Systems</span>
           </a>
-          <div className="flex items-center gap-1 rounded-sm bg-[#2e211a]/70 px-2 py-1 backdrop-blur">
+          <div className="flex items-center gap-1 rounded-sm bg-[#6C151E]/70 px-2 py-1 backdrop-blur">
             <button type="button" className={`${navLink} hidden sm:block`} onClick={() => scrollToStage(stageRef, STAGE_STOPS.about)}>
               About
             </button>
             <a href="#projects-section" className={navLink}>Systems Built</a>
             <a href="#process-section" className={`${navLink} hidden sm:block`}>Work Process</a>
             <a href="#client-portal-section" className={`${navLink} hidden md:block`}>Portal Space</a>
-            <a href="#contact-section" className="whitespace-nowrap rounded-sm bg-[#dcd6ee] px-4 py-1.5 text-sm font-bold text-[#2e211a] transition hover:bg-[#ece8f7]">
+            <a href="#contact-section" className="whitespace-nowrap rounded-sm bg-[#F5DABF] px-4 py-1.5 text-sm font-bold text-[#6C151E] transition hover:bg-[#fbe9d6]">
               Get In Touch
             </a>
           </div>
@@ -363,12 +363,12 @@ export default function App() {
       <BuildSection />
 
       {/* PROJECTS */}
-      <section id="projects-section" className="bg-[#2e211a] px-4 pb-24 pt-6 sm:px-8">
+      <section id="projects-section" className="bg-[#6C151E] px-4 pb-24 pt-6 sm:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 pt-16">
-            <p className="text-base text-[#dcd6ee]">Strategic Case Studies</p>
+            <p className="text-base text-[#F5DABF]">Strategic Case Studies</p>
             <h2 className="mt-2 font-display text-[clamp(2.2rem,6vw,5rem)] font-bold leading-[0.98] tracking-tight"><RevealLine>Systems Design &amp; Mechanics</RevealLine></h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[#e5e4e2]/80">
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[#F5DABF]/80">
               Production-grade systems engineering: architecture blueprints, orchestration logic, and end-to-end automation.
             </p>
           </div>
@@ -378,7 +378,7 @@ export default function App() {
                 type="button"
                 onClick={() => setSelectedTag(null)}
                 aria-pressed={selectedTag === null}
-                className={`rounded-sm border px-3 py-1 text-sm transition ${selectedTag === null ? 'border-[#dcd6ee] bg-[#dcd6ee] text-[#2e211a]' : 'border-[#e5e4e2]/25 text-[#e5e4e2]/80 hover:border-[#dcd6ee]'}`}
+                className={`rounded-sm border px-3 py-1 text-sm transition ${selectedTag === null ? 'border-[#F5DABF] bg-[#F5DABF] text-[#6C151E]' : 'border-[#F5DABF]/25 text-[#F5DABF]/80 hover:border-[#F5DABF]'}`}
               >
                 All
               </button>
@@ -388,7 +388,7 @@ export default function App() {
                   type="button"
                   onClick={() => setSelectedTag(selectedTag === t ? null : t)}
                   aria-pressed={selectedTag === t}
-                  className={`rounded-sm border px-3 py-1 text-sm transition ${selectedTag === t ? 'border-[#dcd6ee] bg-[#dcd6ee] text-[#2e211a]' : 'border-[#e5e4e2]/25 text-[#e5e4e2]/80 hover:border-[#dcd6ee]'}`}
+                  className={`rounded-sm border px-3 py-1 text-sm transition ${selectedTag === t ? 'border-[#F5DABF] bg-[#F5DABF] text-[#6C151E]' : 'border-[#F5DABF]/25 text-[#F5DABF]/80 hover:border-[#F5DABF]'}`}
                 >
                   {t}
                 </button>
@@ -400,13 +400,13 @@ export default function App() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search systems"
-                className="w-full rounded-sm border border-[#e5e4e2]/25 bg-transparent px-4 py-2 text-sm text-[#e5e4e2] placeholder:text-[#e5e4e2]/45 focus:border-[#dcd6ee]"
+                className="w-full rounded-sm border border-[#F5DABF]/25 bg-transparent px-4 py-2 text-sm text-[#F5DABF] placeholder:text-[#F5DABF]/45 focus:border-[#F5DABF]"
               />
             </label>
           </div>
 
           {filtered.length === 0 && (
-            <div className="mx-auto max-w-sm rounded-sm border border-[#e5e4e2]/20 p-8 text-center text-sm text-[#e5e4e2]/70">
+            <div className="mx-auto max-w-sm rounded-sm border border-[#F5DABF]/20 p-8 text-center text-sm text-[#F5DABF]/70">
               No results found matching your active tags or search terms.
               <button
                 type="button"
@@ -414,7 +414,7 @@ export default function App() {
                   setSearchTerm('');
                   setSelectedTag(null);
                 }}
-                className="mt-3 block w-full text-[#dcd6ee] underline"
+                className="mt-3 block w-full text-[#F5DABF] underline"
               >
                 Clear filters
               </button>
@@ -430,18 +430,18 @@ export default function App() {
               >
                 <motion.span
                   aria-hidden="true"
-                  className="absolute inset-x-0 top-0 h-px origin-left bg-[#e5e4e2]/30"
+                  className="absolute inset-x-0 top-0 h-px origin-left bg-[#F5DABF]/30"
                   initial={{ scaleX: 0 }}
                   whileInView={{ scaleX: 1 }}
                   viewport={{ once: true, margin: '-10% 0px' }}
                   transition={{ duration: 0.9, ease: [0.2, 0.7, 0.2, 1] }}
                 />
-                <span className="font-anton text-5xl leading-none text-[#dcd6ee] md:text-6xl" aria-label={`Agent ${proj.agentNumber}`}>
+                <span className="font-anton text-5xl leading-none text-[#F5DABF] md:text-6xl" aria-label={`Agent ${proj.agentNumber}`}>
                   {String(proj.agentNumber).padStart(2, '0')}
                 </span>
 
                 <div className="min-w-0 space-y-3">
-                  <p className="text-sm text-[#e5e4e2]/65">
+                  <p className="text-sm text-[#F5DABF]/65">
                     {proj.category}
                     {proj.badge ? ` — ${proj.badge}` : ''}
                   </p>
@@ -449,16 +449,16 @@ export default function App() {
                     <button
                       type="button"
                       onClick={() => setSelectedProject(proj)}
-                      className="text-left font-display text-[clamp(1.6rem,3.4vw,2.8rem)] font-bold leading-[1.05] tracking-tight transition-colors group-hover:text-[#dcd6ee]"
+                      className="text-left font-display text-[clamp(1.6rem,3.4vw,2.8rem)] font-bold leading-[1.05] tracking-tight transition-colors group-hover:text-[#F5DABF]"
                     >
                       {proj.title}
                     </button>
                   </h3>
                   {proj.engagementNote && (
-                    <p className="inline-block rounded-sm bg-[#dcd6ee]/15 px-3 py-1 text-sm text-[#dcd6ee]">{proj.engagementNote}</p>
+                    <p className="inline-block rounded-sm bg-[#F5DABF]/15 px-3 py-1 text-sm text-[#F5DABF]">{proj.engagementNote}</p>
                   )}
-                  <p className="max-w-3xl text-base leading-relaxed text-[#e5e4e2]/85">{proj.description}</p>
-                  <p className="text-sm text-[#e5e4e2]/60">{proj.tags.join(', ')}</p>
+                  <p className="max-w-3xl text-base leading-relaxed text-[#F5DABF]/85">{proj.description}</p>
+                  <p className="text-sm text-[#F5DABF]/60">{proj.tags.join(', ')}</p>
                 </div>
 
                 <div className="flex flex-col gap-3 md:items-end md:justify-between">
@@ -469,7 +469,7 @@ export default function App() {
                           href={proj.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded-sm bg-[#dcd6ee] px-4 py-2 text-sm font-bold text-[#2e211a] transition hover:bg-[#ece8f7]"
+                          className="inline-flex items-center gap-1.5 rounded-sm bg-[#F5DABF] px-4 py-2 text-sm font-bold text-[#6C151E] transition hover:bg-[#fbe9d6]"
                         >
                           Live Demo <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                         </a>
@@ -477,7 +477,7 @@ export default function App() {
                       <button
                         type="button"
                         onClick={() => setSelectedProject(proj)}
-                        className="inline-flex items-center gap-2 py-1 text-sm font-semibold transition hover:text-[#dcd6ee]"
+                        className="inline-flex items-center gap-2 py-1 text-sm font-semibold transition hover:text-[#F5DABF]"
                       >
                         Case Study <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden="true" />
                       </button>
@@ -486,20 +486,20 @@ export default function App() {
                     <button
                       type="button"
                       onClick={() => setSelectedProject(proj)}
-                      className="inline-flex items-center gap-2 py-1 text-sm font-semibold transition hover:text-[#dcd6ee]"
+                      className="inline-flex items-center gap-2 py-1 text-sm font-semibold transition hover:text-[#F5DABF]"
                     >
                       View System <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden="true" />
                     </button>
                   )}
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[#e5e4e2]/65">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[#F5DABF]/65">
                     {proj.githubUrl && (
-                      <a href={proj.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-[#dcd6ee]">
+                      <a href={proj.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-[#F5DABF]">
                         <Github className="h-3.5 w-3.5" aria-hidden="true" />
                         {proj.isFlagship ? 'Case Study / Code' : proj.codeAvailabilityNote ? 'GitHub' : 'Workflow / Code'}
                       </a>
                     )}
                     {!proj.isFlagship && !proj.githubUrl && proj.notionUrl && (
-                      <a href={proj.notionUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-[#dcd6ee]">
+                      <a href={proj.notionUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-[#F5DABF]">
                         <FileText className="h-3.5 w-3.5" aria-hidden="true" /> Project &amp; architecture
                       </a>
                     )}
@@ -512,7 +512,7 @@ export default function App() {
                       </span>
                     )}
                     {proj.loomUrl && (
-                      <a href={proj.loomUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#dcd6ee]">
+                      <a href={proj.loomUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#F5DABF]">
                         Loom
                       </a>
                     )}
@@ -523,14 +523,14 @@ export default function App() {
           </div>
 
           {/* GitHub spotlight */}
-          <div className="mt-12 rounded-sm bg-[#4a372c] p-7 sm:p-10">
+          <div className="mt-12 rounded-sm bg-[#8c2a35] p-7 sm:p-10">
             <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-center">
               <div className="max-w-2xl space-y-3">
-                <p className="flex flex-wrap items-center gap-2 text-sm text-[#e5e4e2]/80">
+                <p className="flex flex-wrap items-center gap-2 text-sm text-[#F5DABF]/80">
                   <Github className="h-4 w-4" aria-hidden="true" /> Repository: Samhita1008 / edit-theory-agents. 8 Systems &amp; Post-Mortems
                 </p>
                 <h3 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">Production Architecture &amp; Incident Post-Mortems</h3>
-                <p className="text-sm leading-relaxed text-[#e5e4e2]/85 sm:text-base">
+                <p className="text-sm leading-relaxed text-[#F5DABF]/85 sm:text-base">
                   Project workflows and architecture breakdowns for 8 AI automation systems, alongside detailed post-mortems documenting production edge cases (API rate limits, webhook drops, non-deterministic outputs, proxy blocks) and their architectural remediations.
                 </p>
               </div>
@@ -538,7 +538,7 @@ export default function App() {
                 href="https://github.com/Samhita1008/edit-theory-agents"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex shrink-0 items-center gap-2 rounded-sm bg-[#e5e4e2] px-6 py-3 text-sm font-bold text-[#2e211a] transition hover:bg-white"
+                className="inline-flex shrink-0 items-center gap-2 rounded-sm bg-[#F5DABF] px-6 py-3 text-sm font-bold text-[#6C151E] transition hover:bg-white"
               >
                 <Github className="h-4 w-4" aria-hidden="true" /> View on GitHub <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
               </a>
@@ -556,11 +556,11 @@ export default function App() {
       </section>
 
       {/* PRICING */}
-      <section id="pricing-section" className="bg-[#e5e4e2] px-4 py-24 text-[#2e211a] sm:px-8">
+      <section id="pricing-section" className="bg-[#F5DABF] px-4 py-24 text-[#6C151E] sm:px-8">
         <div className="mx-auto max-w-6xl">
-          <p className="text-base text-[#4a372c]">The Pricing Framework</p>
+          <p className="text-base text-[#8c2a35]">The Pricing Framework</p>
           <h2 className="mt-2 font-display text-[clamp(2rem,4.6vw,3.8rem)] font-bold leading-[1.02] tracking-tight"><RevealLine>How I partner for leverage.</RevealLine></h2>
-          <p className="mt-4 max-w-2xl text-base text-[#2e211a]/75">
+          <p className="mt-4 max-w-2xl text-base text-[#6C151E]/75">
             I usually begin with a small, focused pilot build so you can see the workflow in action with zero risk.
           </p>
 
@@ -569,15 +569,15 @@ export default function App() {
               <Rise key={tier.tier} i={i} className="flex">
               <div
                 key={tier.tier}
-                className={`flex w-full flex-col rounded-sm p-7 ${i === 1 ? 'bg-[#2e211a] text-[#e5e4e2]' : 'border border-[#2e211a]/20'}`}
+                className={`flex w-full flex-col rounded-sm p-7 ${i === 1 ? 'bg-[#6C151E] text-[#F5DABF]' : 'border border-[#6C151E]/20'}`}
               >
-                <p className={`text-sm ${i === 1 ? 'text-[#dcd6ee]' : 'text-[#4a372c]'}`}>Pricing Plan</p>
+                <p className={`text-sm ${i === 1 ? 'text-[#F5DABF]' : 'text-[#8c2a35]'}`}>Pricing Plan</p>
                 <h3 className="mt-1 font-display text-2xl font-bold">{tier.tier}</h3>
-                <p className={`mt-3 text-sm leading-relaxed ${i === 1 ? 'text-[#e5e4e2]/80' : 'text-[#2e211a]/75'}`}>{tier.description}</p>
-                <ul className={`mt-5 flex-1 space-y-2.5 border-t pt-5 text-sm leading-relaxed ${i === 1 ? 'border-[#e5e4e2]/20' : 'border-[#2e211a]/15'}`}>
+                <p className={`mt-3 text-sm leading-relaxed ${i === 1 ? 'text-[#F5DABF]/80' : 'text-[#6C151E]/75'}`}>{tier.description}</p>
+                <ul className={`mt-5 flex-1 space-y-2.5 border-t pt-5 text-sm leading-relaxed ${i === 1 ? 'border-[#F5DABF]/20' : 'border-[#6C151E]/15'}`}>
                   {tier.deliverables.map((d) => (
                     <li key={d} className="flex gap-2.5">
-                      <span aria-hidden="true" className="text-[#4a372c]">✓</span>
+                      <span aria-hidden="true" className="text-[#8c2a35]">✓</span>
                       <span>{d}</span>
                     </li>
                   ))}
@@ -585,7 +585,7 @@ export default function App() {
                 <a
                   href="#contact-section"
                   className={`mt-7 rounded-sm px-5 py-3 text-center text-sm font-bold transition ${
-                    i === 1 ? 'bg-[#dcd6ee] text-[#2e211a] hover:bg-[#ece8f7]' : 'border border-[#2e211a]/40 hover:bg-[#2e211a] hover:text-[#e5e4e2]'
+                    i === 1 ? 'bg-[#F5DABF] text-[#6C151E] hover:bg-[#fbe9d6]' : 'border border-[#6C151E]/40 hover:bg-[#6C151E] hover:text-[#F5DABF]'
                   }`}
                 >
                   Select Pilot Setup
@@ -595,22 +595,22 @@ export default function App() {
             ))}
           </div>
 
-          <p className="mx-auto mt-10 max-w-2xl rounded-sm bg-[#dcd6ee]/25 px-5 py-4 text-center text-sm">
+          <p className="mx-auto mt-10 max-w-2xl rounded-sm bg-[#F5DABF]/25 px-5 py-4 text-center text-sm">
             <strong>System Hand-off Memo:</strong> Every system I build ships with solid setup checklists and video walkthroughs so you gain complete, unmanaged autonomy.
           </p>
         </div>
       </section>
 
       {/* FAQ */}
-      <section id="faq-section" className="bg-[#2e211a] px-4 py-24 sm:px-8">
+      <section id="faq-section" className="bg-[#6C151E] px-4 py-24 sm:px-8">
         <div className="mx-auto max-w-3xl">
-          <p className="text-base text-[#dcd6ee]">Frequently Asked Questions</p>
+          <p className="text-base text-[#F5DABF]">Frequently Asked Questions</p>
           <h2 className="mt-2 font-display text-[clamp(2rem,4.4vw,3.4rem)] font-bold leading-[1.04] tracking-tight"><RevealLine>Clear Answers on Automation.</RevealLine></h2>
-          <p className="mt-4 text-base text-[#e5e4e2]/75">
+          <p className="mt-4 text-base text-[#F5DABF]/75">
             Everything you need to know about partnering for custom AI automation setups and custom workflow development.
           </p>
 
-          <div className="mt-10 divide-y divide-[#e5e4e2]/20 border-y border-[#e5e4e2]/20">
+          <div className="mt-10 divide-y divide-[#F5DABF]/20 border-y border-[#F5DABF]/20">
             {FAQS.map((faq, i) => {
               const open = activeFaq === i;
               return (
@@ -621,10 +621,10 @@ export default function App() {
                       aria-expanded={open}
                       aria-controls={`faq-${i}`}
                       onClick={() => setActiveFaq(open ? null : i)}
-                      className="flex w-full items-center justify-between gap-4 py-5 text-left font-display text-lg font-bold transition hover:text-[#dcd6ee]"
+                      className="flex w-full items-center justify-between gap-4 py-5 text-left font-display text-lg font-bold transition hover:text-[#F5DABF]"
                     >
                       {faq.question}
-                      <ChevronDown className={`h-5 w-5 shrink-0 transition-transform ${open ? 'rotate-180 text-[#dcd6ee]' : ''}`} aria-hidden="true" />
+                      <ChevronDown className={`h-5 w-5 shrink-0 transition-transform ${open ? 'rotate-180 text-[#F5DABF]' : ''}`} aria-hidden="true" />
                     </button>
                   </h3>
                   <AnimatePresence initial={false}>
@@ -637,7 +637,7 @@ export default function App() {
                         transition={{ duration: 0.3 }}
                         className="overflow-hidden"
                       >
-                        <p className="pb-6 text-base leading-relaxed text-[#e5e4e2]/80">{faq.answer}</p>
+                        <p className="pb-6 text-base leading-relaxed text-[#F5DABF]/80">{faq.answer}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -646,14 +646,14 @@ export default function App() {
             })}
           </div>
 
-          <div className="mt-10 flex flex-col items-start justify-between gap-4 rounded-sm bg-[#4a372c] p-6 sm:flex-row sm:items-center">
+          <div className="mt-10 flex flex-col items-start justify-between gap-4 rounded-sm bg-[#8c2a35] p-6 sm:flex-row sm:items-center">
             <div>
               <h3 className="font-display text-lg font-bold">Got a specific workflow bottleneck?</h3>
-              <p className="mt-1 text-sm text-[#e5e4e2]/80">
+              <p className="mt-1 text-sm text-[#F5DABF]/80">
                 Let's design a custom-tailored automation system optimized for your exact conversion rate requirements.
               </p>
             </div>
-            <a href="#contact-section" className="shrink-0 rounded-sm bg-[#dcd6ee] px-6 py-3 text-sm font-bold text-[#2e211a] transition hover:bg-[#ece8f7]">
+            <a href="#contact-section" className="shrink-0 rounded-sm bg-[#F5DABF] px-6 py-3 text-sm font-bold text-[#6C151E] transition hover:bg-[#fbe9d6]">
               Get Custom Scope
             </a>
           </div>
@@ -661,7 +661,7 @@ export default function App() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact-section" className="relative overflow-hidden bg-[#dcd6ee] px-4 py-24 text-[#2e211a] sm:px-8">
+      <section id="contact-section" className="relative overflow-hidden bg-[#0F3D3A] px-4 py-24 text-[#F5DABF] sm:px-8">
         <div className="relative mx-auto max-w-6xl">
           <p className="text-base">Connect Today</p>
           <h2 className="mt-2 font-display text-[clamp(2.6rem,7vw,5.6rem)] font-bold leading-[0.95] tracking-tight"><RevealLine>Let's Build Something.</RevealLine></h2>
@@ -682,22 +682,22 @@ export default function App() {
                   href={href}
                   target={href.startsWith('http') ? '_blank' : undefined}
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 rounded-sm bg-[#2e211a] p-4 text-[#e5e4e2] transition hover:bg-[#40302a]"
+                  className="flex items-center gap-3 rounded-sm bg-[#F5DABF] p-4 text-[#0F3D3A] transition hover:bg-[#7c1f29]"
                 >
-                  <Icon className="h-5 w-5 shrink-0 text-[#dcd6ee]" aria-hidden="true" />
+                  <Icon className="h-5 w-5 shrink-0 text-[#0F3D3A]" aria-hidden="true" />
                   <span className="min-w-0">
-                    <span className="block text-xs text-[#e5e4e2]/60">{label}</span>
+                    <span className="block text-xs text-[#0F3D3A]/60">{label}</span>
                     <span className="block truncate text-sm font-semibold">{value}</span>
                   </span>
                 </a>
               ))}
             </div>
 
-            <div className="rounded-sm bg-[#e5e4e2] p-6 sm:p-8 md:col-span-8 lg:col-span-6">
+            <div className="rounded-sm bg-[#0F3D3A] p-6 sm:p-8 md:col-span-8 lg:col-span-6">
               {formSubmitted ? (
                 <div className="py-10 text-center">
                   <h3 className="font-display text-xl font-bold">Opening Mail Client...</h3>
-                  <p className="mx-auto mt-2 max-w-xs text-sm text-[#2e211a]/75">
+                  <p className="mx-auto mt-2 max-w-xs text-sm text-[#F5DABF]/75">
                     Your default mail app will open with your details filled in. If nothing happens, email samhitatavutu@gmail.com directly.
                   </p>
                   <button type="button" onClick={() => setFormSubmitted(false)} className="mt-4 text-sm font-semibold underline">
@@ -713,7 +713,7 @@ export default function App() {
                         value={contactName}
                         onChange={(e) => setContactName(e.target.value)}
                         placeholder="e.g. Emily Weiss"
-                        className="mt-1 w-full rounded-sm border border-[#2e211a]/25 bg-white px-3 py-2.5 text-sm"
+                        className="mt-1 w-full rounded-sm border border-[#F5DABF]/25 bg-white px-3 py-2.5 text-sm"
                       />
                     </label>
                     <label className="block text-sm font-medium">
@@ -722,7 +722,7 @@ export default function App() {
                         value={contactFormBrand}
                         onChange={(e) => setContactFormBrand(e.target.value)}
                         placeholder="e.g. Glossier D2C"
-                        className="mt-1 w-full rounded-sm border border-[#2e211a]/25 bg-white px-3 py-2.5 text-sm"
+                        className="mt-1 w-full rounded-sm border border-[#F5DABF]/25 bg-white px-3 py-2.5 text-sm"
                       />
                     </label>
                   </div>
@@ -734,12 +734,12 @@ export default function App() {
                       value={contactMessage}
                       onChange={(e) => setContactMessage(e.target.value)}
                       placeholder="e.g. Recreating newsletter articles from podcasts takes too many hours, or we need lead sifting lists..."
-                      className="mt-1 w-full resize-none rounded-sm border border-[#2e211a]/25 bg-white px-3 py-2.5 text-sm"
+                      className="mt-1 w-full resize-none rounded-sm border border-[#F5DABF]/25 bg-white px-3 py-2.5 text-sm"
                     />
                   </label>
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2 rounded-sm bg-[#2e211a] px-6 py-3 text-sm font-bold text-[#e5e4e2] transition hover:bg-[#4a372c]"
+                    className="inline-flex items-center gap-2 rounded-sm bg-[#F5DABF] px-6 py-3 text-sm font-bold text-[#0F3D3A] transition hover:bg-[#8c2a35]"
                   >
                     Send Me a Message <Send className="h-3.5 w-3.5" aria-hidden="true" />
                   </button>
@@ -751,22 +751,22 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-      <footer className="overflow-hidden bg-[#2e211a] px-4 pb-8 pt-20 sm:px-8">
+      <footer className="overflow-hidden bg-[#6C151E] px-4 pb-8 pt-20 sm:px-8">
         <GiantName />
         <div className="mt-6" />
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-[#e5e4e2]/65 md:flex-row">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-[#F5DABF]/65 md:flex-row">
           <span>© 2025 - 2026. AI Systems for D2C Brands.</span>
           <div className="flex items-center gap-5">
-            <a href="#about-section" className="hover:text-[#dcd6ee]">About</a>
-            <a href="#projects-section" className="hover:text-[#dcd6ee]">Systems Built</a>
-            <a href="#process-section" className="hover:text-[#dcd6ee]">Work Process</a>
-            <a href="#contact-section" className="hover:text-[#dcd6ee]">Contact</a>
+            <a href="#about-section" className="hover:text-[#F5DABF]">About</a>
+            <a href="#projects-section" className="hover:text-[#F5DABF]">Systems Built</a>
+            <a href="#process-section" className="hover:text-[#F5DABF]">Work Process</a>
+            <a href="#contact-section" className="hover:text-[#F5DABF]">Contact</a>
           </div>
           <div className="flex items-center gap-4">
-            <a href="https://www.instagram.com/fr_samhitaaa/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-[#dcd6ee]"><Instagram className="h-4 w-4" /></a>
-            <a href="https://www.linkedin.com/in/samhita-tavutu-b17b2a37b/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-[#dcd6ee]"><Linkedin className="h-4 w-4" /></a>
-            <a href="https://github.com/Samhita1008/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hover:text-[#dcd6ee]"><Github className="h-4 w-4" /></a>
-            <a href="mailto:samhitatavutu@gmail.com" aria-label="Email" className="hover:text-[#dcd6ee]"><Mail className="h-4 w-4" /></a>
+            <a href="https://www.instagram.com/fr_samhitaaa/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-[#F5DABF]"><Instagram className="h-4 w-4" /></a>
+            <a href="https://www.linkedin.com/in/samhita-tavutu-b17b2a37b/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-[#F5DABF]"><Linkedin className="h-4 w-4" /></a>
+            <a href="https://github.com/Samhita1008/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hover:text-[#F5DABF]"><Github className="h-4 w-4" /></a>
+            <a href="mailto:samhitatavutu@gmail.com" aria-label="Email" className="hover:text-[#F5DABF]"><Mail className="h-4 w-4" /></a>
           </div>
         </div>
       </footer>
