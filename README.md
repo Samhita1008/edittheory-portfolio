@@ -4,11 +4,11 @@
 
 <br/>
 
-[![Live site](https://img.shields.io/badge/live-edittheory--portfolio.vercel.app-0F3D3A?style=for-the-badge&labelColor=6C151E)](https://edittheory-portfolio.vercel.app/)
-![React](https://img.shields.io/badge/React%2019-0F3D3A?style=for-the-badge&labelColor=6C151E&logo=react&logoColor=F5DABF)
-![TypeScript](https://img.shields.io/badge/TypeScript-0F3D3A?style=for-the-badge&labelColor=6C151E&logo=typescript&logoColor=F5DABF)
-![Vite](https://img.shields.io/badge/Vite-0F3D3A?style=for-the-badge&labelColor=6C151E&logo=vite&logoColor=F5DABF)
-![Tailwind](https://img.shields.io/badge/Tailwind%204-0F3D3A?style=for-the-badge&labelColor=6C151E&logo=tailwindcss&logoColor=F5DABF)
+[![Live site](https://img.shields.io/badge/live-edittheory--portfolio.vercel.app-6C151E?style=for-the-badge&labelColor=6C151E)](https://edittheory-portfolio.vercel.app/)
+![React](https://img.shields.io/badge/React%2019-6C151E?style=for-the-badge&labelColor=6C151E&logo=react&logoColor=F5DABF)
+![TypeScript](https://img.shields.io/badge/TypeScript-6C151E?style=for-the-badge&labelColor=6C151E&logo=typescript&logoColor=F5DABF)
+![Vite](https://img.shields.io/badge/Vite-6C151E?style=for-the-badge&labelColor=6C151E&logo=vite&logoColor=F5DABF)
+![Tailwind](https://img.shields.io/badge/Tailwind%204-6C151E?style=for-the-badge&labelColor=6C151E&logo=tailwindcss&logoColor=F5DABF)
 
 </div>
 
