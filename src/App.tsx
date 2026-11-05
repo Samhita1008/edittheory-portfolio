@@ -551,8 +551,8 @@ export default function App() {
       <ProcessStory />
 
       {/* PORTAL */}
-      <section id="client-portal-section" className="mx-auto max-w-6xl px-4 py-20 sm:px-8">
-        <ClientPortal theme="dark" />
+      <section id="client-portal-section" className="bg-[#fbe9d6] px-4 py-20 sm:px-8">
+        <div className="mx-auto max-w-6xl"><ClientPortal theme="dark" /></div>
       </section>
 
       {/* PRICING */}
