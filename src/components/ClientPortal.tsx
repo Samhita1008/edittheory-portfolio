@@ -591,7 +591,7 @@ AI Agent for ${brandName}`,
 
       {/* Auth Selector Dialog Popover */}
       {isAuthModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#082422]/90 backdrop-blur-sm animate-fadeIn">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#2a070b]/85 backdrop-blur-sm animate-fadeIn">
           <div className={`portal-light ${theme === 'dark' ? 'card-vibe' : 'bg-white border border-zinc-250'} rounded-md max-w-sm w-full p-6 space-y-5 relative`}>
             <button
               onClick={() => setIsAuthModalOpen(false)}
