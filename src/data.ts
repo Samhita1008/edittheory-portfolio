@@ -2,18 +2,6 @@ import { Project, Service, ProcessStep, ClientTier } from './types';
 
 export const SERVICES: Service[] = [
   {
-    id: 'service-repurposing',
-    title: 'Content Repurposing Systems',
-    description: 'You record one podcast or high-quality video. I build an automated pipeline that produces 10 highly-optimized content assets distributed across media channels so you hold organic attention with zero re-editing overhead.',
-    bullets: [
-      '1 Long-form interview → 10 tailored distribution assets',
-      'Automated format conversion (Reels, LinkedIn carousels, newsletters)',
-      'Optimized copywriting matching your brand’s bespoke tone of voice',
-      'Direct scheduling options into your media publishing tool'
-    ],
-    iconName: 'repurposing'
-  },
-  {
     id: 'service-outreach',
     title: 'AI Cold Email + DM Systems',
     description: 'Stop sending cold campaigns that net zero responses. I design custom cold outreach systems that execute micro-targeted campaigns, landing on-brand qualified leads directly into your inbox.',
@@ -36,6 +24,18 @@ export const SERVICES: Service[] = [
       'Active verification filters to help protect domain health'
     ],
     iconName: 'scraping'
+  },
+  {
+    id: 'service-repurposing',
+    title: 'Content Repurposing Systems',
+    description: 'You record one podcast or high-quality video. I build an automated pipeline that produces 10 highly-optimized content assets distributed across media channels so you hold organic attention with zero re-editing overhead.',
+    bullets: [
+      '1 Long-form interview → 10 tailored distribution assets',
+      'Automated format conversion (Reels, LinkedIn carousels, newsletters)',
+      'Optimized copywriting matching your brand’s bespoke tone of voice',
+      'Direct scheduling options into your media publishing tool'
+    ],
+    iconName: 'repurposing'
   }
 ];
 
@@ -139,80 +139,6 @@ export const PROJECTS: Project[] = [
       }
     ],
     tags: ['React + TypeScript', 'n8n Orchestration', 'Groq', 'Google Sheets CRM', 'Gmail API', 'Full-Stack Product']
-  },
-  {
-    id: 'project-glossier',
-    agentNumber: 1,
-    title: 'Content Repurposing System',
-    category: 'Content Repurposing',
-    badge: 'Workflow Published on GitHub',
-    engagementNote: 'Concept Build — not a paid client engagement',
-    oneLiner: 'Transforms long-form founder podcasts into 10 multi-platform editorial assets with brand-voice consistency.',
-    description: 'An automated content extraction engine that parses long-form interview transcripts, extracts core narrative hooks, and generates 10 tailored distribution assets synced directly to Notion.',
-    overview: 'Producing high-caliber founder interviews requires substantial creative energy, but manually extracting quotes, drafting carousels, writing newsletter segments, and formatting video reel scripts creates a heavy editorial bottleneck. This system ingests long-form transcripts via webhook, processes narrative hooks with Groq AI, and automatically generates 10 distinct distribution assets synced directly into a structured Notion database.',
-    architectureImage: '/images/agent1-notion.jpg',
-    architectureExplanation: 'Cloud-hosted n8n workflow on Railway. Ingests raw audio/video transcripts, runs prompt pipelines via Groq AI, and writes 10 categorized deliverables to a relational Notion Kanban board.',
-    howItWorks: [
-      {
-        step: '01',
-        title: 'TRANSCRIPT INGESTION',
-        description: 'Long-form podcast transcripts are ingested via webhook, normalized, and partitioned into thematic paragraph segments.'
-      },
-      {
-        step: '02',
-        title: 'NARRATIVE HOOK EXTRACTION',
-        description: 'Groq AI analyzes the transcript, identifying key takeaways, counter-intuitive arguments, and memorable quotes.'
-      },
-      {
-        step: '03',
-        title: 'MULTI-FORMAT SYNTHESIS',
-        description: 'Generates 10 format-specific assets: LinkedIn carousels, reel scripts, newsletters, quote graphics, and ad copy.'
-      },
-      {
-        step: '04',
-        title: 'NOTION PIPELINE POPULATION',
-        description: 'Assets are populated directly into an editorial Notion database with metadata, hashtags, and review status tags.'
-      }
-    ],
-    technologyLine: 'n8n · Groq AI · Notion CRM · Railway · Media Processing',
-    githubUrl: 'https://github.com/Samhita1008/edit-theory-agents/blob/main/1-content-repurposing/workflow.json',
-    notionUrl: 'https://www.notion.so/How-I-would-turn-a-D2C-founder-podcast-into-10-assets-for-skincare-brand-growth-362fd196edb080cbdb6eaf166c36b0e?source=copy_link',
-    loomUrl: 'https://www.loom.com/share/24a0f13f63ad440787e40cb3967c8e24',
-    liveUrl: '/projects.html',
-    images: [
-      '/images/agent1-notion1.jpg',
-      '/images/agent1-notion2.jpg'
-    ],
-    outputImages: [
-      {
-        url: '/images/agent1-notion1.jpg',
-        title: 'Notion Editorial Database (Columns 1–5)',
-        caption: 'Generated long-form YouTube video concepts, LinkedIn carousel structures, and short-form video hooks.'
-      },
-      {
-        url: '/images/agent1-notion2.jpg',
-        title: 'Notion Editorial Database (Columns 6–10)',
-        caption: 'Brand newsletters, standalone quote cards, Twitter/X threads, and conversion-focused social ads.'
-      }
-    ],
-    mockupSlides: [
-      {
-        title: 'n8n Railway Workflow Canvas',
-        description: 'The automated pipeline running on cloud containers. Processes webhooks, retrieves transcript paragraphs, extracts hooks, and creates Notion records.',
-        metrics: '1 transcript → 10 assets'
-      },
-      {
-        title: 'Notion Assets: Columns 1-5',
-        description: 'First half of the Notion database showing generated content assets (YouTube video concepts, LinkedIn carousels, and video reel hooks).',
-        metrics: '10 content formats'
-      },
-      {
-        title: 'Notion Assets: Columns 6-10',
-        description: 'Second half of the Notion asset grid containing automated newsletters, quote cards, captions, threads, and ad concepts.',
-        metrics: 'Notion Kanban sync'
-      }
-    ],
-    tags: ['Media Processing', 'n8n', 'Groq AI', 'Notion CRM', 'Railway']
   },
   {
     id: 'project-dew-co',
@@ -673,6 +599,80 @@ export const PROJECTS: Project[] = [
       }
     ],
     tags: ['n8n', 'Anthropic Claude', 'Google Sheets', 'Gmail', 'Legal Review']
+  },
+  {
+    id: 'project-glossier',
+    agentNumber: 1,
+    title: 'Content Repurposing System',
+    category: 'Content Repurposing',
+    badge: 'Workflow Published on GitHub',
+    engagementNote: 'Concept Build — not a paid client engagement',
+    oneLiner: 'Transforms long-form founder podcasts into 10 multi-platform editorial assets with brand-voice consistency.',
+    description: 'An automated content extraction engine that parses long-form interview transcripts, extracts core narrative hooks, and generates 10 tailored distribution assets synced directly to Notion.',
+    overview: 'Producing high-caliber founder interviews requires substantial creative energy, but manually extracting quotes, drafting carousels, writing newsletter segments, and formatting video reel scripts creates a heavy editorial bottleneck. This system ingests long-form transcripts via webhook, processes narrative hooks with Groq AI, and automatically generates 10 distinct distribution assets synced directly into a structured Notion database.',
+    architectureImage: '/images/agent1-notion.jpg',
+    architectureExplanation: 'Cloud-hosted n8n workflow on Railway. Ingests raw audio/video transcripts, runs prompt pipelines via Groq AI, and writes 10 categorized deliverables to a relational Notion Kanban board.',
+    howItWorks: [
+      {
+        step: '01',
+        title: 'TRANSCRIPT INGESTION',
+        description: 'Long-form podcast transcripts are ingested via webhook, normalized, and partitioned into thematic paragraph segments.'
+      },
+      {
+        step: '02',
+        title: 'NARRATIVE HOOK EXTRACTION',
+        description: 'Groq AI analyzes the transcript, identifying key takeaways, counter-intuitive arguments, and memorable quotes.'
+      },
+      {
+        step: '03',
+        title: 'MULTI-FORMAT SYNTHESIS',
+        description: 'Generates 10 format-specific assets: LinkedIn carousels, reel scripts, newsletters, quote graphics, and ad copy.'
+      },
+      {
+        step: '04',
+        title: 'NOTION PIPELINE POPULATION',
+        description: 'Assets are populated directly into an editorial Notion database with metadata, hashtags, and review status tags.'
+      }
+    ],
+    technologyLine: 'n8n · Groq AI · Notion CRM · Railway · Media Processing',
+    githubUrl: 'https://github.com/Samhita1008/edit-theory-agents/blob/main/1-content-repurposing/workflow.json',
+    notionUrl: 'https://www.notion.so/How-I-would-turn-a-D2C-founder-podcast-into-10-assets-for-skincare-brand-growth-362fd196edb080cbdb6eaf166c36b0e?source=copy_link',
+    loomUrl: 'https://www.loom.com/share/24a0f13f63ad440787e40cb3967c8e24',
+    liveUrl: '/projects.html',
+    images: [
+      '/images/agent1-notion1.jpg',
+      '/images/agent1-notion2.jpg'
+    ],
+    outputImages: [
+      {
+        url: '/images/agent1-notion1.jpg',
+        title: 'Notion Editorial Database (Columns 1–5)',
+        caption: 'Generated long-form YouTube video concepts, LinkedIn carousel structures, and short-form video hooks.'
+      },
+      {
+        url: '/images/agent1-notion2.jpg',
+        title: 'Notion Editorial Database (Columns 6–10)',
+        caption: 'Brand newsletters, standalone quote cards, Twitter/X threads, and conversion-focused social ads.'
+      }
+    ],
+    mockupSlides: [
+      {
+        title: 'n8n Railway Workflow Canvas',
+        description: 'The automated pipeline running on cloud containers. Processes webhooks, retrieves transcript paragraphs, extracts hooks, and creates Notion records.',
+        metrics: '1 transcript → 10 assets'
+      },
+      {
+        title: 'Notion Assets: Columns 1-5',
+        description: 'First half of the Notion database showing generated content assets (YouTube video concepts, LinkedIn carousels, and video reel hooks).',
+        metrics: '10 content formats'
+      },
+      {
+        title: 'Notion Assets: Columns 6-10',
+        description: 'Second half of the Notion asset grid containing automated newsletters, quote cards, captions, threads, and ad concepts.',
+        metrics: 'Notion Kanban sync'
+      }
+    ],
+    tags: ['Media Processing', 'n8n', 'Groq AI', 'Notion CRM', 'Railway']
   }
 ];
 

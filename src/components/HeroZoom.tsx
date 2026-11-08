@@ -241,7 +241,7 @@ export default function HeroZoom({ stageRef }: { stageRef: RefObject<HTMLElement
           {/* Intro */}
           <div className="mx-auto flex max-w-6xl flex-col justify-center px-6 sm:px-10" style={{ minHeight: '100dvh' }}>
             <h1 className="max-w-4xl font-display text-[clamp(2rem,4.6vw,4.2rem)] font-bold leading-[1.04] tracking-tight text-[#6C151E]">
-              I build custom AI systems for D2C brands to solve growth and workflow bottlenecks.
+              I build AI systems that follow up with your leads and book your customers.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#6C151E]/80 sm:text-lg">
               Eliminate manual bottlenecks. I design and launch tailored AI workflows that scrape qualified leads daily, automate personalized outbound outreach, and scale organic content distribution on autopilot.
@@ -268,16 +268,16 @@ export default function HeroZoom({ stageRef }: { stageRef: RefObject<HTMLElement
               <div className="max-w-3xl">
                 <p className="text-sm font-medium text-[#8c2a35]">The Engineer</p>
                 <h2 className="mt-2 font-display text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.06] tracking-tight text-[#6C151E]">
-                  Building custom automation systems for scaling brands.
+                  Automation that follows up, so you don’t lose customers.
                 </h2>
                 <p className="mt-5 text-lg leading-relaxed text-[#6C151E]/90">
-                  I’m Samhita, a CSE student at Pondicherry Central University building AI-powered systems for D2C brands. I started this because I noticed how much time founders lose recreating content and writing cold messages manually — so I began building systems that automate that work.
+                  I’m Samhita, a freelance AI automation engineer. I build n8n and LLM systems that capture enquiries, follow up automatically and book customers for D2C brands and local businesses. Eight systems built, six published on GitHub.
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-[#6C151E]/70">
-                  By modeling human research intuition in scripts and optimizing custom LLM prompts, I clear out routine manual tasks so brands can focus on high-intent relationship building.
+                  Every system keeps a person in control: nothing goes out under your name until you approve it.
                 </p>
                 <ul className="mt-6 flex flex-wrap gap-2 text-sm text-[#6C151E]">
-                  {['CSE @ Pondicherry Central University', 'Python & TypeScript Scraping', 'Prompt Engineering & APIs'].map((b) => (
+                  {['Freelance · Remote', 'n8n & LLM Workflows', 'Human-approved by design'].map((b) => (
                     <li key={b} className="rounded-sm border border-[#6C151E]/30 bg-[#F5DABF]/60 px-3 py-1.5">
                       {b}
                     </li>
@@ -287,14 +287,14 @@ export default function HeroZoom({ stageRef }: { stageRef: RefObject<HTMLElement
               <figure className="mx-auto flex max-w-[200px] flex-col items-center text-center md:mx-0">
                 <img
                   src="/images/sam.jpeg"
-                  alt="Samhita Tavutu - Systems Architect and AI Automation Engineer"
+                  alt="Samhita Tavutu - Freelance AI Automation Engineer"
                   className="h-32 w-32 rounded-full object-cover ring-2 ring-[#6C151E]/20 md:h-36 md:w-36"
                   referrerPolicy="no-referrer"
                 />
                 <figcaption className="mt-3 text-sm text-[#6C151E]">
                   <span className="block font-bold">Samhita Tavutu</span>
-                  <span className="block text-[#6C151E]/70">Systems Architect</span>
-                  <span className="block text-[#6C151E]/70">Pondicherry, IN</span>
+                  <span className="block text-[#6C151E]/70">AI Automation Engineer</span>
+                  <span className="block text-[#6C151E]/70">Chennai, IN</span>
                 </figcaption>
               </figure>
             </div>

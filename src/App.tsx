@@ -755,7 +755,7 @@ export default function App() {
         <GiantName />
         <div className="mt-6" />
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-[#F5DABF]/65 md:flex-row">
-          <span>© 2025 - 2026. AI Systems for D2C Brands.</span>
+          <span>© 2025 - 2026. AI Automation for D2C Brands &amp; Local Businesses.</span>
           <div className="flex items-center gap-5">
             <a href="#about-section" className="hover:text-[#F5DABF]">About</a>
             <a href="#projects-section" className="hover:text-[#F5DABF]">Systems Built</a>
