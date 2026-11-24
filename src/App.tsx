@@ -127,10 +127,7 @@ function BuildSection() {
               The systems and agent architectures shown on this site represent proven, production-tested blueprints. If your team spends hours on copy-pasting, multi-platform scrapers, custom DB loaders, or manual routing, I will engineer a custom script optimized for your exact system requirements on request.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href="https://topmate.io/samhita_tavutu" target="_blank" rel="noopener noreferrer" className="rounded-sm bg-[#F5DABF] px-5 py-2.5 text-sm font-semibold text-[#0F3D3A] transition hover:bg-[#8c2a35]">
-                Book Audit Call
-              </a>
-              <a href="#contact-section" className="rounded-sm border border-[#F5DABF]/60 px-5 py-2.5 text-sm font-semibold transition hover:bg-[#0F3D3A]">
+              <a href="#contact-section" className="rounded-sm bg-[#F5DABF] px-5 py-2.5 text-sm font-semibold text-[#0F3D3A] transition hover:bg-[#8c2a35]">
                 Message Custom Scope
               </a>
             </div>
