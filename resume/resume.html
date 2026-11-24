@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Samhita Tavutu | Resume</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root { --mocha:#6C151E; --cream:#F5DABF; --paper:#FFFAF5; --ink:#2b1a1c; --muted:#7a6a6c; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 210mm; height: 297mm; }
+  body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--paper); font-size: 8.6pt; line-height: 1.4; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { display: grid; grid-template-columns: 70mm 1fr; width: 210mm; height: 297mm; overflow: hidden; }
+
+  aside { background: var(--mocha); color: var(--cream); padding: 12mm 7mm 8mm; display: flex; flex-direction: column; }
+  .photo { width: 24mm; height: 24mm; border-radius: 50%; object-fit: cover; border: 1.2mm solid var(--cream); display: block; }
+  .label { font-size: 6.4pt; letter-spacing: .22em; text-transform: uppercase; color: var(--cream); opacity: .75; }
+  aside h3 { margin-top: 12mm; margin-bottom: 3mm; font-weight: 500; }
+  .c-item { margin-bottom: 2.6mm; }
+  .c-item .label { display: block; font-size: 5.8pt; margin-bottom: .6mm; }
+  .c-item span.v { font-size: 8pt; color: #fff; word-break: break-all; }
+  .chips { display: flex; flex-wrap: wrap; gap: 1.6mm; }
+  .chip { border: .25mm solid rgba(245,218,191,.55); border-radius: 5mm; padding: .9mm 2.8mm; font-size: 7.4pt; color: #fff; }
+  .avail { list-style: none; }
+  .avail li { position: relative; padding-left: 4mm; margin-bottom: 2.4mm; font-size: 8pt; color: #fff; }
+  .avail li::before { content: ''; position: absolute; left: 0; top: 1.6mm; width: 1.2mm; height: 1.2mm; border-radius: 50%; background: var(--cream); }
+  .foot { margin-top: auto; border-top: .2mm solid rgba(245,218,191,.35); padding-top: 3mm; font-size: 7pt; color: var(--cream); opacity: .9; }
+
+  main { padding: 11mm 10mm 6mm 9mm; }
+  h1 { font-size: 27pt; line-height: 1; color: var(--mocha); font-weight: 700; letter-spacing: -.01em; }
+  .role { margin-top: 2.4mm; font-size: 7.6pt; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .intro { margin-top: 6mm; border-left: .8mm solid var(--mocha); padding-left: 3.5mm; font-size: 9.4pt; line-height: 1.5; }
+  .sec { margin-top: 6mm; display: flex; align-items: center; gap: 3mm; font-size: 6.8pt; letter-spacing: .24em; text-transform: uppercase; color: var(--mocha); font-weight: 600; }
+  .sec::after { content: ''; flex: 1; height: .2mm; background: #e6d6c8; }
+  .grid { margin-top: 2.6mm; display: grid; grid-template-columns: 1fr 1fr; gap: 2.4mm; }
+  .card { border: .25mm solid #e6d6c8; border-radius: 1.6mm; padding: 2.2mm 2.8mm; background: #fff; }
+  .card b { display: block; color: var(--mocha); font-size: 8pt; font-weight: 600; margin-bottom: .6mm; }
+  .card p { font-size: 7.4pt; color: #5c4c4e; line-height: 1.35; }
+  .job { margin-top: 3mm; }
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .job-head strong { font-size: 9.2pt; font-weight: 600; }
+  .job-head em { font-style: normal; font-size: 7.6pt; color: var(--muted); }
+  .org { color: var(--mocha); font-weight: 600; font-size: 8pt; margin-bottom: 1.2mm; }
+  .job ul { list-style: none; }
+  .job li { position: relative; padding-left: 4mm; margin-bottom: 1mm; font-size: 8.2pt; }
+  .job li::before { content: ''; position: absolute; left: 0; top: 1.4mm; width: 1.3mm; height: 1.3mm; border-radius: 50%; background: var(--mocha); }
+  .proj { margin-top: 2.6mm; padding-left: 3.2mm; border-left: .3mm solid #e6d6c8; }
+  .proj strong { font-size: 8.6pt; font-weight: 600; }
+  .proj .tag { margin-left: 1.5mm; font-size: 6pt; letter-spacing: .18em; text-transform: uppercase; color: var(--mocha); font-weight: 600; }
+  .proj p { font-size: 7.8pt; color: #5c4c4e; line-height: 1.35; margin-top: .4mm; }
+  .cta { margin-top: 5mm; background: var(--mocha); color: var(--cream); border-radius: 1.6mm; padding: 3mm 4mm; font-size: 8.6pt; line-height: 1.4; }
+  .cta b { color: #fff; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="page">
+  <aside>
+    <img class="photo" src="../public/images/sam.jpeg" alt="Samhita Tavutu" />
+
+    <h3 class="label">Contact</h3>
+    <div class="c-item"><span class="label">Email</span><span class="v">samhitatavutu@gmail.com</span></div>
+    <div class="c-item"><span class="label">Portfolio</span><span class="v">edittheory-portfolio.vercel.app</span></div>
+    <div class="c-item"><span class="label">LinkedIn</span><span class="v" style="font-size:7.1pt">linkedin.com/in/samhita-tavutu-b17b2a37b</span></div>
+    <div class="c-item"><span class="label">GitHub</span><span class="v">github.com/Samhita1008</span></div>
+    <div class="c-item"><span class="label">Based in</span><span class="v">Chennai, India<br />Remote · IST hours</span></div>
+
+    <h3 class="label">Tools</h3>
+    <div class="chips">
+      <span class="chip">n8n</span><span class="chip">Groq</span><span class="chip">Gmail</span>
+      <span class="chip">Google Sheets</span><span class="chip">Telegram</span>
+      <span class="chip">WhatsApp</span><span class="chip">Notion</span>
+      <span class="chip">Razorpay</span><span class="chip">JavaScript</span>
+      <span class="chip">Docker</span><span class="chip">Railway</span><span class="chip">Vercel</span>
+    </div>
+
+    <h3 class="label">Available for</h3>
+    <ul class="avail">
+      <li>14-day pilot: a system that replies to every enquiry and follows up</li>
+      <li>Fixing or rebuilding n8n workflows</li>
+      <li>Websites for local businesses</li>
+    </ul>
+
+    <div class="foot">Workflow files for six of my systems are public on GitHub. Read them before you hire me.</div>
+  </aside>
+
+  <main>
+    <h1>Samhita Tavutu</h1>
+    <div class="role">Freelance AI Automation Engineer</div>
+    <p class="intro">I build AI systems that capture enquiries, follow up automatically and book customers, so businesses stop losing leads to slow replies. Every system keeps a person in control: nothing goes out under your name until you approve it.</p>
+
+    <div class="sec">What I build</div>
+    <div class="grid">
+      <div class="card"><b>Bookings and follow-up</b><p>Capture enquiries, confirm bookings, chase the ones that go quiet.</p></div>
+      <div class="card"><b>Inbox and support</b><p>Sort messages, draft replies, alert you when a human is needed.</p></div>
+      <div class="card"><b>Outreach and leads</b><p>Find prospects, draft personal emails, follow up, track replies.</p></div>
+      <div class="card"><b>Local business websites</b><p>Fast, animated sites that look credible online.</p></div>
+      <div class="card"><b>Document review</b><p>Contracts checked against your playbook, scored, routed for approval.</p></div>
+      <div class="card"><b>Content workflows</b><p>One video becomes posts, summaries and notes.</p></div>
+    </div>
+
+    <div class="sec">Experience</div>
+    <div class="job">
+      <div class="job-head"><strong>Freelance AI Automation Engineer</strong><em>Remote</em></div>
+      <div class="org">Edit Theory · Founder</div>
+      <ul>
+        <li>Built and documented eight automation systems for D2C brands and local businesses, led by enquiry follow-up, outreach and booking. Six workflows are public on GitHub, each with engineering notes.</li>
+        <li>Designed human approval into every system that sends email or messages.</li>
+        <li>Build for hand-off: your own accounts and API keys, one settings block per workflow, plain-English naming.</li>
+      </ul>
+    </div>
+    <div class="job">
+      <div class="job-head"><strong>Automation Engineer</strong><em>Chennai pilot</em></div>
+      <div class="org">Verified Home Tuition Marketplace · Client project</div>
+      <ul>
+        <li>Building the backend (WhatsApp, Google Sheets, Razorpay, Google Meet) and the frontend for parent and tutor flows.</li>
+      </ul>
+    </div>
+
+    <div class="sec">Selected projects</div>
+    <div class="proj"><strong>Booking Assistant</strong><span class="tag">Bookings</span>
+      <p>Customers search, book and watch a live confirmation. Web frontend, automated backend, logging and email. The venue-confirmation step is a labelled demo, with real integrations built and ready.</p></div>
+    <div class="proj"><strong>Cold Email and Lead Systems</strong><span class="tag">Outreach</span>
+      <p>Finds and scores leads, writes personal openers, follows up on a schedule and tracks replies.</p></div>
+    <div class="proj"><strong>Restaurant Outreach</strong><span class="tag">Lead follow-up</span>
+      <p>Audits a restaurant's website, finds what's wrong, and drafts a pitch from the real problems. Review, sending, reply tracking and instant alerts included.</p></div>
+    <div class="proj"><strong>Society Complaint Agent</strong><span class="tag">Operations</span>
+      <p>Residents report issues in a chat bot. Complaints are ticketed, the secretary approves vendor dispatch, and residents are told when it's fixed.</p></div>
+    <div class="proj"><strong>Concept Websites</strong><span class="tag">Design</span>
+      <p>Eleven working demo sites across restaurants, salons, travel, healthcare, gyms and more.</p></div>
+
+    <div class="cta"><b>Free 3-minute demo.</b> I'll show you how fast your business replies to an enquiry. Email samhitatavutu@gmail.com.</div>
+  </main>
+</div>
+</body>
+</html>
