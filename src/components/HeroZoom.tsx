@@ -244,7 +244,7 @@ export default function HeroZoom({ stageRef }: { stageRef: RefObject<HTMLElement
               I build AI systems that follow up with your leads and book your customers.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#6C151E]/80 sm:text-lg">
-              Eliminate manual bottlenecks. I design and launch tailored AI workflows that scrape qualified leads daily, automate personalized outbound outreach, and scale organic content distribution on autopilot.
+              Slow replies lose customers. I build the system that answers every enquiry fast, follows up automatically and books the customer, with your approval before anything goes out.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
