@@ -141,6 +141,179 @@ export const PROJECTS: Project[] = [
     tags: ['React + TypeScript', 'n8n Orchestration', 'Groq', 'Google Sheets CRM', 'Gmail API', 'Full-Stack Product']
   },
   {
+    id: 'project-rwa-society',
+    agentNumber: 7,
+    title: 'RWA Complaint and Vendor Coordination',
+    category: 'Society Operations',
+    badge: 'Private Implementation',
+    codeAvailabilityNote: 'Workflow file private (on request)',
+    demoModeNote: 'Built and tested end to end on test data. Not piloted with a real society yet. Vendor messages need a manual WhatsApp tap until the WhatsApp API is connected.',
+    oneLiner: 'Runs complaints, vendor dispatch, resolution tracking and notices for an apartment society over Telegram, with the secretary approving everything that goes outside the building.',
+    description: 'An automation engine for residential society management that handles complaint logging, vendor dispatch with secretary approval, resolution tracking, and broadcast notices over Telegram.',
+    overview: 'Managing residential community requests manually leads to lost complaints, unapproved vendor messages, and missed resident notices. This system runs complaints, vendor dispatch, resolution tracking and notices for an apartment society over Telegram, with the secretary approving everything that goes outside the building.',
+    architectureImage: '/images/agent7-architecture.svg',
+    architectureExplanation: 'Resident operations workflow in n8n. Ingests resident messages via a single Telegram webhook, classifies urgency and logs tickets to Google Sheets, routes vendor dispatches for secretary approval, and handles broadcast notices.',
+    howItWorks: [
+      {
+        step: '01',
+        title: 'INTAKE',
+        description: 'A resident messages the Telegram bot ("Water leakage in B-402"). AI classifies category and urgency, and a ticket is logged to Google Sheets. The resident gets a ticket ID.'
+      },
+      {
+        step: '02',
+        title: 'DISPATCH',
+        description: 'AI drafts a message to the right vendor. The secretary approves it on Telegram before anything goes out.'
+      },
+      {
+        step: '03',
+        title: 'TRACKING',
+        description: 'The secretary resolves a ticket with one command. The resident is notified automatically.'
+      },
+      {
+        step: '04',
+        title: 'NOTICES',
+        description: 'The secretary writes a notice once, approves a preview, and it reaches every resident. Acknowledgements are logged so she can see who has not read it.'
+      }
+    ],
+    engineeringNotes: [
+      'A Telegram bot has one webhook, so every command enters through a single trigger and is split downstream.',
+      'A stray "=" in a Fixed-mode field made a resident lookup silently match nothing.',
+      'Google Sheets "By List" stays disabled until the Drive API is enabled.'
+    ],
+    technologyLine: 'n8n · Groq · Google Sheets · Telegram',
+    githubUrl: 'https://github.com/Samhita1008/edit-theory-agents/tree/main/7-rwa-society-agent',
+    liveUrl: '/projects.html',
+    images: ['/images/agent7-output.svg'],
+    outputImages: [
+      {
+        url: '/images/agent7-output.svg',
+        title: 'Telegram Bot Interface & Secretary Dispatch Stream',
+        caption: 'Resident ticket intake, automated Google Sheets sync, secretary vendor approval action, and broadcast notices.'
+      }
+    ],
+    mockupSlides: [
+      {
+        title: 'Complaint Intake',
+        description: 'Resident messages Telegram bot, AI classifies category and urgency, logs ticket to Google Sheets, and returns ticket ID.',
+        metrics: 'Automated ticket creation'
+      },
+      {
+        title: 'Vendor Dispatch with Secretary Approval',
+        description: 'AI drafts vendor dispatch note, routed to society secretary on Telegram for approval before transmission.',
+        metrics: 'Human-in-the-loop approval'
+      },
+      {
+        title: 'One-Command Resolution Tracking',
+        description: 'Secretary resolves tickets with a single Telegram command, triggering automated resident resolution alert.',
+        metrics: 'Instant resident notification'
+      },
+      {
+        title: 'Broadcast Notices and Acknowledgement Log',
+        description: 'Notice drafted and approved once, delivered to all residents with read receipt logging.',
+        metrics: 'Read receipt tracking'
+      }
+    ],
+    tags: ['n8n', 'Groq', 'Google Sheets', 'Telegram']
+  },
+  {
+    id: 'project-restaurant-outreach',
+    agentNumber: 4,
+    title: 'Restaurant Outreach AI System',
+    category: 'Outreach Architecture',
+    badge: 'Private Implementation',
+    codeAvailabilityNote: 'Implementation kept private (available on request)',
+    oneLiner: 'B2B outreach engine with structured 8-point website auditing, deduplication, and rate-safe email dispatch.',
+    description: 'An outreach pipeline that audits restaurant websites against 8 practical criteria, handles site timeouts without dropping leads, checks for duplicate rows, and sends personalized cold emails.',
+    overview: 'Cold outreach campaigns frequently fail from two flaws: generic templates that get ignored, and fragile scripts that crash or send duplicate emails. This system audits prospect websites across 8 specific criteria (such as mobile viewports and online menus), logs errors cleanly if a website is offline, checks for duplicate records before emailing, and sends personalized pitches with Telegram reply alerts.',
+    architectureImage: '/images/restaurant-workflow.png',
+    architectureExplanation: 'Outreach pipeline built in n8n. Evaluates restaurant websites using an 8-point checklist, filters out duplicates, and sends emails through the Gmail API with rate limits.',
+    howItWorks: [
+      {
+        step: '01',
+        title: 'STRUCTURED 8-POINT AUDIT',
+        description: 'Evaluates restaurant websites across 8 practical criteria: HTTP status, load time, mobile layout, online menus, contact details, booking forms, and overall UI.'
+      },
+      {
+        step: '02',
+        title: 'ERROR HANDLING',
+        description: 'Catches timeouts and broken links without dropping leads, marking records clearly as Site_Unreachable in the CRM.'
+      },
+      {
+        step: '03',
+        title: 'DEDUPLICATION CHECK',
+        description: 'Checks existing rows in Google Sheets and email logs to ensure no prospect receives duplicate outreach.'
+      },
+      {
+        step: '04',
+        title: 'PITCH GENERATION',
+        description: 'Groq Llama 3.3 writes a personalized outreach email citing specific findings and strengths from the 8-point audit.'
+      },
+      {
+        step: '05',
+        title: 'RATE-SAFE DISPATCH & ALERTS',
+        description: 'Limits sending to 15 emails/hr for domain safety, with optional review steps and real-time Telegram notifications when prospects reply.'
+      }
+    ],
+    technologyLine: 'n8n · Groq Llama 3.3 · Gmail API · Google Sheets · Telegram Alerts',
+    liveUrl: '/projects.html',
+    images: [
+      '/images/restaurant-workflow.png',
+      '/images/restaurant-leads.png',
+      '/images/restaurant-mail.png',
+      '/images/restaurant-telegram.png'
+    ],
+    outputImages: [
+      {
+        url: '/images/restaurant-workflow.png',
+        title: 'n8n Outreach & Audit Workflow',
+        caption: 'Workflow pipeline with 8-point website checks, deduplication, and conditional routing.'
+      },
+      {
+        url: '/images/restaurant-leads.png',
+        title: 'Google Sheets Lead Database',
+        caption: 'Lead sheet with audit notes, contact info, and email delivery status.'
+      },
+      {
+        url: '/images/restaurant-mail.png',
+        title: 'Personalized Outreach Email',
+        caption: 'Cold email referencing specific observations from the website audit.'
+      },
+      {
+        url: '/images/restaurant-telegram.png',
+        title: 'Instant Telegram Notification',
+        caption: 'Mobile alerts sent to Telegram when prospects reply.'
+      }
+    ],
+    mockupSlides: [
+      {
+        title: '8-Point Website Audit',
+        description: 'Evaluates restaurant sites across 8 criteria (HTTP response, page speed, mobile layout, online menu, booking forms, and design) with written notes.',
+        metrics: '8-point audit checklist'
+      },
+      {
+        title: 'Error Handling',
+        description: 'Catches timeouts and broken links without stopping the workflow, logging unreachable sites properly in the CRM.',
+        metrics: 'Handles timeouts gracefully'
+      },
+      {
+        title: 'Deduplication Check',
+        description: 'Checks for existing records in Google Sheets to prevent sending duplicate emails to the same recipient.',
+        metrics: 'Prevents duplicate sends'
+      },
+      {
+        title: 'Turnkey Template Setup',
+        description: 'Keeps credentials and sheet IDs configured in separate variables so the workflow can be reused for new campaigns.',
+        metrics: 'Reusable configuration'
+      },
+      {
+        title: 'Safe Sending & Reply Alerts',
+        description: 'Caps outbound emails at 15/hr to protect sender reputation and sends immediate Telegram alerts when leads reply.',
+        metrics: '15 emails/hr cap'
+      }
+    ],
+    tags: ['n8n', 'Groq Llama 3.3', 'Audit Engine', 'Gmail API', 'Google Sheets', 'Telegram Alerts']
+  },
+  {
     id: 'project-dew-co',
     agentNumber: 2,
     title: 'AI Outreach System',
@@ -294,104 +467,6 @@ export const PROJECTS: Project[] = [
     tags: ['Web Scraping', 'Data Extraction', 'Google Sheets CRM', 'n8n Pipeline']
   },
   {
-    id: 'project-restaurant-outreach',
-    agentNumber: 4,
-    title: 'Restaurant Outreach AI System',
-    category: 'Outreach Architecture',
-    badge: 'Private Implementation',
-    codeAvailabilityNote: 'Implementation kept private (available on request)',
-    oneLiner: 'B2B outreach engine with structured 8-point website auditing, deduplication, and rate-safe email dispatch.',
-    description: 'An outreach pipeline that audits restaurant websites against 8 practical criteria, handles site timeouts without dropping leads, checks for duplicate rows, and sends personalized cold emails.',
-    overview: 'Cold outreach campaigns frequently fail from two flaws: generic templates that get ignored, and fragile scripts that crash or send duplicate emails. This system audits prospect websites across 8 specific criteria (such as mobile viewports and online menus), logs errors cleanly if a website is offline, checks for duplicate records before emailing, and sends personalized pitches with Telegram reply alerts.',
-    architectureImage: '/images/restaurant-workflow.png',
-    architectureExplanation: 'Outreach pipeline built in n8n. Evaluates restaurant websites using an 8-point checklist, filters out duplicates, and sends emails through the Gmail API with rate limits.',
-    howItWorks: [
-      {
-        step: '01',
-        title: 'STRUCTURED 8-POINT AUDIT',
-        description: 'Evaluates restaurant websites across 8 practical criteria: HTTP status, load time, mobile layout, online menus, contact details, booking forms, and overall UI.'
-      },
-      {
-        step: '02',
-        title: 'ERROR HANDLING',
-        description: 'Catches timeouts and broken links without dropping leads, marking records clearly as Site_Unreachable in the CRM.'
-      },
-      {
-        step: '03',
-        title: 'DEDUPLICATION CHECK',
-        description: 'Checks existing rows in Google Sheets and email logs to ensure no prospect receives duplicate outreach.'
-      },
-      {
-        step: '04',
-        title: 'PITCH GENERATION',
-        description: 'Groq Llama 3.3 writes a personalized outreach email citing specific findings and strengths from the 8-point audit.'
-      },
-      {
-        step: '05',
-        title: 'RATE-SAFE DISPATCH & ALERTS',
-        description: 'Limits sending to 15 emails/hr for domain safety, with optional review steps and real-time Telegram notifications when prospects reply.'
-      }
-    ],
-    technologyLine: 'n8n · Groq Llama 3.3 · Gmail API · Google Sheets · Telegram Alerts',
-    liveUrl: '/projects.html',
-    images: [
-      '/images/restaurant-workflow.png',
-      '/images/restaurant-leads.png',
-      '/images/restaurant-mail.png',
-      '/images/restaurant-telegram.png'
-    ],
-    outputImages: [
-      {
-        url: '/images/restaurant-workflow.png',
-        title: 'n8n Outreach & Audit Workflow',
-        caption: 'Workflow pipeline with 8-point website checks, deduplication, and conditional routing.'
-      },
-      {
-        url: '/images/restaurant-leads.png',
-        title: 'Google Sheets Lead Database',
-        caption: 'Lead sheet with audit notes, contact info, and email delivery status.'
-      },
-      {
-        url: '/images/restaurant-mail.png',
-        title: 'Personalized Outreach Email',
-        caption: 'Cold email referencing specific observations from the website audit.'
-      },
-      {
-        url: '/images/restaurant-telegram.png',
-        title: 'Instant Telegram Notification',
-        caption: 'Mobile alerts sent to Telegram when prospects reply.'
-      }
-    ],
-    mockupSlides: [
-      {
-        title: '8-Point Website Audit',
-        description: 'Evaluates restaurant sites across 8 criteria (HTTP response, page speed, mobile layout, online menu, booking forms, and design) with written notes.',
-        metrics: '8-point audit checklist'
-      },
-      {
-        title: 'Error Handling',
-        description: 'Catches timeouts and broken links without stopping the workflow, logging unreachable sites properly in the CRM.',
-        metrics: 'Handles timeouts gracefully'
-      },
-      {
-        title: 'Deduplication Check',
-        description: 'Checks for existing records in Google Sheets to prevent sending duplicate emails to the same recipient.',
-        metrics: 'Prevents duplicate sends'
-      },
-      {
-        title: 'Turnkey Template Setup',
-        description: 'Keeps credentials and sheet IDs configured in separate variables so the workflow can be reused for new campaigns.',
-        metrics: 'Reusable configuration'
-      },
-      {
-        title: 'Safe Sending & Reply Alerts',
-        description: 'Caps outbound emails at 15/hr to protect sender reputation and sends immediate Telegram alerts when leads reply.',
-        metrics: '15 emails/hr cap'
-      }
-    ],
-    tags: ['n8n', 'Groq Llama 3.3', 'Audit Engine', 'Gmail API', 'Google Sheets', 'Telegram Alerts']
-  },
-  {
     id: 'project-email-summary',
     agentNumber: 5,
     title: 'Email Digest Agent',
@@ -453,81 +528,6 @@ export const PROJECTS: Project[] = [
       }
     ],
     tags: ['Gmail API', 'Groq LLM', 'Telegram Bot', 'Cron Automation', 'Python / n8n']
-  },
-  {
-    id: 'project-rwa-society',
-    agentNumber: 7,
-    title: 'RWA Complaint and Vendor Coordination',
-    category: 'Society Operations',
-    badge: 'Private Implementation',
-    codeAvailabilityNote: 'Workflow file private (on request)',
-    demoModeNote: 'Built and tested end to end on test data. Not piloted with a real society yet. Vendor messages need a manual WhatsApp tap until the WhatsApp API is connected.',
-    oneLiner: 'Runs complaints, vendor dispatch, resolution tracking and notices for an apartment society over Telegram, with the secretary approving everything that goes outside the building.',
-    description: 'An automation engine for residential society management that handles complaint logging, vendor dispatch with secretary approval, resolution tracking, and broadcast notices over Telegram.',
-    overview: 'Managing residential community requests manually leads to lost complaints, unapproved vendor messages, and missed resident notices. This system runs complaints, vendor dispatch, resolution tracking and notices for an apartment society over Telegram, with the secretary approving everything that goes outside the building.',
-    architectureImage: '/images/agent7-architecture.svg',
-    architectureExplanation: 'Resident operations workflow in n8n. Ingests resident messages via a single Telegram webhook, classifies urgency and logs tickets to Google Sheets, routes vendor dispatches for secretary approval, and handles broadcast notices.',
-    howItWorks: [
-      {
-        step: '01',
-        title: 'INTAKE',
-        description: 'A resident messages the Telegram bot ("Water leakage in B-402"). AI classifies category and urgency, and a ticket is logged to Google Sheets. The resident gets a ticket ID.'
-      },
-      {
-        step: '02',
-        title: 'DISPATCH',
-        description: 'AI drafts a message to the right vendor. The secretary approves it on Telegram before anything goes out.'
-      },
-      {
-        step: '03',
-        title: 'TRACKING',
-        description: 'The secretary resolves a ticket with one command. The resident is notified automatically.'
-      },
-      {
-        step: '04',
-        title: 'NOTICES',
-        description: 'The secretary writes a notice once, approves a preview, and it reaches every resident. Acknowledgements are logged so she can see who has not read it.'
-      }
-    ],
-    engineeringNotes: [
-      'A Telegram bot has one webhook, so every command enters through a single trigger and is split downstream.',
-      'A stray "=" in a Fixed-mode field made a resident lookup silently match nothing.',
-      'Google Sheets "By List" stays disabled until the Drive API is enabled.'
-    ],
-    technologyLine: 'n8n · Groq · Google Sheets · Telegram',
-    githubUrl: 'https://github.com/Samhita1008/edit-theory-agents/tree/main/7-rwa-society-agent',
-    liveUrl: '/projects.html',
-    images: ['/images/agent7-output.svg'],
-    outputImages: [
-      {
-        url: '/images/agent7-output.svg',
-        title: 'Telegram Bot Interface & Secretary Dispatch Stream',
-        caption: 'Resident ticket intake, automated Google Sheets sync, secretary vendor approval action, and broadcast notices.'
-      }
-    ],
-    mockupSlides: [
-      {
-        title: 'Complaint Intake',
-        description: 'Resident messages Telegram bot, AI classifies category and urgency, logs ticket to Google Sheets, and returns ticket ID.',
-        metrics: 'Automated ticket creation'
-      },
-      {
-        title: 'Vendor Dispatch with Secretary Approval',
-        description: 'AI drafts vendor dispatch note, routed to society secretary on Telegram for approval before transmission.',
-        metrics: 'Human-in-the-loop approval'
-      },
-      {
-        title: 'One-Command Resolution Tracking',
-        description: 'Secretary resolves tickets with a single Telegram command, triggering automated resident resolution alert.',
-        metrics: 'Instant resident notification'
-      },
-      {
-        title: 'Broadcast Notices and Acknowledgement Log',
-        description: 'Notice drafted and approved once, delivered to all residents with read receipt logging.',
-        metrics: 'Read receipt tracking'
-      }
-    ],
-    tags: ['n8n', 'Groq', 'Google Sheets', 'Telegram']
   },
   {
     id: 'project-contract-redlining',
